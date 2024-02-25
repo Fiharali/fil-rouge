@@ -3,19 +3,29 @@ import { z } from 'zod';
 import { axiosSetup } from "./../api/axiosSetup.jsx";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
+import LoopIcon from '@mui/icons-material/Loop';
+import { ApiFunctions } from "../functions/Api.jsx";
+
 const schema = z.object({
     email: z.string().email(),
     password: z.string().min(8),
 });
 
 
+
+
 export default function Login() {
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
 
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false);
+
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,8 +35,6 @@ export default function Login() {
         }));
     };
 
-    const navigate = useNavigate()
-    const [loading, setLoading] = useState(false);
 
     const validate = () => {
         try {
@@ -44,68 +52,76 @@ export default function Login() {
         if (validate()) {
             setLoading(true);
             try {
-                const csrf = await axiosSetup.get('/sanctum/csrf-cookie');
-                const data = await axiosSetup.post('/login', formData);
-                console.log('Login Response:', data);
-                setErrors(prevState => ({
-                    ...prevState,
-                    email: data.data.error
-                }));
-                if (data.data.id) {
-                    console.log('login success');
-                    navigate('/')
-                } else {
-                    console.log('login failed');
-                }
+                await ApiFunctions.getCsrfToken()
+                const data = await ApiFunctions.Login(formData);
+                console.log(data)
+                navigate('/')
+
             } catch (error) {
                 console.error('Error:', error);
+                setErrors(prevState => ({
+                    ...prevState,
+                    email: error.response.data.error
+                }));
             } finally {
                 setLoading(false);
             }
         }
     };
-
     return (
-        <div>
-            <section className="bg-gray-50 dark:bg-gray-900">
-                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                Sign in to your account
-                            </h1>
-                            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-                                <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                    <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" onChange={handleChange} />
-                                    {errors.email && <span className="text-red-500">{errors.email}</span>}
+
+
+
+        <>
+
+            <div className="container flex flex-col mx-auto bg-white rounded-lg pt-12 my-5">
+                <div className="flex justify-center w-full h-full my-auto xl:gap-14 lg:justify-normal md:gap-5 draggable">
+                    <div className="flex items-center justify-center w-full lg:p-12">
+                        <div className="flex items-center xl:p-10 w-full sm:w-3/4 md:w-1/2 lg:w-2/5 md:mx-auto sm:mx-5">
+                            <form className="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl" onSubmit={handleSubmit}>
+                                <h3 className="mb-3 text-4xl font-extrabold text-dark-grey-900">Sign In</h3>
+                                <p className="mb-4 text-grey-700">Enter your email and password</p>
+
+                                <div className="flex items-center mb-3">
+                                    <hr className="h-0 border-b border-solid border-grey-500 grow" />
+                                    <p className="mx-4 text-grey-600"></p>
+                                    <hr className="h-0 border-b border-solid border-grey-500 grow" />
                                 </div>
-                                <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                    <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" onChange={handleChange} />
-                                    {errors.password && <span className="text-red-500">{errors.password}</span>}
+                                <label htmlFor="email" className="mb-2 text-sm text-start text-grey-900">Email*</label>
+                                <input id="email" type="email" name="email" placeholder="mail@loopple.com" className="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400  placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
+                                {errors.email && <span className="text-red-500 text-left ms-5">{errors.email}</span>}
+                                <label htmlFor="password" className={`mb-2 text-sm text-start text-grey-900 ${errors.email ? 'mt-2' : 'mt-7'}`}>Password*</label>
+                                <input id="password" type="password" name="password" placeholder="Enter a password" className="flex items-center w-full px-5 py-4  mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
+                                {errors.password && <span className="text-red-500 text-left ms-5">{errors.password}</span>}
+                                <div className="flex flex-row justify-between mb-8 mt-6">
+                                    <a href="javascript:void(0)" className="mr-4 text-sm font-medium text-purple-blue-500">Forget password?</a>
                                 </div>
-                                <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                                 <Button
-    disabled={loading}
-    type="submit"
-    className="w-full bg-primary-100 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
->
-    {loading ? (
-        <lord-icon
-            src="https://cdn.lordicon.com/cjbuodml.json"
-            trigger="loop"
-            colors="primary:#ffffff,secondary:#000000"
-            style={{ width: '25px', height: '25px' }}
-        />
-    ) : 'Sign In'}
-</Button>
+                                    disabled={loading}
+                                    type="submit"
+                                    className=""
+                                >
+                                    {loading ? (
+                                        <LoopIcon className="animate-spin" />
+                                    ) : 'Sign In'}
+                                </Button>
 
                             </form>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
-    );
+            </div>
+
+
+        </>
+
+    )
 }
+
+
+
+
+
+
+
+

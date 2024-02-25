@@ -2,7 +2,7 @@
 // import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import Login from './Auth/Login.jsx'
+// import Login from './Auth/Login.jsx'
 import { ThemeProvider } from './theme/ThemeProvider.jsx'
 // import Register from './Auth/Register.jsx'
 // import './index.css'

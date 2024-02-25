@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -57,7 +58,7 @@ class UserController extends Controller
             return response()->json(
                 [
                     'error'=>'these credentials do not match our records .',
-                ]);
+                ], Response::HTTP_UNAUTHORIZED);
         }
 
         return Auth::user();

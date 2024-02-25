@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
 import React, { useState, createContext, useContext, useEffect } from 'react';
 
 // Create a context for the theme
