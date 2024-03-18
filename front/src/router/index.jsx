@@ -6,6 +6,7 @@ import DefaultLayout from "./../layouts/DefaultLayout";
 import Sidebar from "./../layouts/Sidebar";
 import Test from "./../layouts/Test";
 import Home from "./../pages/Home";
+import { AddUser } from "../pages/AddUser";
 // import NavbarCustom from "../layouts/NavbarCustom";
 // import Sidebar from "../layouts/Sidebar";
 // import NavbarCustom from "../layouts/NavbarCustom";
@@ -14,13 +15,13 @@ export const router = createBrowserRouter([
     {
         element: <DefaultLayout />,
         children: [
-            {
-                path: '/register',
-                element: <Register />
-            },
+            // {
+            //     path: '/register',
+            //     element: <Register />
+            // },
             {
                 path: '/',
-                element: <Home />
+                element: <Test />
 
             },
         ]
@@ -31,7 +32,10 @@ export const router = createBrowserRouter([
         element: <Login />
     },
 
-
+ {
+                path: '/register',
+                element: <Register />
+            },
 
     {
         path: '*',

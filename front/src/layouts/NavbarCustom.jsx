@@ -240,7 +240,7 @@ export default function NavbarCustom() {
                 </AccordionHeader>
               </ListItem>
               <AccordionBody className="py-1">
-                <List className="p-0">
+                <List className="p-0 ">
                   <ListItem>
                     <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5 " />
@@ -299,7 +299,7 @@ export default function NavbarCustom() {
 
         </Card>
       </Drawer>
-   
+
     </>
 
   )

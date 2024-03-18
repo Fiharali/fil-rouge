@@ -47,21 +47,23 @@ export default function Login() {
         }
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
             setLoading(true);
             try {
-                await ApiFunctions.getCsrfToken()
+
+                // const csrf = await axiosSetup.get('/sanctum/csrf-cookie');
                 const data = await ApiFunctions.Login(formData);
-                console.log(data)
-                navigate('/')
+                console.log(data);
+                // navigate('/')
 
             } catch (error) {
                 console.error('Error:', error);
                 setErrors(prevState => ({
                     ...prevState,
-                    email: error.response.data.error
+                    email: error.response?.data.error //?? error.response.data.message
                 }));
             } finally {
                 setLoading(false);
@@ -77,7 +79,7 @@ export default function Login() {
             <div className="container flex flex-col mx-auto bg-white rounded-lg pt-12 my-5">
                 <div className="flex justify-center w-full h-full my-auto xl:gap-14 lg:justify-normal md:gap-5 draggable">
                     <div className="flex items-center justify-center w-full lg:p-12">
-                        <div className="flex items-center xl:p-10 w-full sm:w-3/4 md:w-1/2 lg:w-2/5 md:mx-auto sm:mx-5">
+                        <div className="flex items-center xl:p-10 w-full sm:w-3/4 md:w-1/2 lg:w-2/5 md:mx-auto sm:mx-5 ">
                             <form className="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl" onSubmit={handleSubmit}>
                                 <h3 className="mb-3 text-4xl font-extrabold text-dark-grey-900">Sign In</h3>
                                 <p className="mb-4 text-grey-700">Enter your email and password</p>

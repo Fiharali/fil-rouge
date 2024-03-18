@@ -21,6 +21,7 @@ Route::get('/dashboard', function () {
 
 
 
+Route::get('/sanctum/csrf-cookie', [\Laravel\Sanctum\Http\Controllers\CsrfCookieController::class, 'show']);
 
     Route::get('/test', function () {
         $data = [

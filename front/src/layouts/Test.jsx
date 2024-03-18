@@ -1,44 +1,116 @@
-// import React, { useState } from 'react';
-
-const Test = () => {
 
 
+const SignIn = () => {
     return (
-        <div className="container flex flex-col mx-auto bg-white rounded-lg ">
-            <div className="flex justify-center w-full h-full my-auto xl:gap-14 lg:justify-normal md:gap-5 draggable">
-                <div className="flex items-center justify-center w-full lg:p-12">
-                    <div className="flex items-center xl:p-10   sm:border-0 md:border-2 sm:p-10 md:p-5 lg:p-1">
-                        <form className="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl">
-                            <h3 className="mb-3 text-4xl font-extrabold text-dark-grey-900">Sign In</h3>
-                            <p className="mb-4 text-grey-700">Enter your email and password</p>
+        <>
 
-                            <div className="flex items-center mb-3">
-                                <hr className="h-0 border-b border-solid border-grey-500 grow" />
-                                <p className="mx-4 text-grey-600">or</p>
-                                <hr className="h-0 border-b border-solid border-grey-500 grow" />
-                            </div>
-                            <label htmlFor="email" className="mb-2 text-sm text-start text-grey-900">Email*</label>
-                            <input id="email" type="email" placeholder="mail@loopple.com" className="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" />
-                            <label htmlFor="password" className="mb-2 text-sm text-start text-grey-900">Password*</label>
-                            <input id="password" type="password" placeholder="Enter a password" className="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" />
-                            <div className="flex flex-row justify-between mb-8">
-                                <label className="relative inline-flex items-center mr-3 cursor-pointer select-none">
-                                    <input type="checkbox" checked value="" className="sr-only peer" />
-                                    <div className="w-5 h-5 bg-white border-2 rounded-sm border-grey-500 peer peer-checked:border-0 peer-checked:bg-purple-blue-500">
-                                        <img className="" src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/icons/check.png" alt="tick" />
-                                    </div>
-                                    <span className="ml-3 text-sm font-normal text-grey-900">Keep me logged in</span>
-                                </label>
-                                <a href="javascript:void(0)" className="mr-4 text-sm font-medium text-purple-blue-500">Forget password?</a>
-                            </div>
-                            <button className="w-full text-gray-900  px-6 py-5 mb-5 text-sm font-bold leading-none ring-2 ring-purple-blue-100   transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500">Sign In</button>
 
-                        </form>
+            {/* <section class="bg-gray-2 pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
+                <div class="container mx-auto">
+                    <div class="-mx-4 flex flex-wrap">
+                        <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+                            <div
+                                class="mb-10 overflow-hidden rounded-lg bg-white shadow-1 duration-300 hover:shadow-3 dark:bg-dark-2 dark:shadow-card dark:hover:shadow-3"
+                            >
+                                <img
+                                    src="assets/images/cards/card-01/image-01.jpg"
+                                    alt="image"
+                                    class="w-full"
+                                />
+                                <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+                                    <h3>
+                                        <a
+                                            href="javascript:void(0)"
+                                            class="mb-4 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
+                                        >
+                                            50+ Best creative website themes & templates
+                                        </a>
+                                    </h3>
+                                    <p
+                                        class="mb-7 text-base leading-relaxed text-body-color dark:text-dark-6"
+                                    >
+                                        Lorem ipsum dolor sit amet pretium consectetur adipiscing
+                                        elit. Lorem consectetur adipiscing elit.
+                                    </p>
+
+                                    <a
+                                        href="javascript:void(0)"
+                                        class="inline-block rounded-full border border-gray-3 px-7 py-2 text-base font-medium text-body-color transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
+                                    >
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+                            <div
+                                class="mb-10 overflow-hidden rounded-lg bg-white shadow-1 duration-300 hover:shadow-3 dark:bg-dark-2 dark:shadow-card dark:hover:shadow-3"
+                            >
+                                <img
+                                    src="assets/images/cards/card-01/image-02.jpg"
+                                    alt="image"
+                                    class="w-full"
+                                />
+                                <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+                                    <h3>
+                                        <a
+                                            href="javascript:void(0)"
+                                            class="mb-4 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
+                                        >
+                                            The ultimate UX and UI guide to card design
+                                        </a>
+                                    </h3>
+                                    <p class="mb-7 text-base leading-relaxed text-body-color">
+                                        Lorem ipsum dolor sit amet pretium consectetur adipiscing
+                                        elit. Lorem consectetur adipiscing elit.
+                                    </p>
+
+                                    <a
+                                        href="javascript:void(0)"
+                                        class="inline-block rounded-full border border-gray-3 px-7 py-2 text-base font-medium text-body-color transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
+                                    >
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+                            <div
+                                class="mb-10 overflow-hidden rounded-lg bg-white shadow-1 duration-300 hover:shadow-3 dark:bg-dark-2 dark:shadow-card dark:hover:shadow-3"
+                            >
+                                <img
+                                    src="assets/images/cards/card-01/image-03.jpg"
+                                    alt="image"
+                                    class="w-full"
+                                />
+                                <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+                                    <h3>
+                                        <a
+                                            href="javascript:void(0)"
+                                            class="mb-4 block text-xl font-semibold text-dark hover:text-primary dark:text-white sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
+                                        >
+                                            Creative Card Component designs graphic elements
+                                        </a>
+                                    </h3>
+                                    <p class="mb-7 text-base leading-relaxed text-body-color">
+                                        Lorem ipsum dolor sit amet pretium consectetur adipiscing
+                                        elit. Lorem consectetur adipiscing elit.
+                                    </p>
+
+                                    <a
+                                        href="javascript:void(0)"
+                                        class="inline-block rounded-full border border-gray-3 px-7 py-2 text-base font-medium text-body-color transition hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-dark-6"
+                                    >
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section> */}
+        </>
     );
 };
 
-export default Test;
+export default SignIn;
