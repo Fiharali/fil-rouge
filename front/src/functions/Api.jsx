@@ -31,5 +31,31 @@ export const ApiFunctions = {
             console.log('register failed');
         }
 
-    }
+    },
+
+    getAllUsers: async () => {
+
+        const data = await axiosSetup.get('/users');
+        if (data.status === 200) {
+            console.log('users ...');
+            return data.data;
+
+        } else {
+            console.log(' failed');
+        }
+
+    },
+
+    addUser: async (formData) => {
+
+        const data = await axiosSetup.post('/users', formData);
+        if (data.status === 200) {
+          
+            return data.data;
+
+        } else {
+            console.log('login failed');
+        }
+
+    },
 } 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,17 +19,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-        return User::all();
+
+
+
+        return response([
+            'users' => UserResource::collection(User::all()),
+        ]);
 
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        User::create($request->all());
+        return response([
+            'success' => 'User added Successful',
+        ]);
+
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,15 +25,14 @@ class AuthController extends Controller
                     'error'=>'these credentials do not match our records .',
                 ], Response::HTTP_UNAUTHORIZED);
         }
-         $user=Auth::user();
+
+        $user=Auth::user();
         $token=$user->createToken('usertoken')->plainTextToken;
-        $roles = $user->roles()->pluck('name');
-        $response=[
-            'user'=>$user,
+
+        return response([
+            'user'=>new UserResource($user),
             'token'=>$token,
-            'roles' => $roles,
-        ];
-        return response($response);
+        ]);
     }
 
     public function  Register(Request $request){
