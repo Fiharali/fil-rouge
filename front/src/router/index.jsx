@@ -7,6 +7,7 @@ import Sidebar from "./../layouts/Sidebar";
 import Test from "./../layouts/Test";
 import Home from "./../pages/Home";
 import { Users } from "../pages/Users";
+import Profile from "../pages/Profile";
 // import NavbarCustom from "../layouts/NavbarCustom";
 // import Sidebar from "../layouts/Sidebar";
 // import NavbarCustom from "../layouts/NavbarCustom";
@@ -27,6 +28,12 @@ export const router = createBrowserRouter([
             {
                 path: '/users',
                 element: <Users />
+
+            },
+
+            {
+                path: '/profile',
+                element: <Profile />
 
             },
         ]

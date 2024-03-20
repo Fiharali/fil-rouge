@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\admin\UserController;
 use App\Http\Controllers\api\Auth\AuthController;
+use App\Http\Controllers\api\user\ProfileUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,6 @@ Route::post('/login', [AuthController::class, 'login'])
 //////
 
 Route::apiResource('users', UserController::class);
+Route::get('profile',[ProfileUserController::class, 'index']);
 
 

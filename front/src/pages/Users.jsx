@@ -106,7 +106,6 @@ export function Users() {
 
 
     useEffect(() => {
-
         getAllUsers();
     }, []);
     const getAllUsers = async () => {

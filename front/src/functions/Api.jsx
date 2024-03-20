@@ -71,4 +71,17 @@ export const ApiFunctions = {
         }
 
     },
+
+    getAuthUser: async () => {
+
+        const data = await axiosSetup.get('/profile' );
+        if (data.status === 200) {
+          
+            return data.data;
+
+        } else {
+            console.log('login failed');
+        }
+
+    },
 } 
