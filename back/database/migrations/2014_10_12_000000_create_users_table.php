@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('number')->nullable();
             $table->string('password');
-            $table->string('level')->nullable();
-            $table->string('class_name')->nullable();
-            $table->string('promotion')->nullable();
-            $table->string('campus')->nullable();
+            $table->foreignIdFor(\App\Models\City::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Campus::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\ClassName::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Promotion::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Level::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

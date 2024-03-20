@@ -58,4 +58,17 @@ export const ApiFunctions = {
         }
 
     },
+    
+    deleteUser: async (id) => {
+
+        const data = await axiosSetup.delete('/users/'+id );
+        if (data.status === 200) {
+          
+            return data.data;
+
+        } else {
+            console.log('login failed');
+        }
+
+    },
 } 

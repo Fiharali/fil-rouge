@@ -21,12 +21,14 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'number' => $this->number,
             'level' => $this->level,
-            'class_name' => $this->class_name,
+            'class_name' => $this->className->name,
             'promotion' => $this->promotion,
             'campus' => $this->campus,
             'roles' => $this->roles->pluck('name'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'image' => $this->getFirstMediaUrl('images'),
+            'roles' => $this->roles->pluck('name'),
         ];
     }
 }
