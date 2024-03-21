@@ -50,37 +50,49 @@ export const ApiFunctions = {
 
         const data = await axiosSetup.post('/users', formData);
         if (data.status === 200) {
-          
+
             return data.data;
 
         } else {
-            console.log('login failed');
+            console.log(' failed');
         }
 
     },
-    
+
     deleteUser: async (id) => {
 
-        const data = await axiosSetup.delete('/users/'+id );
+        const data = await axiosSetup.delete('/users/' + id);
         if (data.status === 200) {
-          
+
             return data.data;
 
         } else {
-            console.log('login failed');
+            console.log(' failed');
         }
 
     },
 
     getAuthUser: async () => {
 
-        const data = await axiosSetup.get('/profile' );
+        const data = await axiosSetup.get('/profile');
         if (data.status === 200) {
-          
+
             return data.data;
 
         } else {
-            console.log('login failed');
+            console.log(' failed');
+        }
+
+    },
+    editAuthUser: async (formData) => {
+
+        const data = await axiosSetup.post('/profile', formData);
+        if (data.status === 200) {
+
+            return data.data;
+
+        } else {
+            console.log(' failed');
         }
 
     },

@@ -29,4 +29,16 @@ class ProfileUserController extends Controller
             'roles' => Role::all(),
         ]);
     }
+
+
+    public function update(Request $request){
+        //$user=Auth::user();
+        $user=User::find(20);
+        $user->update($request->all());
+
+        return response([
+            'success' => 'User updated Successful',
+
+        ]);
+    }
 }

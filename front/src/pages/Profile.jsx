@@ -11,7 +11,6 @@ const schema = z.object({
     number: z.string().refine(value => /^\d{10,}$/.test(value), {
         message: 'Number must be an integer with  length of 10 digits'
     }),
-    password: z.string().min(8),
     // level_id: z.string()
     //     .min(1, { message: "Please select a level" }),
     // class_name_id: z.string()
@@ -60,6 +59,7 @@ const Profile = () => {
             ...prevState,
             [name]: value
         }));
+
         // console.log(formData)
     };
 
@@ -78,7 +78,8 @@ const Profile = () => {
 
         try {
             const data = await ApiFunctions.getAuthUser();
-            console.log(data.user);
+            console.log(data.user.city.id);
+
             setData(data.user);
             setFormData(data.user);
             setCities(data.cities);
@@ -97,53 +98,30 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         // console.log('Submit')
         e.preventDefault();
-        // if (validate()) {
-        console.log('h')
+        if (validate()) {
+            console.log('h')
 
-        // try {
+            try {
 
-        //     const data = await ApiFunctions.addUser(formData);
-        //     //console.log(data);
+                const data = await ApiFunctions.editAuthUser(formData);
 
-        //     setFormData({
-        //         first_name: '',
-        //         last_name: '',
-        //         email: '',
-        //         number: '',
-        //         password: '',
-        //         level_id: '',
-        //         class_name_id: '',
-        //         promotion_id: '',
-        //         campus_id: '',
-        //         city_id: '',
-        //         role: '',
-        //         image: null,
+                setSelectedFile(null)
 
 
-        //     });
-        //     setSelectedFile(null)
-        //     if (modalButtonRef.current) {
-        //         modalButtonRef.current.click();
-        //     }
+                Swal.fire({
+                    //position: "top",
+                    title: data.success,
+                    icon: "success",
+                    timer: 2000,
+                });
+                getAuthUser();
 
-        //     Swal.fire({
-        //         //position: "top",
-        //         title: data.success,
-        //         icon: "success",
-        //         timer: 2000,
-        //     });
-        //     getAllUsers();
+            } catch (error) {
+                console.error('Error:', error);
 
-        // } catch (error) {
-        //     console.error('Error:', error);
-        //     setErrors(prevState => ({
-        //         ...prevState,
-        //         image: error.response?.data.error ?? error.response.data.message
-        //     }));
-        // }
-        //}
-        console.log('hd')
-        console.log(formData)
+            }
+        }
+
 
     };
     const validate = () => {
@@ -153,7 +131,6 @@ const Profile = () => {
             return true;
         } catch (error) {
             setErrors(error.formErrors.fieldErrors);
-            //console.log('ffdfj')
             return false;
         }
     };
@@ -206,7 +183,7 @@ const Profile = () => {
                                 </div>
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-6">
                                     <label for="password" className="block mb-2 text-sm font-medium ">New password</label>
-                                    <input  data-popover-placement="bottom" type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" />
+                                    <input data-popover-placement="bottom" type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" />
 
                                 </div>
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-6">
@@ -224,11 +201,12 @@ const Profile = () => {
                 <div className="col-span-2">
                     <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 ">
                         <h3 className="mb-4 text-xl font-semibold ">General information</h3>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} >
                             <div className="grid grid-cols-6 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
                                     <label for="first_name" className="block mb-2 text-sm font-medium ">First Name</label>
                                     <input type="text" name="first_name" id="first_name" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="first name" value={formData.first_name} onChange={handleChange} />
+                                    <input type="hidden" name="_method" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value='PATCH' />
                                     {errors.first_name && <span className="text-red-500 text-left ms-5">{errors.first_name}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
@@ -248,7 +226,14 @@ const Profile = () => {
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
                                     <label for="city_id" className="block mb-2 text-sm font-medium ">city</label>
-                                    <select name="city_id" id="city_id" className="shadow-sm border sm:text-sm rounded-lg block w-full p-2.5" value={formData.city_id} onChange={handleChange}>
+                                    <select
+                                        name="city_id"
+                                        id="city_id"
+                                        className="shadow-sm border sm:text-sm rounded-lg block w-full p-2.5"
+                                        value={formData.city_id}
+                                        onChange={handleChange}
+                                        disabled
+                                    >
                                         <option value="">choose city_id</option>
                                         {cities.map(city => (
                                             <option key={city.id} value={city.id} {...(city.id === formData.city.id ? { selected: true } : {})}>
@@ -256,11 +241,12 @@ const Profile = () => {
                                             </option>
                                         ))}
                                     </select>
+
                                     {errors.city_id && <span className="text-red-500 text-left ms-5">{errors.city_id}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
                                     <label for="campus_id" className="block mb-2 text-sm font-medium ">campus</label>
-                                    <select name="campus_id" id="campus_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.campus_id} onChange={handleChange} >
+                                    <select name="campus_id" id="campus_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.campus_id} onChange={handleChange} disabled>
                                         <option value=""> choose campus </option>
                                         {
                                             campuses.map(campus => (
@@ -275,7 +261,7 @@ const Profile = () => {
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
                                     <label for="promotion_id" className="block mb-2 text-sm font-medium ">promotion</label>
-                                    <select name="promotion_id" id="promotion_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.promotion_id} onChange={handleChange} >
+                                    <select name="promotion_id" id="promotion_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.promotion_id} onChange={handleChange} disabled >
                                         <option value=""> choose promotion </option>
                                         {
                                             promotions.map(promotion => (
@@ -290,7 +276,7 @@ const Profile = () => {
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
                                     <label for="level_id" className="block mb-2 text-sm font-medium ">level</label>
-                                    <select name="level_id" id="level_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.level_id} onChange={handleChange} >
+                                    <select name="level_id" id="level_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.level_id} onChange={handleChange} disabled >
                                         <option value=""> choose level</option>
                                         {
                                             levels.map(level => (
@@ -305,7 +291,7 @@ const Profile = () => {
                                 </div>
                                 <div className="col-span-6 ">
                                     <label for="class_name_id" className="block mb-2 text-sm font-medium ">class name</label>
-                                    <select name="class_name_id" id="class_name_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.class_name_id} onChange={handleChange} >
+                                    <select name="class_name_id" id="class_name_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.class_name_id} onChange={handleChange} disabled>
                                         <option value=""> choose class name</option>
                                         {
                                             classNames.map(classname => (
