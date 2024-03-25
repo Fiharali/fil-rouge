@@ -25,7 +25,6 @@ class UserResource extends JsonResource
             'promotion' => $this->promotion,
             'campus' => $this->campus,
             'city' => $this->city,
-            'roles' => $this->roles->pluck('name'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'image' => $this->getFirstMediaUrl('images'),

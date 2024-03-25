@@ -31,14 +31,20 @@ class ProfileUserController extends Controller
     }
 
 
-    public function update(Request $request){
+    public function update(Request $request ){
         //$user=Auth::user();
         $user=User::find(20);
         $user->update($request->all());
-
-        return response([
-            'success' => 'User updated Successful',
-
-        ]);
+        if ($request->hasFile('image')) {
+            $user->clearMediaCollection('images');
+            $user->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+       // dd($request->all());
+       // $user->save();
+        return $user;
+//        return response([
+//            'success' => 'User updated Successful',
+//
+//        ]);
     }
 }

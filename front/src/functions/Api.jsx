@@ -85,8 +85,13 @@ export const ApiFunctions = {
 
     },
     editAuthUser: async (formData) => {
-
-        const data = await axiosSetup.post('/profile', formData);
+        const formDataWithPatchMethod = {
+            ...formData,
+            _method: 'PATCH'
+        };
+        const data = await axiosSetup.post('/profile', formDataWithPatchMethod, {
+            method: 'patch'
+        });
         if (data.status === 200) {
 
             return data.data;

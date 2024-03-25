@@ -1,31 +1,12 @@
 import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { ApiFunctions } from "../functions/Api";
-import { z } from "zod";
+import { userEditProfile } from "../lib/validations/validation";
 
 
-const schema = z.object({
-    first_name: z.string().min(4),
-    last_name: z.string().min(4),
-    email: z.string().email(),
-    number: z.string().refine(value => /^\d{10,}$/.test(value), {
-        message: 'Number must be an integer with  length of 10 digits'
-    }),
-    // level_id: z.string()
-    //     .min(1, { message: "Please select a level" }),
-    // class_name_id: z.string()
-    //     .min(1, { message: "Please select a class name" }),
-    // promotion_id: z.string()
-    //     .min(1, { message: "Please select a promotion" }),
-    // campus_id: z.string()
-    //     .min(1, { message: "Please select a campus" }),
-    // city_id: z.string()
-    //     .min(1, { message: "Please select a city" }),
-    // role: z.array(z.string())
-    //     .min(1, { message: "Please select at least one role" }),
 
 
-});
+
 
 const Profile = () => {
 
@@ -65,8 +46,12 @@ const Profile = () => {
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        // console.log(file);
+        console.log(file);
         setSelectedFile(file);
+        setFormData(prevState => ({
+            ...prevState,
+            image: file
+        }));
 
     };
 
@@ -78,7 +63,7 @@ const Profile = () => {
 
         try {
             const data = await ApiFunctions.getAuthUser();
-            console.log(data.user.city.id);
+            //console.log(data.user.roles);
 
             setData(data.user);
             setFormData(data.user);
@@ -126,7 +111,7 @@ const Profile = () => {
     };
     const validate = () => {
         try {
-            schema.parse(formData);
+            userEditProfile.parse(formData);
             setErrors({});
             return true;
         } catch (error) {
@@ -145,14 +130,17 @@ const Profile = () => {
                 <div className="col-span-full xl:col-auto">
                     <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 ">
 
-                        <div className="block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4 ">
+                        <div className="block flex  mx-auto w-fit  ">
 
                             {selectedFile ? (
                                 <img src={URL.createObjectURL(selectedFile)} alt="Selected file" className=" mb-4 rounded-lg w-36 h-36 sm:mb-0 xl:mb-4 2xl:mb-0 mx-auto" />
                             ) :
-                                <img className="mb-4 rounded-lg w-36 h-36 sm:mb-0 xl:mb-4 2xl:mb-0 mx-auto" src={formData.image} alt="Jese picture" />
+                                formData.image ?
+                                    (<img className="mb-4 rounded-lg w-36 h-36 sm:mb-0 xl:mb-4 2xl:mb-0 mx-auto" src={formData.image} alt="Jese picture" />)
+                                    :
+                                    <img class="mb-4 rounded-lg w-36 h-36 sm:mb-0 xl:mb-4 2xl:mb-0 mx-auto" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Jese picture" />
                             }
-                            <div className="flex items-center justify-center   rounded-full col-span-2 ">
+                            <div className="flex items-center justify-center   rounded-full col-span-2 ms-2">
                                 <label htmlFor="dropzone-file" className="flex  rounded-4 flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-2 cursor-pointer ">
 
                                     <div className="flex flex-col items-center justify-center p-5 rounded-2">
@@ -169,7 +157,7 @@ const Profile = () => {
                             </div>
 
                         </div>
-                        <Button fullWidth className="mt-8">Save</Button>
+                        {/* <Button fullWidth className="mt-8">Save</Button> */}
 
 
                     </div>
@@ -196,17 +184,15 @@ const Profile = () => {
                             </div>
                         </form>
                     </div>
-
                 </div>
                 <div className="col-span-2">
                     <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 ">
                         <h3 className="mb-4 text-xl font-semibold ">General information</h3>
-                        <form onSubmit={handleSubmit} >
+                        <form onSubmit={handleSubmit} encType="multipart/form-data" >
                             <div className="grid grid-cols-6 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
                                     <label for="first_name" className="block mb-2 text-sm font-medium ">First Name</label>
                                     <input type="text" name="first_name" id="first_name" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="first name" value={formData.first_name} onChange={handleChange} />
-                                    <input type="hidden" name="_method" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value='PATCH' />
                                     {errors.first_name && <span className="text-red-500 text-left ms-5">{errors.first_name}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
@@ -234,7 +220,7 @@ const Profile = () => {
                                         onChange={handleChange}
                                         disabled
                                     >
-                                        <option value="">choose city_id</option>
+                                        <option value="">choose city </option>
                                         {cities.map(city => (
                                             <option key={city.id} value={city.id} {...(city.id === formData.city.id ? { selected: true } : {})}>
                                                 {city.name}

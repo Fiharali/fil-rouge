@@ -6,8 +6,10 @@ import DefaultLayout from "./../layouts/DefaultLayout";
 import Sidebar from "./../layouts/Sidebar";
 import Test from "./../layouts/Test";
 import Home from "./../pages/Home";
-import { Users } from "../pages/Users";
+
 import Profile from "../pages/Profile";
+import { Users } from "../pages/users/Users";
+import Dashboard from "../pages/dashboard/Dashboard";
 // import NavbarCustom from "../layouts/NavbarCustom";
 // import Sidebar from "../layouts/Sidebar";
 // import NavbarCustom from "../layouts/NavbarCustom";
@@ -34,6 +36,12 @@ export const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <Profile />
+
+            },
+
+            {
+                path: '/dashboard',
+                element: <Dashboard />
 
             },
         ]

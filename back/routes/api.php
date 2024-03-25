@@ -34,6 +34,6 @@ Route::post('/login', [AuthController::class, 'login'])
 Route::apiResource('users', UserController::class);
 
 Route::get('profile',[ProfileUserController::class, 'index']);
-Route::post('profile',[ProfileUserController::class, 'update']);
+Route::patch('profile',[ProfileUserController::class, 'update']);
 
 
