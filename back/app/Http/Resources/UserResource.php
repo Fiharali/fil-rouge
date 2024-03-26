@@ -19,6 +19,11 @@ class UserResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
+            'city_id' => $this->city_id,
+            'campus_id' => $this->campus_id,
+            'promotion_id' => $this->promotion_id,
+            'class_name_id' => $this->city_id,
+            'level_id' => $this->level_id,
             'number' => $this->number,
             'level' => $this->level,
             'class_name' => $this->className,
@@ -29,6 +34,7 @@ class UserResource extends JsonResource
             'updated_at' => $this->updated_at,
             'image' => $this->getFirstMediaUrl('images'),
             'roles' => $this->roles->pluck('name'),
+            'role_id' => $this->roles->pluck('id'),
         ];
     }
 }

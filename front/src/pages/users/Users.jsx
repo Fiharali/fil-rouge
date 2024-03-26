@@ -8,6 +8,7 @@ import UserCreate from "./components/UserCreate";
 import SearchBar from "./components/SearchBar";
 import { deleteUser } from "./functions/deleteUser";
 import { createUser } from "./functions/createUser";
+import { getUsers } from "./functions/getUsers";
 
 
 
@@ -77,11 +78,10 @@ export function Users() {
     useEffect(() => {
         getAllUsers();
     }, []);
-    const getAllUsers = async () => {
 
-        try {
-            const data = await ApiFunctions.getAllUsers();
-            console.log(data.users);
+    const getAllUsers = async () => {
+            const data = await getUsers();
+            //console.log(data);
             setUsers(data.users);
             setCities(data.cities);
             setCampuses(data.campuses)
@@ -89,10 +89,7 @@ export function Users() {
             setLevels(data.levels)
             setPromotions(data.promotions)
             setRoles(data.roles)
-
-        } catch (error) {
-            console.error('Error:', error);
-        }
+       
     };
 
 
@@ -109,41 +106,43 @@ export function Users() {
         e.preventDefault();
         if (validate()) {
 
-            try {
-
-                const data = await createUser(formData);
-                //console.log(data);
-                if (data) {
-                    setFormData({
-                        first_name: '',
-                        last_name: '',
-                        email: '',
-                        number: '',
-                        password: '',
-                        level_id: '',
-                        class_name_id: '',
-                        promotion_id: '',
-                        campus_id: '',
-                        city_id: '',
-                        role: '',
-                        image: null,
-    
-    
-                    });
-                    setSelectedFile(null)
-                    if (modalButtonRef.current) {
-                        modalButtonRef.current.click();
-                    }
-                    getAllUsers();
+            const { success, data, error } = await createUser(formData);
+            if (success) {
+                setFormData({
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    number: '',
+                    password: '',
+                    level_id: '',
+                    class_name_id: '',
+                    promotion_id: '',
+                    campus_id: '',
+                    city_id: '',
+                    role: '',
+                    image: null,
+                });
+                setSelectedFile(null);
+                if (modalButtonRef.current) {
+                    modalButtonRef.current.click();
                 }
-
-
-            } catch (error) {
+                Swal.fire({
+                    title: data.success,
+                    icon: "success",
+                    timer: 2000,
+                });
+                getAllUsers();
+            } else {
                 setErrors(prevState => ({
                     ...prevState,
-                    // image: error.response?.data.error ?? error.response.data.message
+                    image: error.response?.data.error ?? error.response.data.message
                 }));
             }
+
+
+
+
+
         }
     };
 

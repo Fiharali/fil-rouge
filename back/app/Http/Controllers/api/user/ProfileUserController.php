@@ -39,12 +39,11 @@ class ProfileUserController extends Controller
             $user->clearMediaCollection('images');
             $user->addMediaFromRequest('image')->toMediaCollection('images');
         }
-       // dd($request->all());
-       // $user->save();
-        return $user;
-//        return response([
-//            'success' => 'User updated Successful',
-//
-//        ]);
+
+        //return $user;
+       return response([
+            'success' => 'User updated Successful',
+
+       ]);
     }
 }

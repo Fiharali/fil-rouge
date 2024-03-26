@@ -10,16 +10,12 @@ export const createUser = async (formData) => {
         return { success: true, data };
 
     
-        Swal.fire({
-            title: data.success,
-            icon: "success",
-            timer: 2000,
-        });
+       
         
 
     } catch (error) {
         console.error('Error:', error);
-        return error
+        return { success: false, error };
         
     }
 };

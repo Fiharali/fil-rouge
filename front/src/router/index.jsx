@@ -9,7 +9,8 @@ import Home from "./../pages/Home";
 
 import Profile from "../pages/Profile";
 import { Users } from "../pages/users/Users";
-import Dashboard from "../pages/dashboard/Dashboard";
+//import Dashboard from "../pages/dashboard/Dashboard";
+import UserEdit from "../pages/users/UserEdit";
 // import NavbarCustom from "../layouts/NavbarCustom";
 // import Sidebar from "../layouts/Sidebar";
 // import NavbarCustom from "../layouts/NavbarCustom";
@@ -39,9 +40,15 @@ export const router = createBrowserRouter([
 
             },
 
+            // {
+            //     path: '/dashboard',
+            //     element: <Dashboard />
+
+            // },
+
             {
-                path: '/dashboard',
-                element: <Dashboard />
+                path: '/user/:id',
+                element: <UserEdit />
 
             },
         ]

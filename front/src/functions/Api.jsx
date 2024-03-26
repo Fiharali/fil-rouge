@@ -101,4 +101,31 @@ export const ApiFunctions = {
         }
 
     },
+    getUser: async (id) => {
+
+        const data = await axiosSetup.get('/users/' + id);
+        if (data.status === 200) {
+            return data.data;
+        } else {
+            console.log(' failed');
+        }
+
+    },
+
+    editUser: async (id , formData) => {
+        const formDataWithPatchMethod = {
+            ...formData,
+            _method: 'PATCH'
+        };
+        const data = await axiosSetup.post('/users/'+id , formDataWithPatchMethod, {
+            method: 'patch'
+        });
+        if (data.status === 200) {
+            return data.data;
+
+        } else {
+            console.log(' failed');
+        }
+
+    },
 } 

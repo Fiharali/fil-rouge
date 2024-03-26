@@ -64,7 +64,16 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+
+        return response([
+            'user' => new UserResource($user),
+            'cities' => City::all(),
+            'campuses' => Campus::all(),
+            'promotions' => Promotion::all(),
+            'levels' => Level::all(),
+            'class_names' => ClassName::all(),
+            'roles' => Role::all(),
+        ]);
     }
 
     /**
@@ -72,7 +81,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->all());
+        if ($request->hasFile('image')) {
+            $user->clearMediaCollection('images');
+            $user->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+
+        $user->roles()->sync($request->role_id);
+        return $user;
     }
 
     /**
