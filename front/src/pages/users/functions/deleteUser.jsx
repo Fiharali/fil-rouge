@@ -14,6 +14,7 @@ export const deleteUser = async (id) => {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
     });
+    
 
     if (confirmationResult.isConfirmed) {
         try {
@@ -24,6 +25,7 @@ export const deleteUser = async (id) => {
                 text: "Your file has been deleted.",
                 icon: "success"
             });
+            return true;
         } catch (error) {
             console.error('Error:', error);
             Swal.fire({
@@ -31,6 +33,8 @@ export const deleteUser = async (id) => {
                 text: "Failed to delete user",
                 icon: "error"
             });
+            return false;
+
         }
     }
 };

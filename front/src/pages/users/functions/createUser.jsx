@@ -7,10 +7,9 @@ export const createUser = async (formData) => {
 
         const data = await ApiFunctions.addUser(formData);
         //console.log(data);
-        return data;
+        return { success: true, data };
 
-      
-
+    
         Swal.fire({
             title: data.success,
             icon: "success",
@@ -20,10 +19,7 @@ export const createUser = async (formData) => {
 
     } catch (error) {
         console.error('Error:', error);
-        setErrors(prevState => ({
-            ...prevState,
-            image: error.response?.data.error ?? error.response.data.message
-        }));
-
+        return error
+        
     }
 };

@@ -13,12 +13,6 @@ import { createUser } from "./functions/createUser";
 
 
 
-
-
-
-
-
-
 export function Users() {
 
     const [users, setUsers] = useState([]);
@@ -103,8 +97,9 @@ export function Users() {
 
 
     const deleteUserFunction = async (id) => {
-       await deleteUser(id)
-        await getAllUsers()
+        if (await deleteUser(id)) {
+            await getAllUsers()
+        }
     };
 
 
@@ -118,33 +113,35 @@ export function Users() {
 
                 const data = await createUser(formData);
                 //console.log(data);
-
-                setFormData({
-                    first_name: '',
-                    last_name: '',
-                    email: '',
-                    number: '',
-                    password: '',
-                    level_id: '',
-                    class_name_id: '',
-                    promotion_id: '',
-                    campus_id: '',
-                    city_id: '',
-                    role: '',
-                    image: null,
-
-
-                });
-                setSelectedFile(null)
-                if (modalButtonRef.current) {
-                    modalButtonRef.current.click();
+                if (data) {
+                    setFormData({
+                        first_name: '',
+                        last_name: '',
+                        email: '',
+                        number: '',
+                        password: '',
+                        level_id: '',
+                        class_name_id: '',
+                        promotion_id: '',
+                        campus_id: '',
+                        city_id: '',
+                        role: '',
+                        image: null,
+    
+    
+                    });
+                    setSelectedFile(null)
+                    if (modalButtonRef.current) {
+                        modalButtonRef.current.click();
+                    }
+                    getAllUsers();
                 }
-                getAllUsers();
+
 
             } catch (error) {
                 setErrors(prevState => ({
                     ...prevState,
-                    //image: error.response?.data.error ?? error.response.data.message
+                    // image: error.response?.data.error ?? error.response.data.message
                 }));
             }
         }
@@ -152,7 +149,7 @@ export function Users() {
 
     const listUsers = users.map(user => {
         return (
-            <UserCard user={user} deleteUser={deleteUserFunction} />
+            <UserCard user={user} key={user.id} deleteUser={deleteUserFunction} />
         )
     }
     );
