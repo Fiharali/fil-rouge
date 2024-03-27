@@ -88,7 +88,9 @@ class UserController extends Controller
         }
 
         $user->roles()->sync($request->role_id);
-        return $user;
+        return response([
+            'success' => 'User updated Successful',
+        ]);
     }
 
     /**
