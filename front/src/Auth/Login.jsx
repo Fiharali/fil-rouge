@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from 'zod';
 import { axiosSetup } from "./../api/axiosSetup.jsx";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import LoopIcon from '@mui/icons-material/Loop';
 import { ApiFunctions } from "../functions/Api.jsx";
+import { useUserContext } from "../context/UserContext.jsx";
+import { isAuth } from "../roles/isAuth.jsx";
+import { isHasRole } from "../roles/isHasRole.jsx";
 
 const schema = z.object({
     email: z.string().email(),
@@ -16,6 +19,8 @@ const schema = z.object({
 
 export default function Login() {
 
+    const UserContext = useUserContext()
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -25,7 +30,10 @@ export default function Login() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
 
+        isAuth() && navigate('/')
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -56,8 +64,17 @@ export default function Login() {
 
                 // const csrf = await axiosSetup.get('/sanctum/csrf-cookie');
                 const data = await ApiFunctions.Login(formData);
-                console.log(data);
-                // navigate('/')
+                //console.log(data);
+                UserContext.setUser(data.user)
+                UserContext.setIsAuth(true)
+                UserContext.setToken(data.token)
+                localStorage.setItem('user', JSON.stringify(data.user));
+                localStorage.setItem('isAuth', true);
+                localStorage.setItem('token', JSON.stringify(data.token));
+
+                console.log(data.user.roles)
+                isHasRole(data.user.roles)
+                // navigate('/users')
 
             } catch (error) {
                 console.error('Error:', error);

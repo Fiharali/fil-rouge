@@ -1,5 +1,5 @@
 import { Button } from "@material-tailwind/react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ApiFunctions } from "../../functions/Api";
 import { z } from "zod";
 import { addUser } from "../../lib/validations/validation";
@@ -9,12 +9,16 @@ import SearchBar from "./components/SearchBar";
 import { deleteUser } from "./functions/deleteUser";
 import { createUser } from "./functions/createUser";
 import { getUsers } from "./functions/getUsers";
+import { UserStateContext, useUserContext } from "../../context/UserContext";
 
 
 
 
 
 export function Users() {
+
+    const UserContext = useUserContext()
+    console.log(UserContext)
 
     const [users, setUsers] = useState([]);
     const [cities, setCities] = useState([]);
@@ -25,6 +29,7 @@ export function Users() {
     const [roles, setRoles] = useState([]);
     const [errors, setErrors] = useState({});
     const [selectedFile, setSelectedFile] = useState(null);
+
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -80,16 +85,16 @@ export function Users() {
     }, []);
 
     const getAllUsers = async () => {
-            const data = await getUsers();
-            //console.log(data);
-            setUsers(data.users);
-            setCities(data.cities);
-            setCampuses(data.campuses)
-            setClassNames(data.class_names)
-            setLevels(data.levels)
-            setPromotions(data.promotions)
-            setRoles(data.roles)
-       
+        const data = await getUsers();
+        //console.log(data);
+        setUsers(data.users);
+        setCities(data.cities);
+        setCampuses(data.campuses)
+        setClassNames(data.class_names)
+        setLevels(data.levels)
+        setPromotions(data.promotions)
+        setRoles(data.roles)
+
     };
 
 
