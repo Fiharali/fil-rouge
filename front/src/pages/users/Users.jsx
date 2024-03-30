@@ -10,6 +10,8 @@ import { deleteUser } from "./functions/deleteUser";
 import { createUser } from "./functions/createUser";
 import { getUsers } from "./functions/getUsers";
 import { UserStateContext, useUserContext } from "../../context/UserContext";
+import { isAuth } from "../../roles/isAuth";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -18,7 +20,8 @@ import { UserStateContext, useUserContext } from "../../context/UserContext";
 export function Users() {
 
     const UserContext = useUserContext()
-    console.log(UserContext)
+   // console.log(UserContext)
+   const navigate = useNavigate()
 
     const [users, setUsers] = useState([]);
     const [cities, setCities] = useState([]);
@@ -81,6 +84,7 @@ export function Users() {
 
 
     useEffect(() => {
+        !isAuth() && navigate('/login')
         getAllUsers();
     }, []);
 

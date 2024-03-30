@@ -2,14 +2,17 @@ import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { ApiFunctions } from "../../functions/Api";
 import { editUser } from "../../lib/validations/validation";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getUser } from "./functions/getUser";
 import { userUpdate } from "./functions/UserUpdate";
 import UserFormSkeleton from "./components/UserFormSkeleton";
 import UserEditForm from "./components/UserEditForm";
+import { isAuth } from "../../roles/isAuth";
 export default function UserEdit() {
 
   const { id } = useParams();
+  const navigate = useNavigate()
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [data, setData] = useState([]);
   const [cities, setCities] = useState([]);
@@ -58,8 +61,9 @@ export default function UserEdit() {
   };
 
   useEffect(() => {
+    !isAuth() && navigate('/login')
     getOneUser();
-  }, []);
+  }, [isAuth]);
   const getOneUser = async () => {
     setLoadingPage(true);
     const data = await getUser(id);

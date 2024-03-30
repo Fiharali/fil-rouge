@@ -17,12 +17,28 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+/**
+ * @OA\Info(
+ *      title="Users API",
+ *      version="1.0.0",
+ *      description="API to manage students",
+ * )
+ */
 class UserController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/users",
+     *     tags={"Users"},
+     *     summary="Get all users",
+     *     description="Retrieve a list of all users",
+     *     @OA\Response(response="200", description="List of users"),
+     *     @OA\Response(response="404", description="No user found"),
+     *
+     * )
      */
+
     public function index()
     {
 
@@ -41,7 +57,24 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/users",
+     *     tags={"Users"},
+     *     summary="Create a new user",
+     *     description="Create a new student with provided name and age",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"firs_name", "firs_name","email","number","password"},
+     *             @OA\Property(property="firs_name", type="string"),
+     *             @OA\Property(property="email", type="string"),
+     *             @OA\Property(property="number", type="string"),
+     *             @OA\Property(property="password", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(response="201", description="User created"),
+     *     @OA\Response(response="400", description="Bad request")
+     * )
      */
     public function store(StoreUserRequest $request)
     {
@@ -58,9 +91,24 @@ class UserController extends Controller
         ]);
 
     }
-
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/users/{user}",
+     *     tags={"Users"},
+     *     summary="Edit a user",
+     *     description="Update the details of a user",
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the users to update",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *
+     *     @OA\Response(response="200", description="Student updated"),
+     *     @OA\Response(response="400", description="Bad request"),
+     *     @OA\Response(response="404", description="Student not found")
+     * )
      */
     public function show(User $user)
     {
@@ -76,8 +124,34 @@ class UserController extends Controller
         ]);
     }
 
+
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/users/{user}",
+     *     tags={"Users"},
+     *     summary="Update a user",
+     *     description="Update the details of a user",
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the users to update",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *              required={"firs_name", "firs_name","email","number","password"},
+     *              @OA\Property(property="firs_name", type="string"),
+     *              @OA\Property(property="email", type="string"),
+     *              @OA\Property(property="number", type="string"),
+     *              @OA\Property(property="password", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Student updated"),
+     *     @OA\Response(response="400", description="Bad request"),
+     *     @OA\Response(response="404", description="Student not found")
+     * )
      */
     public function update(Request $request, User $user)
     {
@@ -92,15 +166,28 @@ class UserController extends Controller
             'success' => 'User updated Successful',
         ]);
     }
-
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/users/{user}",
+     *     tags={"Users"},
+     *     summary="Delete a user",
+     *     description="Delete a users by its ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the student to delete",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response="204", description="user deleted"),
+     *     @OA\Response(response="404", description="user not found")
+     * )
      */
     public function destroy(User $user)
     {
         $user->delete();
         return response([
-            'success' => 'User added Successful',
+            'success' => 'User deleted Successful',
         ]);
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\admin\CampusController;
 use App\Http\Controllers\api\admin\UserController;
 use App\Http\Controllers\api\Auth\AuthController;
 use App\Http\Controllers\api\user\ProfileUserController;
@@ -29,11 +30,22 @@ Route::post('/register', [AuthController::class, 'Register']);
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login');
 
-//////
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
-Route::apiResource('users', UserController::class);
+    Route::apiResource('users', UserController::class);
 
-Route::get('profile',[ProfileUserController::class, 'index']);
-Route::patch('profile',[ProfileUserController::class, 'update']);
+    Route::apiResource('campuses', CampusController::class);
+
+
+    Route::get('profile',[ProfileUserController::class, 'index']);
+    Route::patch('profile',[ProfileUserController::class, 'update']);
+    Route::delete('/logout', [AuthController::class, 'logout']);
+
+
+});
+
+//Route::apiResource('users', UserController::class);
+
+
 
 

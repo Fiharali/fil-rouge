@@ -6,25 +6,20 @@ const axiosSetup = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'multipart/form-data'
+  }
+});
+
+axiosSetup.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token.trim().replace(/^"|"$/g, '')}`;
+    }
+    return config;
   },
-})
+  error => {
+    return Promise.reject(error);
+  }
+);
 
-
-// axiosSetup.interceptors.request.use(async config => {
-//   try {
-//       // Fetch CSRF token
-//       const csrfResponse = await axiosSetup.get('/sanctum/csrf-cookie');
-//       const csrfToken = csrfResponse.headers['x-csrf-token']; // Assuming the CSRF token is provided in the response headers
-
-//       // Attach CSRF token to request headers
-//       if (csrfToken) {
-//           config.headers['X-CSRF-TOKEN'] = csrfToken;
-//       }
-//   } catch (error) {
-//       console.error('Failed to fetch CSRF token:', error);
-//   }
-
-//   return config;
-// });
-
-export { axiosSetup }
+export { axiosSetup };

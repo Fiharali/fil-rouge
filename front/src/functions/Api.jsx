@@ -128,4 +128,15 @@ export const ApiFunctions = {
         }
 
     },
+    Logout: async () => {
+
+        const data = await axiosSetup.delete('/logout');
+        if (data.status === 200) {
+            return data.data;
+
+        } else {
+            console.log(' failed');
+        }
+
+    },
 } 

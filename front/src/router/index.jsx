@@ -11,6 +11,9 @@ import Profile from "../pages/Profile";
 import { Users } from "../pages/users/Users";
 //import Dashboard from "../pages/dashboard/Dashboard";
 import UserEdit from "../pages/users/UserEdit";
+import Page404 from "../pages/Page404";
+import Campuses from "../pages/campuses/Campuses";
+// import Campuses from "../pages/campuses/Campuses";
 // import NavbarCustom from "../layouts/NavbarCustom";
 // import Sidebar from "../layouts/Sidebar";
 // import NavbarCustom from "../layouts/NavbarCustom";
@@ -25,12 +28,17 @@ export const router = createBrowserRouter([
             // },
             {
                 path: '/',
-                element: <Test />
+                element: <Home />
 
             },
             {
                 path: '/users',
                 element: <Users />
+
+            },
+            {
+                path: '/user/:id',
+                element: <UserEdit />
 
             },
 
@@ -45,12 +53,12 @@ export const router = createBrowserRouter([
             //     element: <Dashboard />
 
             // },
-
             {
-                path: '/user/:id',
-                element: <UserEdit />
+                path: '/campuses',
+                element: <Campuses />
 
             },
+
         ]
     },
 
@@ -66,7 +74,7 @@ export const router = createBrowserRouter([
 
     {
         path: '*',
-        element: 'Not Found'
+        element: <Page404 />
     },
 
 ])

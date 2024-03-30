@@ -56,6 +56,7 @@ const Profile = () => {
     };
 
     useEffect(() => {
+        !isAuth() && navigate('/login')
         getAuthUser();
 
     }, []);
