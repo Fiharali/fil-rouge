@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\admin\CampusController;
 use App\Http\Controllers\api\admin\ClassNameController;
+use App\Http\Controllers\api\admin\PromotionController;
 use App\Http\Controllers\api\admin\UserController;
 use App\Http\Controllers\api\Auth\AuthController;
 use App\Http\Controllers\api\user\ProfileUserController;
@@ -38,6 +39,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('campuses', CampusController::class);
 
     Route::apiResource('classNames', ClassNameController::class);
+
+    Route::apiResource('promotions', PromotionController::class);
 
 
     Route::get('profile',[ProfileUserController::class, 'index']);

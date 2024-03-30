@@ -14,6 +14,7 @@ import UserEdit from "../pages/users/UserEdit";
 import Page404 from "../pages/Page404";
 import Campuses from "../pages/campuses/Campuses";
 import ClassNames from "../pages/classNames/classNames";
+import Promotions from "../pages/promotions/Promotions";
 // import Campuses from "../pages/campuses/Campuses";
 // import NavbarCustom from "../layouts/NavbarCustom";
 // import Sidebar from "../layouts/Sidebar";
@@ -62,6 +63,11 @@ export const router = createBrowserRouter([
             {
                 path: '/class-names',
                 element: <ClassNames />
+
+            },
+            {
+                path: '/promotions',
+                element: <Promotions />
 
             },
 
