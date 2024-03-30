@@ -13,6 +13,7 @@ import { Users } from "../pages/users/Users";
 import UserEdit from "../pages/users/UserEdit";
 import Page404 from "../pages/Page404";
 import Campuses from "../pages/campuses/Campuses";
+import ClassNames from "../pages/classNames/classNames";
 // import Campuses from "../pages/campuses/Campuses";
 // import NavbarCustom from "../layouts/NavbarCustom";
 // import Sidebar from "../layouts/Sidebar";
@@ -56,6 +57,11 @@ export const router = createBrowserRouter([
             {
                 path: '/campuses',
                 element: <Campuses />
+
+            },
+            {
+                path: '/class-names',
+                element: <ClassNames />
 
             },
 

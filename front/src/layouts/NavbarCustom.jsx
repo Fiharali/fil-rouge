@@ -255,7 +255,7 @@ export default function NavbarCustom() {
               <ListItemPrefix>
                 <Cog6ToothIcon className="h-5 w-5" />
               </ListItemPrefix>
-              <Link to={'/classes'}>Classes</Link>
+              <Link to={'/class-names'}>Classes</Link>
             </ListItem>
             <ListItem className="mt-2 ">
               <ListItemPrefix>

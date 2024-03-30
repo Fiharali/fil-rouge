@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { getCampuses } from './functions/getCampuses';
+import { getClassNames } from './functions/getClassNames';
 import { isAuth } from '../../roles/isAuth';
 import { Button } from '@material-tailwind/react';
-import CampusCreate from './components/CampusCreate';
-import { addCampus } from '../../lib/validations/campus';
-import { createCampus } from './functions/createCampus';
-import CampusSkeleton from './components/CampusSkeleton';
-import { deleteCampus } from './functions/deleteCampus';
+import ClassNameCreate from './components/ClassNameCreate';
+import { addClassName } from '../../lib/validations/className';
+import { createClassName } from './functions/createClassName';
+import ClassNameSkeleton from './components/ClassNameSkeleton';
+import { deleteClassName } from './functions/deleteClassName';
 
 
-export default function Campuses() {
+export default function ClassNames() {
 
-    const [campuses, setCampuses] = useState([]);
+    const [classNames, setClassNames] = useState([]);
     const [errors, setErrors] = useState({});
     const [loadingPage, setLoadingPage] = useState(false);
 
@@ -33,7 +33,7 @@ export default function Campuses() {
 
     const validate = () => {
         try {
-            addCampus.parse(formData);
+            addClassName.parse(formData);
             setErrors({});
             return true;
         } catch (error) {
@@ -44,14 +44,14 @@ export default function Campuses() {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        getAllCampuses();
+        getAllClassNames();
     }, []);
 
-    const getAllCampuses = async () => {
+    const getAllClassNames = async () => {
         setLoadingPage(true)
-        const data = await getCampuses();
+        const data = await getClassNames();
         // console.log(data);
-        setCampuses(data.campuses)
+        setClassNames(data.classNames)
         setLoadingPage(false)
     };
 
@@ -60,21 +60,21 @@ export default function Campuses() {
         return `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')}`;
     };
 
-    //console.log(campuses);
+    //console.log(classNames);
 
 
-    const deleteCampusFunction = async (id) => {
-        if (await deleteCampus(id)) {
-            await getAllCampuses()
+    const deleteClassNameFunction = async (id) => {
+        if (await deleteClassName(id)) {
+            await getAllClassNames()
         }
     };
 
-    const submitCampusCreate = async (e) => {
+    const submitClassNameCreate = async (e) => {
         // console.log('Submit')
         e.preventDefault();
         if (validate()) {
 
-            const { success, data, error } = await createCampus(formData);
+            const { success, data, error } = await createClassName(formData);
             if (success) {
                 setFormData({
                     name: '',
@@ -88,7 +88,7 @@ export default function Campuses() {
                     icon: "success",
                     timer: 2000,
                 });
-                getAllCampuses();
+                getAllClassNames();
             } else {
                 setErrors(prevState => ({
                     ...prevState,
@@ -98,17 +98,15 @@ export default function Campuses() {
         }
     };
 
-    const listCampuses = campuses.map(campus => {
+    const listClassNames = classNames.map(className => {
         return (
-            <tr key={campus.id}>
-                <th>{campus.id}</th>
-                <td>{campus.name}</td>
-                <td ><span className=' text-xs font-medium me-2 px-2.5 py-0.5 rounded  border border-green-400'>{formatDate(campus.created_at)}</span></td>
+            <tr key={className.id}>
+                <th>{className.id}</th>
+                <td>{className.name}</td>
+                <td ><span className=' text-xs font-medium me-2 px-2.5 py-0.5 rounded  border border-green-400'>{formatDate(className.created_at)}</span></td>
                 <td className=''>
-                    {/* <button className="btn btn-outline btn-success  btn-sm" data-modal-target={`edit-campus-${campus.id}`} data-modal-toggle={`edit-campus-${campus.id}`} type="button" >Edit</button> */}
-                    <button className="btn btn-outline btn-error btn-sm ms-2" onClick={() => deleteCampusFunction(campus.id)} >Delete</button>
+                    <button className="btn btn-outline btn-error btn-sm ms-2" onClick={() => deleteClassNameFunction(className.id)} >Delete</button>
                 </td>
-                {/* <CampusEdit errors={errors} submitCampusCreate={submitCampusCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} id={campus.id} /> */}
             </tr>
         )
     }
@@ -118,8 +116,8 @@ export default function Campuses() {
     return (
         <>
             <div className="overflow-x-auto  mt-5 ">
-                <Button color="blue" className=" py-3 min-w-2/6 me-44 float-end " data-modal-target="add-campus" data-modal-toggle="add-campus" type="button"  >Add New Campus </Button>
-                <CampusCreate errors={errors} submitCampusCreate={submitCampusCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} />
+                <Button color="blue" className=" py-3 min-w-2/6 me-44 float-end " data-modal-target="add-className" data-modal-toggle="add-className" type="button"  >Add New ClassName </Button>
+                <ClassNameCreate errors={errors} submitClassNameCreate={submitClassNameCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} />
                 <table className="table table-zebra w-full md:w-3/4 mx-auto mt-16">
                     <thead>
                         <tr>
@@ -130,7 +128,7 @@ export default function Campuses() {
                         </tr>
                     </thead>
                     <tbody>
-                    {loadingPage ? <CampusSkeleton /> : listCampuses}
+                    {loadingPage ? <ClassNameSkeleton /> : listClassNames}
                     </tbody>
                 </table>
             </div>
