@@ -43,16 +43,22 @@ class UserController extends Controller
     {
 
 
+            $users=User::paginate(8);
+            return response([
+                'users' => UserResource::collection($users),
+                'pagination' => [
+                    'total' => $users->total(),
+                    'current_page' => $users->currentPage(),
+                    'total_pages' => $users->lastPage(),
 
-        return response([
-            'users' => UserResource::collection(User::all()),
-            'cities' => City::all(),
-            'campuses' => Campus::all(),
-            'promotions' => Promotion::all(),
-            'levels' => Level::all(),
-            'class_names' => ClassName::all(),
-            'roles' => Role::all(),
-        ]);
+                ],
+                'cities' => City::all(),
+                'campuses' => Campus::all(),
+                'promotions' => Promotion::all(),
+                'levels' => Level::all(),
+                'class_names' => ClassName::all(),
+                'roles' => Role::all(),
+            ]);
 
     }
 

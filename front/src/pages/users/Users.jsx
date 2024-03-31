@@ -13,6 +13,7 @@ import { UserStateContext, useUserContext } from "../../context/UserContext";
 import { isAuth } from "../../roles/isAuth";
 import { useNavigate } from "react-router-dom";
 import UserCardSkeleton from "./components/UserCardSkeleton";
+import Pagination from "../../components/Pagination";
 
 
 
@@ -21,8 +22,8 @@ import UserCardSkeleton from "./components/UserCardSkeleton";
 export function Users() {
 
     const UserContext = useUserContext()
-   // console.log(UserContext)
-   const navigate = useNavigate()
+    // console.log(UserContext)
+    const navigate = useNavigate()
 
     const [users, setUsers] = useState([]);
     const [cities, setCities] = useState([]);
@@ -34,6 +35,9 @@ export function Users() {
     const [errors, setErrors] = useState({});
     const [selectedFile, setSelectedFile] = useState(null);
     const [loadingPage, setLoadingPage] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pagination, setPagination] = useState({});
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -89,10 +93,11 @@ export function Users() {
         getAllUsers();
     }, []);
 
-    const getAllUsers = async () => {
+    const getAllUsers = async (page = 1) => {
         setLoadingPage(true)
-        const data = await getUsers();
+        const data = await getUsers(page);
         //console.log(data);
+        setPagination(data.pagination);
         setUsers(data.users);
         setCities(data.cities);
         setCampuses(data.campuses)
@@ -103,6 +108,12 @@ export function Users() {
         setLoadingPage(false)
 
     };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        getAllUsers(page);
+    };
+
 
 
     const deleteUserFunction = async (id) => {
@@ -115,6 +126,7 @@ export function Users() {
 
     const submitUserCreate = async (e) => {
         // console.log('Submit')
+        setLoading(true)
         e.preventDefault();
         if (validate()) {
 
@@ -152,6 +164,7 @@ export function Users() {
             }
 
 
+            setLoading(false)
 
 
 
@@ -165,7 +178,7 @@ export function Users() {
     }
     );
 
-    
+
 
 
 
@@ -185,15 +198,18 @@ export function Users() {
                     handleChange={handleChange} selectedFile={selectedFile} handleFileChange={handleFileChange}
                     errors={errors} formData={formData} cities={cities} campuses={campuses} promotions={promotions}
                     levels={levels} classNames={classNames} setFormData={setFormData} roles={roles}
-                    submitUserCreate={submitUserCreate} modalButtonRef={modalButtonRef}
+                    submitUserCreate={submitUserCreate} modalButtonRef={modalButtonRef} loading={loading}
                 />
             </div>
 
 
             <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  gap-2 mt-10 mx-5">
-               
+
                 {loadingPage ? <UserCardSkeleton /> : listUsers}
+
             </div>
+            
+         <Pagination  pagination={pagination} handlePageChange={handlePageChange}/>
         </>
 
     );

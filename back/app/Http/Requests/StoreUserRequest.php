@@ -31,8 +31,7 @@ class StoreUserRequest extends FormRequest
             'class_name_id' => 'required',
             'promotion_id' => 'required',
             'campus_id' => 'required',
-            'city_id' => 'required',
-           // 'image' => 'required|image',
+            'city_id' => 'required', 'image' => 'required|image',
         ];
     }
 }

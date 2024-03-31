@@ -6,7 +6,7 @@ export default function UserCardSkeleton() {
         <>
             {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
 
-                <div className="flex flex-col gap-4 w-72 mt-5" key={index}>
+                <div className="flex flex-col gap-4  mt-5  p-5  h-full  w-full  mx-auto  rounded-lg  shadow-lg " key={index}>
                     <div className="flex gap-4 items-center">
                         <div className="skeleton w-28 h-28 rounded-full shrink-0 mx-auto"></div>
                         {/* <div className="flex flex-col gap-4">

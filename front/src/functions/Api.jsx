@@ -33,9 +33,9 @@ export const ApiFunctions = {
 
     },
 
-    getAllUsers: async () => {
+    getAllUsers: async (page=1) => {
 
-        const data = await axiosSetup.get('/users');
+        const data = await axiosSetup.get(`/users?page=${page}`);
         if (data.status === 200) {
             console.log('users ...');
             return data.data;
