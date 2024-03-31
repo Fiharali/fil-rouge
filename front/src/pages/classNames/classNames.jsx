@@ -14,6 +14,7 @@ export default function ClassNames() {
     const [classNames, setClassNames] = useState([]);
     const [errors, setErrors] = useState({});
     const [loadingPage, setLoadingPage] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -70,7 +71,7 @@ export default function ClassNames() {
     };
 
     const submitClassNameCreate = async (e) => {
-        // console.log('Submit')
+        setLoading(true);
         e.preventDefault();
         if (validate()) {
 
@@ -96,6 +97,8 @@ export default function ClassNames() {
                 }));
             }
         }
+        setLoading(false);
+
     };
 
     const listClassNames = classNames.map(className => {
@@ -117,7 +120,7 @@ export default function ClassNames() {
         <>
             <div className="overflow-x-auto  mt-5 ">
                 <Button color="blue" className=" py-3 min-w-2/6 me-44 float-end " data-modal-target="add-className" data-modal-toggle="add-className" type="button"  >Add New ClassName </Button>
-                <ClassNameCreate errors={errors} submitClassNameCreate={submitClassNameCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} />
+                <ClassNameCreate errors={errors} submitClassNameCreate={submitClassNameCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} loading={loading} />
                 <table className="table table-zebra w-full md:w-3/4 mx-auto mt-16">
                     <thead>
                         <tr>

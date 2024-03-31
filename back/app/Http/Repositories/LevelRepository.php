@@ -11,7 +11,7 @@ class LevelRepository
         return Level::all();
     }
 
-    public function create(array $data)
+    public function create($data)
     {
         return Level::create($data);
     }

@@ -1,20 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { getPromotions } from './functions/getPromotions';
+import { getLevels } from './functions/getLevels';
 import { isAuth } from '../../roles/isAuth';
 import { Button } from '@material-tailwind/react';
-import PromotionCreate from './components/PromotionCreate';
-import { addPromotion } from '../../lib/validations/promotion';
-import { createPromotion } from './functions/createPromotion';
-import PromotionSkeleton from './components/PromotionSkeleton';
-import { deletePromotion } from './functions/deletePromotion';
+import LevelCreate from './components/LevelCreate';
+import { addLevel } from '../../lib/validations/level';
+import { createLevel } from './functions/createLevel';
+import LevelSkeleton from './components/LevelSkeleton';
+import { deleteLevel } from './functions/deleteLevel';
 
 
-export default function Promotions() {
+export default function Levels() {
 
-    const [promotions, setPromotions] = useState([]);
+    const [levels, setLevels] = useState([]);
     const [errors, setErrors] = useState({});
     const [loadingPage, setLoadingPage] = useState(false);
     const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
     });
@@ -33,7 +34,7 @@ export default function Promotions() {
 
     const validate = () => {
         try {
-            addPromotion.parse(formData);
+            addLevel.parse(formData);
             setErrors({});
             return true;
         } catch (error) {
@@ -44,14 +45,14 @@ export default function Promotions() {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        getAllPromotions();
+        getAllLevels();
     }, []);
 
-    const getAllPromotions = async () => {
+    const getAllLevels = async () => {
         setLoadingPage(true)
-        const data = await getPromotions();
+        const data = await getLevels();
         // console.log(data);
-        setPromotions(data.promotions)
+        setLevels(data.levels)
         setLoadingPage(false)
     };
 
@@ -60,23 +61,23 @@ export default function Promotions() {
         return `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')}`;
     };
 
-    //console.log(promotions);
+    //console.log(levels);
 
 
-    const deletePromotionFunction = async (id) => {
-        if (await deletePromotion(id)) {
-            await getAllPromotions()
+    const deleteLevelFunction = async (id) => {
+        if (await deleteLevel(id)) {
+            await getAllLevels()
         }
     };
 
-    const submitPromotionCreate = async (e) => {
+    const submitLevelCreate = async (e) => {
         // console.log('Submit')
         setLoading(true);
-
         e.preventDefault();
         if (validate()) {
 
-            const { success, data, error } = await createPromotion(formData);
+
+            const { success, data, error } = await createLevel(formData);
             if (success) {
                 setFormData({
                     name: '',
@@ -90,29 +91,30 @@ export default function Promotions() {
                     icon: "success",
                     timer: 2000,
                 });
-                getAllPromotions();
+
+                getAllLevels();
             } else {
                 setErrors(prevState => ({
                     ...prevState,
                     name: error.response?.data.error ?? error.response.data.message
                 }));
             }
+
         }
         setLoading(false);
-
     };
 
-    const listPromotions = promotions.map(promotion => {
+    const listLevels = levels.map(level => {
         return (
-            <tr key={promotion.id}>
-                <th>{promotion.id}</th>
-                <td>{promotion.name}</td>
-                <td ><span className=' text-xs font-medium me-2 px-2.5 py-0.5 rounded  border border-green-400'>{formatDate(promotion.created_at)}</span></td>
+            <tr key={level.id}>
+                <th>{level.id}</th>
+                <td>{level.name}</td>
+                <td ><span className=' text-xs font-medium me-2 px-2.5 py-0.5 rounded  border border-green-400'>{formatDate(level.created_at)}</span></td>
                 <td className=''>
-                    {/* <button className="btn btn-outline btn-success  btn-sm" data-modal-target={`edit-promotion-${promotion.id}`} data-modal-toggle={`edit-promotion-${promotion.id}`} type="button" >Edit</button> */}
-                    <button className="btn btn-outline btn-error btn-sm ms-2" onClick={() => deletePromotionFunction(promotion.id)} >Delete</button>
+                    {/* <button className="btn btn-outline btn-success  btn-sm" data-modal-target={`edit-level-${level.id}`} data-modal-toggle={`edit-level-${level.id}`} type="button" >Edit</button> */}
+                    <button className="btn btn-outline btn-error btn-sm ms-2" onClick={() => deleteLevelFunction(level.id)} >Delete</button>
                 </td>
-                {/* <PromotionEdit errors={errors} submitPromotionCreate={submitPromotionCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} id={promotion.id} /> */}
+                {/* <LevelEdit errors={errors} submitLevelCreate={submitLevelCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} id={level.id} /> */}
             </tr>
         )
     }
@@ -122,8 +124,8 @@ export default function Promotions() {
     return (
         <>
             <div className="overflow-x-auto  mt-5 ">
-                <Button color="blue" className=" py-3 min-w-2/6 me-44 float-end " data-modal-target="add-promotion" data-modal-toggle="add-promotion" type="button"  >Add New Promotion </Button>
-                <PromotionCreate errors={errors} submitPromotionCreate={submitPromotionCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} loading={loading} />
+                <Button color="blue" className=" py-3 min-w-2/6 me-44 float-end " data-modal-target="add-level" data-modal-toggle="add-level" type="button"  >Add New Level </Button>
+                <LevelCreate errors={errors} submitLevelCreate={submitLevelCreate} formData={formData} modalButtonRef={modalButtonRef} handleChange={handleChange} loading={loading} />
                 <table className="table table-zebra w-full md:w-3/4 mx-auto mt-16">
                     <thead>
                         <tr>
@@ -134,7 +136,7 @@ export default function Promotions() {
                         </tr>
                     </thead>
                     <tbody>
-                        {loadingPage ? <PromotionSkeleton /> : listPromotions}
+                        {loadingPage ? <LevelSkeleton /> : listLevels}
                     </tbody>
                 </table>
             </div>

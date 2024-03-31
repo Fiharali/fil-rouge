@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\LevelRepository;
+use App\Http\Requests\StoreLevelResuest;
 use App\Models\Level;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class LevelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLevelResuest $request)
     {
         $this->levelRepository->create($request->all());
 

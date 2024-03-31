@@ -1,5 +1,7 @@
 import { Button } from "@material-tailwind/react";
 export default function ClassNameCreate(props) {
+    const loader = <span className="loading loading-ring loading-sm"></span>
+
     return (
         <div id="add-className" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full  max-h-full" ref={props.modalButtonRef}>
             <div class="relative p-4 pb-8 w-full md:w-2/5 mt-10 max-h-full">
@@ -25,7 +27,8 @@ export default function ClassNameCreate(props) {
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                            <Button type="submit" fullWidth>Add </Button>
+                        <Button type="submit" fullWidth disabled={props.loading}  > {props.loading ? loader : 'Add'} </Button>
+
                         </div>
                     </form>
                 </div>

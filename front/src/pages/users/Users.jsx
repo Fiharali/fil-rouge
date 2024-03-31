@@ -12,6 +12,7 @@ import { getUsers } from "./functions/getUsers";
 import { UserStateContext, useUserContext } from "../../context/UserContext";
 import { isAuth } from "../../roles/isAuth";
 import { useNavigate } from "react-router-dom";
+import UserCardSkeleton from "./components/UserCardSkeleton";
 
 
 
@@ -32,7 +33,7 @@ export function Users() {
     const [roles, setRoles] = useState([]);
     const [errors, setErrors] = useState({});
     const [selectedFile, setSelectedFile] = useState(null);
-
+    const [loadingPage, setLoadingPage] = useState(false);
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -89,6 +90,7 @@ export function Users() {
     }, []);
 
     const getAllUsers = async () => {
+        setLoadingPage(true)
         const data = await getUsers();
         //console.log(data);
         setUsers(data.users);
@@ -98,6 +100,7 @@ export function Users() {
         setLevels(data.levels)
         setPromotions(data.promotions)
         setRoles(data.roles)
+        setLoadingPage(false)
 
     };
 
@@ -162,6 +165,8 @@ export function Users() {
     }
     );
 
+    
+
 
 
 
@@ -186,7 +191,8 @@ export function Users() {
 
 
             <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  gap-2 mt-10 mx-5">
-                {listUsers}
+               
+                {loadingPage ? <UserCardSkeleton /> : listUsers}
             </div>
         </>
 
