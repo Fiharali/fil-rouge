@@ -14,6 +14,7 @@ import { isAuth } from "../../roles/isAuth";
 import { useNavigate } from "react-router-dom";
 import UserCardSkeleton from "./components/UserCardSkeleton";
 import Pagination from "../../components/Pagination";
+import { getSearchUsers } from "./functions/userSearch";
 
 
 
@@ -52,6 +53,10 @@ export function Users() {
         role: '',
         image: null,
     });
+    const [formDataSearch, setFormDataSearch] = useState({
+        role: '',
+        query: '',
+    });
 
 
     const modalButtonRef = useRef(null);
@@ -64,6 +69,40 @@ export function Users() {
         }));
 
     };
+
+    const handleSearch = () => {
+
+        const searchTerm = "r"
+        const filteredUsers = users.filter(user =>
+            user.first_name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        setUsers(filteredUsers);
+    };
+
+
+    const handleChangeSearch = (e) => {
+        const { name, value } = e.target;
+        setFormDataSearch(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const performSearch = async (page = 1) => {
+        setLoadingPage(true);
+        const data = await getSearchUsers(page, formDataSearch);
+        console.log(data);
+        setUsers(data.users);
+        setPagination(data.pagination);
+        setLoadingPage(false);
+    };
+
+    useEffect(() => {
+        !isAuth() && navigate('/login')
+        getAllUsers();
+        performSearch();
+    }, [formDataSearch]);
 
     const validate = () => {
         try {
@@ -88,10 +127,7 @@ export function Users() {
 
 
 
-    useEffect(() => {
-        !isAuth() && navigate('/login')
-        getAllUsers();
-    }, []);
+  
 
     const getAllUsers = async (page = 1) => {
         setLoadingPage(true)
@@ -170,6 +206,7 @@ export function Users() {
 
         }
     };
+    //console.log(formDataSearch)
 
     const listUsers = users.map(user => {
         return (
@@ -178,20 +215,11 @@ export function Users() {
     }
     );
 
-
-
-
-
-
     return (
 
-
         <>
-
-
-
             <div className=" grid grid-flow-col justify-stretch   items-end mt-5    ">
-                <SearchBar />
+                <SearchBar roles={roles} handleChangeSearch={handleChangeSearch} />
                 <Button color="blue" className=" py-3 min-w-2/6 mx-auto " data-modal-target="add-user" data-modal-toggle="add-user" type="button"  >Add New User </Button>
 
                 <UserCreate
@@ -202,14 +230,13 @@ export function Users() {
                 />
             </div>
 
-
             <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  gap-2 mt-10 mx-5">
 
                 {loadingPage ? <UserCardSkeleton /> : listUsers}
 
             </div>
-            
-         <Pagination  pagination={pagination} handlePageChange={handlePageChange}/>
+
+            <Pagination pagination={pagination} handlePageChange={handlePageChange} />
         </>
 
     );

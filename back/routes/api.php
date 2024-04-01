@@ -36,6 +36,7 @@ Route::post('/login', [AuthController::class, 'login'])
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::apiResource('users', UserController::class);
+    Route::get('search-users', [UserController::class,'search']);
     Route::apiResource('campuses', CampusController::class);
     Route::apiResource('classNames', ClassNameController::class);
     Route::apiResource('promotions', PromotionController::class);

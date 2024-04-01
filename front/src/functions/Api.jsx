@@ -33,7 +33,7 @@ export const ApiFunctions = {
 
     },
 
-    getAllUsers: async (page=1) => {
+    getAllUsers: async (page = 1) => {
 
         const data = await axiosSetup.get(`/users?page=${page}`);
         if (data.status === 200) {
@@ -112,12 +112,12 @@ export const ApiFunctions = {
 
     },
 
-    editUser: async (id , formData) => {
+    editUser: async (id, formData) => {
         const formDataWithPatchMethod = {
             ...formData,
             _method: 'PATCH'
         };
-        const data = await axiosSetup.post('/users/'+id , formDataWithPatchMethod, {
+        const data = await axiosSetup.post('/users/' + id, formDataWithPatchMethod, {
             method: 'patch'
         });
         if (data.status === 200) {
@@ -128,6 +128,18 @@ export const ApiFunctions = {
         }
 
     },
+    getSearchUsers: async (page = 1, formDataSearch) => {
+
+        const data = await axiosSetup.get(`/search-users?page=${page}&role=${formDataSearch.role}&query=${formDataSearch.query}`);
+        if (data.status === 200) {
+            return data.data;
+            //console.log('data', data)
+        } else {
+            console.log(' failed');
+        }
+
+    },
+
     Logout: async () => {
 
         const data = await axiosSetup.delete('/logout');

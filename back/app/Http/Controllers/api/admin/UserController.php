@@ -198,6 +198,39 @@ class UserController extends Controller
     }
 
 
+    public function search(Request $request){
+        $users = User::query();
+
+        if ($request->has('query')) {
+            $users->where(function ($query) use ($request) {
+                $query->where('first_name', 'like', '%' . $request->input('query') . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->input('query') . '%');
+            });
+        }
+
+        if ($request->has('role') && $request->input('role')!="") {
+            $role = $request->input('role');
+            $users->whereHas('roles', function ($query) use ($role) {
+                    $query->where('roles.id', $role);
+            });
+
+        }
+
+        // Paginate the results
+        $allUsers = $users->paginate(8);
+
+        return response([
+            'users' => UserResource::collection($allUsers),
+            'pagination' => [
+                'total' => $allUsers->total(),
+                'current_page' => $allUsers->currentPage(),
+                'total_pages' => $allUsers->lastPage(),
+            ],
+        ]);
+    }
+
+
+
 
 
 }
