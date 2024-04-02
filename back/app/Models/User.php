@@ -85,4 +85,9 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsTo(Campus::class);
     }
 
+    public function  absences(): \Illuminate\Database\Eloquent\Relations\hasMany
+    {
+        return $this->hasMany(Absence::class);
+    }
+
 }

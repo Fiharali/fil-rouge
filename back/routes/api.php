@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\admin\AbsenceController;
 use App\Http\Controllers\api\admin\CampusController;
 use App\Http\Controllers\api\admin\ClassNameController;
 use App\Http\Controllers\api\admin\LevelController;
@@ -37,10 +38,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::apiResource('users', UserController::class);
     Route::get('search-users', [UserController::class,'search']);
+
     Route::apiResource('campuses', CampusController::class);
     Route::apiResource('classNames', ClassNameController::class);
     Route::apiResource('promotions', PromotionController::class);
     Route::apiResource('levels', LevelController::class);
+
+    Route::apiResource('absences', AbsenceController::class)->only(['index','delete']);
+    Route::apiResource('absences', \App\Http\Controllers\api\apprenant\AbsenceController::class)
+        ->only('store');
+    Route::get('types', [AbsenceController::class,'allTypes']);
 
 
     Route::get('profile',[ProfileUserController::class, 'index']);

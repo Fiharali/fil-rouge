@@ -41,6 +41,8 @@ import { submitLogout } from "../Auth/LogOut";
 import { Link, NavLink } from "react-router-dom";
 import Navbar from "./Navbar";
 import { Class, EventAvailable, Room, School, WorkHistory } from "@mui/icons-material";
+import { useUserContext } from "../context/UserContext";
+import { isAdmin } from "../roles/isAdmin";
 
 export default function NavbarCustom() {
 
@@ -55,6 +57,8 @@ export default function NavbarCustom() {
   const closeDrawer = () => setIsDrawerOpen(false);
 
   const { isDarkMode, toggleDarkMode } = useTheme();
+  const UserContext = useUserContext()
+  // console.log(UserContext.user.roles)
 
   const links = [
     { to: '/users', text: 'Users', icon: UsersIcon },
@@ -62,6 +66,7 @@ export default function NavbarCustom() {
     { to: '/class-names', text: 'Classes', icon: Class },
     { to: '/promotions', text: 'Promotions', icon: EventAvailable },
     { to: '/levels', text: 'Levels', icon: WorkHistory },
+    { to: '/absences', text: 'absences', icon: WorkHistory },
   ];
 
 
@@ -150,22 +155,25 @@ export default function NavbarCustom() {
                 </ListItemSuffix>
               </ListItem>
             </Link> */}
-
-            {links.map((link, index) => (
-              <NavLink
-                to={link.to}
-                key={index}
-                activeClassName="bg-red-500"
-              >
-                <ListItem className='mt-2' >
-                  <ListItemPrefix>
-                    <link.icon className="h-5 w-5" />
-                  </ListItemPrefix>
-                  {link.text}
-                </ListItem>
-              </NavLink>
-            ))}
+            {/* {isAdmin() && */}
+              {links.map((link, index) => (
+                <NavLink
+                  to={link.to}
+                  key={index}
+                  activeClassName="bg-red-500"
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <link.icon className="h-5 w-5" />
+                    </ListItemPrefix>
+                    {link.text}
+                  </ListItem>
+                </NavLink>
+              ))
+              }
           </List>
+
+
 
         </Card>
       </Drawer>

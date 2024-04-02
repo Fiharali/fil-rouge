@@ -8,10 +8,11 @@ import { Users } from "../pages/users/Users";
 import UserEdit from "../pages/users/UserEdit";
 import Page404 from "../pages/Page404";
 import ClassNames from "../pages/classNames/classNames";
-
 import Campuses from "../pages/campuses/Campuses";
 import Promotions from "../pages/promotions/Promotions";
 import Levels from "../pages/levels/Levels";
+import Absences from "../pages/absences/Absences";
+import AbsenceRequest from "../pages/absences/AbsenceRequest";
 
 
 export const router = createBrowserRouter([
@@ -58,6 +59,16 @@ export const router = createBrowserRouter([
             {
                 path: '/levels',
                 element: <Levels />
+
+            },
+            {
+                path: '/absences',
+                element: <Absences />
+
+            },
+            {
+                path: '/demand-absence',
+                element: <AbsenceRequest />
 
             },
 

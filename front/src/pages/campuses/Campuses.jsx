@@ -7,6 +7,7 @@ import { addCampus } from '../../lib/validations/campus';
 import { createCampus } from './functions/createCampus';
 import CampusSkeleton from './components/CampusSkeleton';
 import { deleteCampus } from './functions/deleteCampus';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Campuses() {
@@ -15,7 +16,7 @@ export default function Campuses() {
     const [errors, setErrors] = useState({});
     const [loadingPage, setLoadingPage] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: '',
     });
@@ -134,7 +135,7 @@ export default function Campuses() {
                         </tr>
                     </thead>
                     <tbody>
-                    {loadingPage ? <CampusSkeleton /> : listCampuses}
+                        {loadingPage ? <CampusSkeleton /> : listCampuses}
                     </tbody>
                 </table>
             </div>

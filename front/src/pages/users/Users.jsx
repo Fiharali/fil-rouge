@@ -23,7 +23,6 @@ import { getSearchUsers } from "./functions/userSearch";
 export function Users() {
 
     const UserContext = useUserContext()
-    // console.log(UserContext)
     const navigate = useNavigate()
 
     const [users, setUsers] = useState([]);
@@ -58,7 +57,6 @@ export function Users() {
         query: '',
     });
 
-
     const modalButtonRef = useRef(null);
 
     const handleChange = (e) => {
@@ -69,17 +67,6 @@ export function Users() {
         }));
 
     };
-
-    const handleSearch = () => {
-
-        const searchTerm = "r"
-        const filteredUsers = users.filter(user =>
-            user.first_name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-
-        setUsers(filteredUsers);
-    };
-
 
     const handleChangeSearch = (e) => {
         const { name, value } = e.target;
@@ -100,7 +87,7 @@ export function Users() {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        getAllUsers();
+        //getAllUsers();
         performSearch();
     }, [formDataSearch]);
 
@@ -125,10 +112,6 @@ export function Users() {
 
     };
 
-
-
-  
-
     const getAllUsers = async (page = 1) => {
         setLoadingPage(true)
         const data = await getUsers(page);
@@ -150,15 +133,11 @@ export function Users() {
         getAllUsers(page);
     };
 
-
-
     const deleteUserFunction = async (id) => {
         if (await deleteUser(id)) {
             await getAllUsers()
         }
     };
-
-
 
     const submitUserCreate = async (e) => {
         // console.log('Submit')
@@ -206,8 +185,7 @@ export function Users() {
 
         }
     };
-    //console.log(formDataSearch)
-
+    
     const listUsers = users.map(user => {
         return (
             <UserCard user={user} key={user.id} deleteUser={deleteUserFunction} />
