@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AbsenceResource;
 use App\Models\Absence;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -14,7 +15,10 @@ class AbsenceController extends Controller
      */
     public function index()
     {
-        //
+        $absences=Absence::all();
+        return response([
+            'absences' => AbsenceResource::collection($absences),
+            ]);
     }
 
     /**

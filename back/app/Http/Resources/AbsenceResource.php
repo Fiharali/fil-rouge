@@ -14,6 +14,16 @@ class AbsenceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'status' => $this->status,
+            'date' => $this->date,
+            'created_at' => $this->created_at,
+            'type_id' => $this->type_id,
+            'user_id' => $this->user_id,
+            'type' => $this->type,
+            'user' => new UserResource($this->user),
+            'file' => $this->getFirstMediaUrl('absences'),
+        ];
     }
 }

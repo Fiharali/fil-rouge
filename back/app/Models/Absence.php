@@ -12,7 +12,7 @@ class Absence extends Model implements HasMedia
 {
     use HasFactory ,InteractsWithMedia ,SoftDeletes;
 
-
+protected  $fillable = ['type_id','status','date','user_id'];
 
     public function  type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

@@ -20,6 +20,18 @@ export const AbsenceFunctions = {
             console.log(' failed');
         }
 
-    }
+    },
+
+    getAbsences: async () => {
+        const data = await axiosSetup.get('/absences');
+        if (data.status === 200) {
+            return data;
+        } else {
+            console.log(' failed');
+        }
+
+    },
+
+    
 
 }

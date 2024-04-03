@@ -9,7 +9,7 @@ export default function AbsenceRequest() {
     const [errors, setErrors] = useState({});
     const [types, setTypes] = useState([]);
     const [formData, setFormData] = useState({
-        date: ' ',
+        date: '',
         type: '',
         file: null,
     });
@@ -24,11 +24,9 @@ export default function AbsenceRequest() {
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        console.log(file);
-        setSelectedFile(file);
         setFormData(prevState => ({
             ...prevState,
-            image: file
+            file: file
         }));
 
     };
@@ -46,11 +44,12 @@ export default function AbsenceRequest() {
             setTypes(data.data)
         } catch (error) {
             console.error('Error:', error);
+            
 
         }
     }
 
-
+    //console.log(formData)
 
     const loader = <span className="loading loading-ring loading-sm"></span>
 
@@ -64,17 +63,20 @@ export default function AbsenceRequest() {
 
                 const data = await AbsenceFunctions.addType(formData);
                 console.log(data);
-                // setSelectedFile(null)
-                // Swal.fire({
-
-                //     title: data.success,
-                //     icon: "success",
-                //     timer: 2000,
-                // });
+                setFormData({})
+                Swal.fire({
+                    title: data.success,
+                    icon: "success",
+                    timer: 2000,
+                });
 
             } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    timer: 2000,
+                });
                 console.error('Error:', error);
-
+                setErrors()
             }
         }
     }
@@ -103,7 +105,7 @@ export default function AbsenceRequest() {
                     <div className="grid grid-cols-6 gap-6">
                         <div className="col-span-6 ">
                             <label for="last_name" className="block mb-2 text-sm font-medium ">Date</label>
-                            <input type="date" name="date" id="date" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="last name" value={formData.date} onChange={handleChange} min={today}  />
+                            <input type="date" name="date" id="date" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="last name" value={formData.date} onChange={handleChange} min={today} />
                             {errors.date && <span className="text-red-500 text-left ms-5">{errors.date}</span>}
                         </div>
                         <div className="col-span-6 ">
@@ -121,6 +123,7 @@ export default function AbsenceRequest() {
                             </select>
                             {errors.type && <span className="text-red-500 text-left ms-5">{errors.type}</span>}
                         </div>
+
                         <div className="col-span-6">
                             <label for="file" className="block mb-2 text-sm font-medium ">File approve</label>
                             <input type="file" name="file" id="file" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full " onChange={handleFileChange} accept='pdf' />
