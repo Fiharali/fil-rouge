@@ -3,6 +3,7 @@ import { getAbsences } from './functions/getAbsences';
 import { isAuth } from '../../roles/isAuth';
 import AbsencesSkeleton from './components/AbsencesSkeleton';
 
+
 export default function Absences() {
 
   const [loadingPage, setLoadingPage] = useState(false);
@@ -14,10 +15,11 @@ export default function Absences() {
     getAllAbsences();
   }, []);
 
+  
+
   const getAllAbsences = async () => {
     setLoadingPage(true)
     const data = await getAbsences();
-    // console.log(data.data.absences);
     setAbsences(data.data.absences)
     setLoadingPage(false)
   };
@@ -43,10 +45,12 @@ export default function Absences() {
   }
   );
 
+  
+
 
   return (
     <>
-      <div className="overflow-x-auto  mt-5 ">
+      <div className="overflow-x-auto  mt-5  ">
         <table className="table table-zebra w-full md:w-3/4 mx-auto mt-16">
           <thead>
             <tr>
@@ -63,7 +67,10 @@ export default function Absences() {
             {loadingPage ? <AbsencesSkeleton /> : listAbsences}
           </tbody>
         </table>
+       
       </div>
+
+
     </>
   );
 }

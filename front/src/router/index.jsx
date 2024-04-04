@@ -13,6 +13,7 @@ import Promotions from "../pages/promotions/Promotions";
 import Levels from "../pages/levels/Levels";
 import Absences from "../pages/absences/Absences";
 import AbsenceRequest from "../pages/absences/AbsenceRequest";
+import AbsencesCalendar from "../pages/absences/AbsencesCalendar";
 
 
 export const router = createBrowserRouter([
@@ -69,6 +70,11 @@ export const router = createBrowserRouter([
             {
                 path: '/demand-absence',
                 element: <AbsenceRequest />
+
+            },
+            {
+                path: '/absence-calender',
+                element: <AbsencesCalendar />
 
             },
 

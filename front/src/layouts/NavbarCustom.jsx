@@ -92,7 +92,7 @@ export default function NavbarCustom() {
           </div>
 
           <List>
-            {/* <Accordion
+            <Accordion
               open={open === 1}
               icon={
                 <ChevronDownIcon
@@ -121,7 +121,7 @@ export default function NavbarCustom() {
                     <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5 " />
                     </ListItemPrefix>
-                    <Link to={'/users'}>Users</Link>
+                    <Link to={'/users'} className="text-gray-500">Users</Link>
                   </ListItem>
                   <ListItem>
                     <ListItemPrefix>
@@ -138,7 +138,7 @@ export default function NavbarCustom() {
                 </List>
               </AccordionBody>
             </Accordion>
-            <Link to={'/users'}>
+            {/* <Link to={'/users'}>
               <ListItem className="">
                 <ListItemPrefix>
                   <InboxIcon className="h-5 w-5" />
@@ -156,21 +156,21 @@ export default function NavbarCustom() {
               </ListItem>
             </Link> */}
             {/* {isAdmin() && */}
-              {links.map((link, index) => (
-                <NavLink
-                  to={link.to}
-                  key={index}
-                  activeClassName="bg-red-500"
-                >
-                  <ListItem className='mt-2' >
-                    <ListItemPrefix>
-                      <link.icon className="h-5 w-5" />
-                    </ListItemPrefix>
-                    {link.text}
-                  </ListItem>
-                </NavLink>
-              ))
-              }
+            {links.map((link, index) => (
+              <NavLink
+                to={link.to}
+                key={index}
+                activeClassName="bg-red-500"
+              >
+                <ListItem className='mt-2' >
+                  <ListItemPrefix>
+                    <link.icon className="h-5 w-5" />
+                  </ListItemPrefix>
+                  {link.text}
+                </ListItem>
+              </NavLink>
+            ))
+            }
           </List>
 
 

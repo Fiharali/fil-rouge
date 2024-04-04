@@ -106,7 +106,7 @@ export default function AbsenceRequest() {
                         <div className="col-span-6 ">
                             <label for="last_name" className="block mb-2 text-sm font-medium ">Date</label>
                             <input type="date" name="date" id="date" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="last name" value={formData.date} onChange={handleChange} min={today} />
-                            {errors.date && <span className="text-red-500 text-left ms-5">{errors.date}</span>}
+                            {/* {errors.date && <span className="text-red-500 text-left ms-5">{errors.date}</span>} */}
                         </div>
                         <div className="col-span-6 ">
                             <label for="type" className="block mb-2 text-sm font-medium ">Type </label>
@@ -121,13 +121,13 @@ export default function AbsenceRequest() {
                                     ))
                                 }
                             </select>
-                            {errors.type && <span className="text-red-500 text-left ms-5">{errors.type}</span>}
+                            {/* {errors.type && <span className="text-red-500 text-left ms-5">{errors.type}</span>} */}
                         </div>
 
                         <div className="col-span-6">
                             <label for="file" className="block mb-2 text-sm font-medium ">File approve</label>
                             <input type="file" name="file" id="file" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full " onChange={handleFileChange} accept='pdf' />
-                            {errors.file && <span className="text-red-500 text-left ms-5">{errors.file}</span>}
+                            {/* {errors.file && <span className="text-red-500 text-left ms-5">{errors.file}</span>} */}
                         </div>
                         <div className="col-span-6 sm:col-full">
                             <Button type="submit" fullWidth>Save</Button>

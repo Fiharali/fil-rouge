@@ -86,8 +86,8 @@ export function Users() {
     };
 
     useEffect(() => {
-        !isAuth() && navigate('/login')
-        //getAllUsers();
+        // !isAuth() && navigate('/login')
+        getAllUsers();
         performSearch();
     }, [formDataSearch]);
 
@@ -179,13 +179,12 @@ export function Users() {
             }
 
 
-            setLoading(false)
-
-
 
         }
+        setLoading(false)
+
     };
-    
+
     const listUsers = users.map(user => {
         return (
             <UserCard user={user} key={user.id} deleteUser={deleteUserFunction} />
