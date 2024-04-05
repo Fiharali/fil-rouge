@@ -8,10 +8,12 @@ import { userUpdate } from "./functions/UserUpdate";
 import UserFormSkeleton from "./components/UserFormSkeleton";
 import UserEditForm from "./components/UserEditForm";
 import { isAuth } from "../../roles/isAuth";
+import UserContext, { useUserContext } from "../../context/UserContext";
 export default function UserEdit() {
 
   const { id } = useParams();
   const navigate = useNavigate()
+  const userContext = useUserContext();
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [data, setData] = useState([]);
@@ -78,7 +80,18 @@ export default function UserEdit() {
     setRoles(data.roles)
     setLoadingPage(false);
   };
+  const getAuthUser = async () => {
 
+    try {
+      const data = await ApiFunctions.getAuthUser();
+      console.log(data.user);
+      userContext.setUser(data.user);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const submitUserEdit = async (e) => {
     e.preventDefault();
@@ -90,6 +103,7 @@ export default function UserEdit() {
         icon: "success",
         timer: 2000,
       });
+      getAuthUser()
     }
 
 

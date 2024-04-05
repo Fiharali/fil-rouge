@@ -72,7 +72,7 @@ export default function Login() {
                 localStorage.setItem('isAuth', true);
                 localStorage.setItem('token', JSON.stringify(data.token));
 
-                console.log(data.user.roles)
+                //console.log(data.user.roles)
                 isHasRole(data.user.roles)
                 // navigate('/users')
 

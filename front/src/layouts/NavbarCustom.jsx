@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import logo from "./../images/logo2.png";
 import logo2 from "./../images/logo.png";
 import {
@@ -40,9 +40,11 @@ import { ApiFunctions } from "../functions/Api";
 import { submitLogout } from "../Auth/LogOut";
 import { Link, NavLink } from "react-router-dom";
 import Navbar from "./Navbar";
-import { Class, EventAvailable, Room, School, WorkHistory } from "@mui/icons-material";
+import { AllInbox, AppRegistration, Class, EventAvailable, Room, School, WorkHistory } from "@mui/icons-material";
 import { useUserContext } from "../context/UserContext";
 import { isAdmin } from "../roles/isAdmin";
+import { isAuth } from "../roles/isAuth";
+
 
 export default function NavbarCustom() {
 
@@ -58,16 +60,12 @@ export default function NavbarCustom() {
 
   const { isDarkMode, toggleDarkMode } = useTheme();
   const UserContext = useUserContext()
-  // console.log(UserContext.user.roles)
 
-  const links = [
-    { to: '/users', text: 'Users', icon: UsersIcon },
-    { to: '/campuses', text: 'Campuses', icon: School },
-    { to: '/class-names', text: 'Classes', icon: Class },
-    { to: '/promotions', text: 'Promotions', icon: EventAvailable },
-    { to: '/levels', text: 'Levels', icon: WorkHistory },
-    { to: '/absences', text: 'absences', icon: WorkHistory },
-  ];
+
+
+  useEffect(() => {
+    !isAuth() && navigate('/login')
+  }, []);
 
 
 
@@ -92,7 +90,7 @@ export default function NavbarCustom() {
           </div>
 
           <List>
-            <Accordion
+            {/* <Accordion
               open={open === 1}
               icon={
                 <ChevronDownIcon
@@ -138,7 +136,7 @@ export default function NavbarCustom() {
                 </List>
               </AccordionBody>
             </Accordion>
-            {/* <Link to={'/users'}>
+            <Link to={'/users'}>
               <ListItem className="">
                 <ListItemPrefix>
                   <InboxIcon className="h-5 w-5" />
@@ -154,8 +152,8 @@ export default function NavbarCustom() {
                   />
                 </ListItemSuffix>
               </ListItem>
-            </Link> */}
-            {/* {isAdmin() && */}
+            </Link>
+            {isAdmin() &&
             {links.map((link, index) => (
               <NavLink
                 to={link.to}
@@ -170,7 +168,117 @@ export default function NavbarCustom() {
                 </ListItem>
               </NavLink>
             ))
+            } */}
+            {isAdmin() && (
+              <>
+                <NavLink
+                  to='/users'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <UsersIcon className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Users
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/campuses'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <School className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Campuses
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/class-names'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <Class className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Classes
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/promotions'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <EventAvailable className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Promotions
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/levels'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <WorkHistory className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Levels
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/absences'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AllInbox className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Absences
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/absence-calender'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AppRegistration className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Absences Calender
+                  </ListItem>
+                </NavLink>
+              </>
+            )
             }
+
+
+            {/* apprenant */}
+
+            <NavLink
+              to='/demand-absence'
+            >
+              <ListItem className='mt-2' >
+                <ListItemPrefix>
+                  <AllInbox className="h-5 w-5" />
+                </ListItemPrefix>
+                Demand Absence
+              </ListItem>
+            </NavLink>
+            <NavLink
+              to='/my-absences'
+            >
+              <ListItem className='mt-2' >
+                <ListItemPrefix>
+                  <WorkHistory className="h-5 w-5" />
+                </ListItemPrefix>
+                My Absences
+              </ListItem>
+            </NavLink>
+            <NavLink
+              to='/my-absence-calender'
+            >
+              <ListItem className='mt-2' >
+                <ListItemPrefix>
+                  <AppRegistration className="h-5 w-5" />
+                </ListItemPrefix>
+                My Absence Calender
+              </ListItem>
+            </NavLink>
+
           </List>
 
 

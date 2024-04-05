@@ -18,9 +18,9 @@ class ProfileUserController extends Controller
     //
 
 
-    public function index(){
+    public function index(Request $request){
         return response([
-            'user' => new UserResource(User::find(20)),
+            'user' => new UserResource($request->user()),
             'cities' => City::all(),
             'campuses' => Campus::all(),
             'promotions' => Promotion::all(),

@@ -2,6 +2,7 @@ import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { ApiFunctions } from "../functions/Api";
 import { userEditProfile } from "../lib/validations/validation";
+import { isAuth } from "../roles/isAuth";
 
 
 

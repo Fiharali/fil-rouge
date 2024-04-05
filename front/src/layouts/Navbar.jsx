@@ -1,7 +1,15 @@
 import React from 'react'
 import { submitLogout } from "../Auth/LogOut";
+import { useUserContext } from '../context/UserContext';
 
 export default function Navbar(props) {
+
+
+
+    const UserContext = useUserContext()
+    //console.log(UserContext)
+
+
     return (
         <nav className={` border-gray-200 ${props.isDarkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -80,7 +88,7 @@ export default function Navbar(props) {
                     <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" className=" ms-5 flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:me-0 focus:ring-0 focus:outline-none dark:text-white" type="button">
                         <span className="sr-only">Open user menu</span>
                         <img className="w-8 h-8 me-2 rounded-full" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80" alt="user photo" />
-                        <span className={!props.isDarkMode ? 'text-gray-900' : 'text-gray-50'}>Bonnie Green</span>
+                        <span className={!props.isDarkMode ? 'text-gray-900' : 'text-gray-50'}>{UserContext?.user?.first_name ?? 'null'} {UserContext?.user?.last_name ?? 'null'}</span>
                         <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" s="2" d="m1 1 4 4 4-4" />
                         </svg>
