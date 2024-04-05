@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('absences', \App\Http\Controllers\api\apprenant\AbsenceController::class)
         ->only('store');
     Route::get('types', [AbsenceController::class,'allTypes']);
+    Route::get('my-absences', [AbsenceController::class,'myAbsences']);
 
 
     Route::get('profile',[ProfileUserController::class, 'index']);

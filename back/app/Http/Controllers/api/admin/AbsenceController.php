@@ -15,7 +15,7 @@ class AbsenceController extends Controller
      */
     public function index()
     {
-        $absences=Absence::all();
+        $absences=Absence::with('user')->get();
         return response([
             'absences' => AbsenceResource::collection($absences),
             ]);
@@ -51,6 +51,15 @@ class AbsenceController extends Controller
     public function destroy(Absence $absence)
     {
         //
+    }
+
+
+    public function  myAbsences(Request $request): \Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    {
+        $absences=Absence::where('user_id',$request->user()->id)->get();
+        return response([
+            'absences' => AbsenceResource::collection($absences),
+        ]);
     }
 
     public function allTypes()

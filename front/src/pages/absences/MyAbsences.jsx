@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getAbsences } from './functions/getAbsences';
 import { isAuth } from '../../roles/isAuth';
 import AbsencesSkeleton from './components/AbsencesSkeleton';
+import { getMyAbsences } from './functions/getMyAbsences';
 
 
-export default function Absences() {
+export default function MyAbsences() {
 
   const [loadingPage, setLoadingPage] = useState(false);
   const [absences, setAbsences] = useState([]);
@@ -15,11 +15,11 @@ export default function Absences() {
     getAllAbsences();
   }, []);
 
-
+  
 
   const getAllAbsences = async () => {
     setLoadingPage(true)
-    const data = await getAbsences();
+    const data = await getMyAbsences();
     setAbsences(data.data.absences)
     setLoadingPage(false)
   };
@@ -37,7 +37,7 @@ export default function Absences() {
         <td>{absence.type.name}</td>
         <td>{absence.date}</td>
         <td>{absence.status}</td>
-        <td>{absence.user?.first_name ?? 'Unknown'}</td>
+        <td>{absence.user.first_name}</td>
         <td><span className='text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-400'>{formatDate(absence.created_at)}</span></td>
         <td> <a className='underline underline-offset-1' target='_blank' href={absence.file}>Link of file</a> </td>
       </tr >
@@ -45,7 +45,7 @@ export default function Absences() {
   }
   );
 
-
+  
 
 
   return (
@@ -67,7 +67,7 @@ export default function Absences() {
             {loadingPage ? <AbsencesSkeleton /> : listAbsences}
           </tbody>
         </table>
-
+       
       </div>
 
 

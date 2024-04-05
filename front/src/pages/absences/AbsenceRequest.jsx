@@ -61,7 +61,7 @@ export default function AbsenceRequest() {
 
             try {
 
-                const data = await AbsenceFunctions.addType(formData);
+                const data = await AbsenceFunctions.addAbsence(formData);
                 console.log(data);
                 setFormData({})
                 Swal.fire({

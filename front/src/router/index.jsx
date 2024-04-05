@@ -14,6 +14,8 @@ import Levels from "../pages/levels/Levels";
 import Absences from "../pages/absences/Absences";
 import AbsenceRequest from "../pages/absences/AbsenceRequest";
 import AbsencesCalendar from "../pages/absences/AbsencesCalendar";
+import MyAbsencesCalendar from "../pages/absences/MyAbsencesCalendar";
+import MyAbsences from "../pages/absences/MyAbsences";
 
 
 export const router = createBrowserRouter([
@@ -75,6 +77,18 @@ export const router = createBrowserRouter([
             {
                 path: '/absence-calender',
                 element: <AbsencesCalendar />
+
+            },
+
+            {
+                path: '/my-absences',
+                element: <MyAbsences />
+
+            },
+
+            {
+                path: '/my-absence-calender',
+                element: <MyAbsencesCalendar />
 
             },
 

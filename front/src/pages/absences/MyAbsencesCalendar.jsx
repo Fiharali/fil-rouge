@@ -4,9 +4,10 @@ import { isAuth } from '../../roles/isAuth';
 import AbsencesSkeleton from './components/AbsencesSkeleton';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from "@fullcalendar/interaction"
+import interactionPlugin from "@fullcalendar/interaction" 
+import { getMyAbsences } from './functions/getMyAbsences';
 
-export default function AbsencesCalendar() {
+export default function MyAbsencesCalendar() {
 
     const [loadingPage, setLoadingPage] = useState(false);
     const [absences, setAbsences] = useState([]);
@@ -19,18 +20,19 @@ export default function AbsencesCalendar() {
 
     const getAllAbsences = async () => {
         setLoadingPage(true)
-        const data = await getAbsences();
-        // console.log(data.data.absences);
+        const data = await getMyAbsences();
         setAbsences(data.data.absences)
         setLoadingPage(false)
     };
-   
+
+
+ 
 
 
 
     const events = absences.map(absence => ({
         id: absence.id,
-        title: absence.user?.first_name ?? 'null',
+        title: absence.user.first_name,
         start: absence.date,
         end: absence.date,
         backgroundColor: 'green',
@@ -43,10 +45,10 @@ export default function AbsencesCalendar() {
             <div className="overflow-x-auto  mt-5  ">
                 <div className='md:w-2/3 mx-auto w-full'>
                     <FullCalendar className="mx-auto w-1/2"
-                        plugins={[dayGridPlugin, interactionPlugin]}
+                        plugins={[ dayGridPlugin, interactionPlugin ]}
                         initialView="dayGridMonth"
                         events={events}
-                    // dateClick={handleDateClick}
+                        // dateClick={handleDateClick}
                     />
                 </div>
             </div>
