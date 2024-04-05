@@ -21,14 +21,14 @@ export default function CampusCreate(props) {
                     <form class="p-4 md:p-5 pb-8" onSubmit={props.submitCampusCreate} encType="multipart/form-data">
                         <div class="grid gap-4 mb-4 grid-cols-2 pb-8">
                             <div class="col-span-2">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Name</label>
+                                <label htmlFor="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Name</label>
                                 <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder=" name" onChange={props.handleChange} value={props.formData.name} />
                                 {props.errors.name && <span className="text-red-500 text-left ms-5">{props.errors.name}</span>}
                             </div>
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                        <Button type="submit" fullWidth disabled={props.loading}  > {props.loading ? loader : 'Add'} </Button>
+                            <Button type="submit" fullWidth disabled={props.loading}  > {props.loading ? loader : 'Add'} </Button>
 
                         </div>
                     </form>

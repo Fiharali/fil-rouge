@@ -114,12 +114,12 @@ export default function AbsenceRequest() {
                 <form onSubmit={handleSubmit} encType="multipart/form-data" >
                     <div className="grid grid-cols-6 gap-6">
                         <div className="col-span-6 ">
-                            <label for="last_name" className="block mb-2 text-sm font-medium ">Date</label>
+                            <label htmlFor="last_name" className="block mb-2 text-sm font-medium ">Date</label>
                             <input type="date" name="date" id="date" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="last name" value={formData.date} onChange={handleChange} min={today} />
                             {errors.date && <span className="text-red-500 text-left ms-5">{errors.date}</span>}
                         </div>
                         <div className="col-span-6 ">
-                            <label for="type" className="block mb-2 text-sm font-medium ">Type </label>
+                            <label htmlFor="type" className="block mb-2 text-sm font-medium ">Type </label>
                             <select name="type" id="type" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.type} onChange={handleChange} >
                                 <option value=""> choose type of absence </option>
                                 {
@@ -135,7 +135,7 @@ export default function AbsenceRequest() {
                         </div>
 
                         <div className="col-span-6">
-                            <label for="file" className="block mb-2 text-sm font-medium ">File approve</label>
+                            <label htmlFor="file" className="block mb-2 text-sm font-medium ">File approve</label>
                             <input type="file" name="file" id="file" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full " onChange={handleFileChange} accept='pdf' />
                             {errors.file && <span className="text-red-500 text-left ms-5">{errors.file}</span>}
                         </div>

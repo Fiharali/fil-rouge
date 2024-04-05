@@ -31,7 +31,7 @@ const SignIn = () => {
                                 <img class="mb-4 rounded-lg w-36 h-36 sm:mb-0 xl:mb-4 2xl:mb-0 mx-auto" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Jese picture" />
                             }
                             <div className="flex items-center justify-center   rounded-full col-span-2 ">
-                                <label htmlFor="dropzone-file" className="flex  rounded-4 flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-2 cursor-pointer ">
+                                <label htmlhtmlFor="dropzone-file" className="flex  rounded-4 flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-2 cursor-pointer ">
 
                                     <div className="flex flex-col items-center justify-center p-5 rounded-2">
                                         <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -56,16 +56,16 @@ const SignIn = () => {
                         <form action="#">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3 lg:col-span-6">
-                                    <label for="current-password" class="block mb-2 text-sm font-medium ">Current password</label>
+                                    <label htmlFor="current-password" class="block mb-2 text-sm font-medium ">Current password</label>
                                     <input type="text" name="current-password" id="current-password" class="shadow-sm  border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 lg:col-span-6">
-                                    <label for="password" class="block mb-2 text-sm font-medium ">New password</label>
+                                    <label htmlFor="password" class="block mb-2 text-sm font-medium ">New password</label>
                                     <input data-popover-target="popover-password" data-popover-placement="bottom" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" />
 
                                 </div>
                                 <div class="col-span-6 sm:col-span-3 lg:col-span-6">
-                                    <label for="confirm-password" class="block mb-2 text-sm font-medium ">Confirm password</label>
+                                    <label htmlFor="confirm-password" class="block mb-2 text-sm font-medium ">Confirm password</label>
                                     <input type="text" name="confirm-password" id="confirm-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" />
                                 </div>
                                 <div class="col-span-6 sm:col-full">
@@ -82,51 +82,51 @@ const SignIn = () => {
                         <form action="#">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="first-name" class="block mb-2 text-sm font-medium ">First Name</label>
+                                    <label htmlFor="first-name" class="block mb-2 text-sm font-medium ">First Name</label>
                                     <input type="text" name="first-name" id="first-name" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="Bonnie" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="last-name" class="block mb-2 text-sm font-medium ">Last Name</label>
+                                    <label htmlFor="last-name" class="block mb-2 text-sm font-medium ">Last Name</label>
                                     <input type="text" name="last-name" id="last-name" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="Green" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="country" class="block mb-2 text-sm font-medium ">Country</label>
+                                    <label htmlFor="country" class="block mb-2 text-sm font-medium ">Country</label>
                                     <input type="text" name="country" id="country" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="United States" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="city" class="block mb-2 text-sm font-medium ">City</label>
+                                    <label htmlFor="city" class="block mb-2 text-sm font-medium ">City</label>
                                     <input type="text" name="city" id="city" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="e.g. San Francisco" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="address" class="block mb-2 text-sm font-medium ">Address</label>
+                                    <label htmlFor="address" class="block mb-2 text-sm font-medium ">Address</label>
                                     <input type="text" name="address" id="address" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="e.g. California" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="email" class="block mb-2 text-sm font-medium ">Email</label>
+                                    <label htmlFor="email" class="block mb-2 text-sm font-medium ">Email</label>
                                     <input type="email" name="email" id="email" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="example@company.com" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="phone-number" class="block mb-2 text-sm font-medium ">Phone Number</label>
+                                    <label htmlFor="phone-number" class="block mb-2 text-sm font-medium ">Phone Number</label>
                                     <input type="number" name="phone-number" id="phone-number" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="e.g. +(12)3456 789" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="birthday" class="block mb-2 text-sm font-medium ">Birthday</label>
+                                    <label htmlFor="birthday" class="block mb-2 text-sm font-medium ">Birthday</label>
                                     <input type="number" name="birthday" id="birthday" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="15/08/1990" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="organization" class="block mb-2 text-sm font-medium ">Organization</label>
+                                    <label htmlFor="organization" class="block mb-2 text-sm font-medium ">Organization</label>
                                     <input type="text" name="organization" id="organization" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="Company Name" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="role" class="block mb-2 text-sm font-medium ">Role</label>
+                                    <label htmlFor="role" class="block mb-2 text-sm font-medium ">Role</label>
                                     <input type="text" name="role" id="role" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5 " placeholder="React Developer" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="department" class="block mb-2 text-sm font-medium ">Department</label>
+                                    <label htmlFor="department" class="block mb-2 text-sm font-medium ">Department</label>
                                     <input type="text" name="department" id="department" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="Development" />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="zip-code" class="block mb-2 text-sm font-medium ">Zip/postal code</label>
+                                    <label htmlFor="zip-code" class="block mb-2 text-sm font-medium ">Zip/postal code</label>
                                     <input type="number" name="zip-code" id="zip-code" class="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="123456" />
                                 </div>
                                 <div class="col-span-6 sm:col-full">

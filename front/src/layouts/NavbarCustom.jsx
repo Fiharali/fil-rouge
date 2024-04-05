@@ -44,6 +44,7 @@ import { AllInbox, AppRegistration, Class, EventAvailable, Room, School, WorkHis
 import { useUserContext } from "../context/UserContext";
 import { isAdmin } from "../roles/isAdmin";
 import { isAuth } from "../roles/isAuth";
+import isApprenant from "../roles/isApprenant";
 
 
 export default function NavbarCustom() {
@@ -71,7 +72,7 @@ export default function NavbarCustom() {
     overflowY: 'auto',
     scrollbarWidth: 'none',
     msOverflowStyle: 'none',
-    '&::-webkit-scrollbar': {
+    '&::WebkitScrollbar': {
       display: 'none',
     }
   };
@@ -255,38 +256,40 @@ export default function NavbarCustom() {
 
 
             {/* apprenant */}
-
-            <NavLink
-              to='/demand-absence'
-            >
-              <ListItem className='mt-2' >
-                <ListItemPrefix>
-                  <AllInbox className="h-5 w-5" />
-                </ListItemPrefix>
-                Demand Absence
-              </ListItem>
-            </NavLink>
-            <NavLink
-              to='/my-absences'
-            >
-              <ListItem className='mt-2' >
-                <ListItemPrefix>
-                  <WorkHistory className="h-5 w-5" />
-                </ListItemPrefix>
-                My Absences
-              </ListItem>
-            </NavLink>
-            <NavLink
-              to='/my-absence-calender'
-            >
-              <ListItem className='mt-2' >
-                <ListItemPrefix>
-                  <AppRegistration className="h-5 w-5" />
-                </ListItemPrefix>
-                My Absence Calender
-              </ListItem>
-            </NavLink>
-
+            {isApprenant() && (
+              <>
+                <NavLink
+                  to='/demand-absence'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AllInbox className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Demand Absence
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/my-absences'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <WorkHistory className="h-5 w-5" />
+                    </ListItemPrefix>
+                    My Absences
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/my-absence-calender'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AppRegistration className="h-5 w-5" />
+                    </ListItemPrefix>
+                    My Absence Calender
+                  </ListItem>
+                </NavLink>
+              </>
+            )}
           </List>
 
 

@@ -106,10 +106,10 @@ export default function Login() {
                                     <p className="mx-4 text-grey-600"></p>
                                     <hr className="h-0 border-b border-solid border-grey-500 grow" />
                                 </div>
-                                <label htmlFor="email" className="mb-2 text-sm text-start text-grey-900">Email*</label>
+                                <label htmlhtmlFor="email" className="mb-2 text-sm text-start text-grey-900">Email*</label>
                                 <input id="email" type="email" name="email" placeholder="mail@loopple.com" className="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400  placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
                                 {errors.email && <span className="text-red-500 text-left ms-5">{errors.email}</span>}
-                                <label htmlFor="password" className={`mb-2 text-sm text-start text-grey-900 ${errors.email ? 'mt-2' : 'mt-7'}`}>Password*</label>
+                                <label htmlhtmlFor="password" className={`mb-2 text-sm text-start text-grey-900 ${errors.email ? 'mt-2' : 'mt-7'}`}>Password*</label>
                                 <input id="password" type="password" name="password" placeholder="Enter a password" className="flex items-center w-full px-5 py-4  mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
                                 {errors.password && <span className="text-red-500 text-left ms-5">{errors.password}</span>}
                                 <div className="flex flex-row justify-between mb-8 mt-6">

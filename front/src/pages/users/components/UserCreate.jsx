@@ -23,7 +23,7 @@ export default function UserCreate(props) {
 
 
                             <div className="flex items-center justify-center max-w-1/2 mx-auto rounded-full col-span-2 mt-5">
-                                <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center max-w-full border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <label htmlhtmlFor="dropzone-file" className="flex flex-col items-center justify-center max-w-full border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                     {props.selectedFile ? (
                                         <div className="w-full h-64 overflow-hidden">
                                             <img src={URL.createObjectURL(props.selectedFile)} alt="Selected file" className="object-cover w-full h-full" />
@@ -43,36 +43,36 @@ export default function UserCreate(props) {
                             </div>
 
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                                <label htmlFor="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
                                 <input type="text" name="first_name" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="first name" onChange={props.handleChange} value={props.formData.first_name} />
                                 {props.errors.first_name && <span className="text-red-500 text-left ms-5">{props.errors.first_name}</span>}
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+                                <label htmlFor="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
                                 <input type="text" name="last_name" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="last name" onChange={props.handleChange} value={props.formData.last_name} />
                                 {props.errors.last_name && <span className="text-red-500 text-left ms-5">{props.errors.last_name}</span>}
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <label htmlFor="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                 <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="email" onChange={props.handleChange} value={props.formData.email} />
                                 {props.errors.email && <span className="text-red-500 text-left ms-5">{props.errors.email}</span>}
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">number</label>
+                                <label htmlFor="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">number</label>
                                 <input type="text" name="number" id="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="number" onChange={props.handleChange} value={props.formData.number} />
                                 {props.errors.number && <span className="text-red-500 text-left ms-5">{props.errors.number}</span>}
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <label htmlFor="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                 <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="password" onChange={props.handleChange} value={props.formData.password} />
                                 {props.errors.password && <span className="text-red-500 text-left ms-5">{props.errors.password}</span>}
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="city_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
+                                <label htmlFor="city_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
                                 <select name="city_id" id="city_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" onChange={props.handleChange} >
                                     <option value=""> choose city</option>
                                     {
@@ -86,7 +86,7 @@ export default function UserCreate(props) {
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="campus_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">campus</label>
+                                <label htmlFor="campus_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">campus</label>
                                 <select name="campus_id" id="campus_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" onChange={props.handleChange} >
                                     <option value=""> choose campus </option>
                                     {
@@ -100,7 +100,7 @@ export default function UserCreate(props) {
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="promotion_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotion</label>
+                                <label htmlFor="promotion_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotion</label>
                                 <select name="promotion_id" id="promotion_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" onChange={props.handleChange} >
                                     <option value=""> choose Promotion</option>
                                     {
@@ -114,7 +114,7 @@ export default function UserCreate(props) {
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="level_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level</label>
+                                <label htmlFor="level_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Level</label>
                                 <select name="level_id" id="level_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" onChange={props.handleChange} >
                                     <option value=""> choose Level</option>
                                     {
@@ -128,7 +128,7 @@ export default function UserCreate(props) {
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="class_name_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Name</label>
+                                <label htmlFor="class_name_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Name</label>
                                 <select name="class_name_id" id="class_name_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" onChange={props.handleChange} >
                                     <option value=""> choose Class Name </option>
                                     {
@@ -142,7 +142,7 @@ export default function UserCreate(props) {
 
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">roles</label>
+                                <label htmlFor="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">roles</label>
                                 <select name="role[]" id="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" multiple size="1" onChange={(e) => {
                                     const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
                                     props.setFormData(prevState => ({
@@ -165,7 +165,7 @@ export default function UserCreate(props) {
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                        <Button type="submit" fullWidth disabled={props.loading}  > {props.loading ? loader : 'Add'} </Button>
+                            <Button type="submit" fullWidth disabled={props.loading}  > {props.loading ? loader : 'Add'} </Button>
 
                         </div>
                     </form>

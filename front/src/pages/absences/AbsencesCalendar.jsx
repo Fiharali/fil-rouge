@@ -5,30 +5,43 @@ import AbsencesSkeleton from './components/AbsencesSkeleton';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction"
+import { useQuery } from 'react-query';
 
 export default function AbsencesCalendar() {
 
-    const [loadingPage, setLoadingPage] = useState(false);
+    // const [loadingPage, setLoadingPage] = useState(false);
     const [absences, setAbsences] = useState([]);
 
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        getAllAbsences();
+        //getAllAbsences();
     }, []);
 
-    const getAllAbsences = async () => {
-        setLoadingPage(true)
-        const data = await getAbsences();
-        // console.log(data.data.absences);
-        setAbsences(data.data.absences)
-        setLoadingPage(false)
-    };
-   
+    // const getAllAbsences = async () => {
+    //     setLoadingPage(true)
+    //     const data = await getAbsences();
+    //     // console.log(data.data.absences);
+    //     setAbsences(data.data.absences)
+    //     setLoadingPage(false)
+    // };
+
+    const { isLoading, isError, data: absencesData } = useQuery('absences', getAbsences, {
+        cacheTime: 60000, // Cache for 1 minute (adjust the value as needed)
+    });
+
+    if (isLoading) {
+        return <div>skeleton</div>;
+    }
+
+    if (isError) {
+        return <div>Error fetching data</div>;
+    }
+    console.log(absencesData)
 
 
 
-    const events = absences.map(absence => ({
+    const events = absencesData.data.absences.map(absence => ({
         id: absence.id,
         title: absence.user?.first_name ?? 'null',
         start: absence.date,

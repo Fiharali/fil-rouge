@@ -143,7 +143,7 @@ const Profile = () => {
                                     <img class="mb-4 rounded-lg w-36 h-36 sm:mb-0 xl:mb-4 2xl:mb-0 mx-auto" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Jese picture" />
                             }
                             <div className="flex items-center justify-center   rounded-full col-span-2 ms-2">
-                                <label htmlFor="dropzone-file" className="flex  rounded-4 flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-2 cursor-pointer ">
+                                <label htmlhtmlFor="dropzone-file" className="flex  rounded-4 flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-2 cursor-pointer ">
 
                                     <div className="flex flex-col items-center justify-center p-5 rounded-2">
                                         <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -168,16 +168,16 @@ const Profile = () => {
                         <form action="#">
                             <div className="grid grid-cols-6 gap-6">
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-6">
-                                    <label for="current-password" className="block mb-2 text-sm font-medium ">Current password</label>
+                                    <label htmlFor="current-password" className="block mb-2 text-sm font-medium ">Current password</label>
                                     <input type="text" name="current-password" id="current-password" className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" />
                                 </div>
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-6">
-                                    <label for="password" className="block mb-2 text-sm font-medium ">New password</label>
+                                    <label htmlFor="password" className="block mb-2 text-sm font-medium ">New password</label>
                                     <input data-popover-placement="bottom" type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" />
 
                                 </div>
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-6">
-                                    <label for="confirm-password" className="block mb-2 text-sm font-medium ">Confirm password</label>
+                                    <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium ">Confirm password</label>
                                     <input type="text" name="confirm-password" id="confirm-password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" />
                                 </div>
                                 <div className="col-span-6 sm:col-full">
@@ -193,27 +193,27 @@ const Profile = () => {
                         <form onSubmit={handleSubmit} encType="multipart/form-data" >
                             <div className="grid grid-cols-6 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label for="first_name" className="block mb-2 text-sm font-medium ">First Name</label>
+                                    <label htmlFor="first_name" className="block mb-2 text-sm font-medium ">First Name</label>
                                     <input type="text" name="first_name" id="first_name" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="first name" value={formData.first_name} onChange={handleChange} />
                                     {errors.first_name && <span className="text-red-500 text-left ms-5">{errors.first_name}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label for="last_name" className="block mb-2 text-sm font-medium ">Last Name</label>
+                                    <label htmlFor="last_name" className="block mb-2 text-sm font-medium ">Last Name</label>
                                     <input type="text" name="last_name" id="last_name" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="last name" value={formData.last_name} onChange={handleChange} />
                                     {errors.last_name && <span className="text-red-500 text-left ms-5">{errors.last_name}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label for="email" className="block mb-2 text-sm font-medium ">email</label>
+                                    <label htmlFor="email" className="block mb-2 text-sm font-medium ">email</label>
                                     <input type="text" name="email" id="email" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="email" value={formData.email} onChange={handleChange} />
                                     {errors.email && <span className="text-red-500 text-left ms-5">{errors.email}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label for="number" className="block mb-2 text-sm font-medium ">number</label>
+                                    <label htmlFor="number" className="block mb-2 text-sm font-medium ">number</label>
                                     <input type="text" name="number" id="number" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="number" value={formData.number} onChange={handleChange} />
                                     {errors.number && <span className="text-red-500 text-left ms-5">{errors.number}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label for="city_id" className="block mb-2 text-sm font-medium ">city</label>
+                                    <label htmlFor="city_id" className="block mb-2 text-sm font-medium ">city</label>
                                     <select
                                         name="city_id"
                                         id="city_id"
@@ -233,7 +233,7 @@ const Profile = () => {
                                     {errors.city_id && <span className="text-red-500 text-left ms-5">{errors.city_id}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label for="campus_id" className="block mb-2 text-sm font-medium ">campus</label>
+                                    <label htmlFor="campus_id" className="block mb-2 text-sm font-medium ">campus</label>
                                     <select name="campus_id" id="campus_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.campus_id} onChange={handleChange} disabled>
                                         <option value=""> choose campus </option>
                                         {
@@ -248,7 +248,7 @@ const Profile = () => {
                                     {errors.campus_id && <span className="text-red-500 text-left ms-5">{errors.campus_id}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label for="promotion_id" className="block mb-2 text-sm font-medium ">promotion</label>
+                                    <label htmlFor="promotion_id" className="block mb-2 text-sm font-medium ">promotion</label>
                                     <select name="promotion_id" id="promotion_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.promotion_id} onChange={handleChange} disabled >
                                         <option value=""> choose promotion </option>
                                         {
@@ -263,7 +263,7 @@ const Profile = () => {
                                     {errors.promotion_id && <span className="text-red-500 text-left ms-5">{errors.promotion_id}</span>}
                                 </div>
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label for="level_id" className="block mb-2 text-sm font-medium ">level</label>
+                                    <label htmlFor="level_id" className="block mb-2 text-sm font-medium ">level</label>
                                     <select name="level_id" id="level_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.level_id} onChange={handleChange} disabled >
                                         <option value=""> choose level</option>
                                         {
@@ -278,7 +278,7 @@ const Profile = () => {
                                     {errors.level_id && <span className="text-red-500 text-left ms-5">{errors.level_id}</span>}
                                 </div>
                                 <div className="col-span-6 ">
-                                    <label for="class_name_id" className="block mb-2 text-sm font-medium ">class name</label>
+                                    <label htmlFor="class_name_id" className="block mb-2 text-sm font-medium ">class name</label>
                                     <select name="class_name_id" id="class_name_id" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.class_name_id} onChange={handleChange} disabled>
                                         <option value=""> choose class name</option>
                                         {

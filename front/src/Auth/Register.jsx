@@ -50,7 +50,7 @@ export default function Register() {
     if (validate()) {
       setLoading(true);
       try {
-       
+
         const csrf = await axiosSetup.get('/sanctum/csrf-cookie');
         const data = await ApiFunctions.Register(formData);
         console.log(data);
@@ -76,19 +76,19 @@ export default function Register() {
               <h3 className="mb-3 text-4xl font-extrabold text-dark-grey-900">Sign Up</h3>
               <p className="mb-4 text-grey-700">Enter your name, email, and password</p>
 
-              <label htmlFor="name" className="mb-2 text-sm text-start text-grey-900">Name*</label>
+              <label htmlhtmlFor="name" className="mb-2 text-sm text-start text-grey-900">Name*</label>
               <input id="name" type="text" name="name" placeholder="John Doe" className="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400  placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
               {errors.name && <span className="text-red-500 text-left ms-5">{errors.name}</span>}
 
-              <label htmlFor="email" className="mb-2 text-sm text-start text-grey-900 mt-4">Email*</label>
+              <label htmlhtmlFor="email" className="mb-2 text-sm text-start text-grey-900 mt-4">Email*</label>
               <input id="email" type="email" name="email" placeholder="mail@example.com" className="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400  placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
               {errors.email && <span className="text-red-500 text-left ms-5">{errors.email}</span>}
 
-              <label htmlFor="password" className={`mb-2 text-sm text-start text-grey-900 ${errors.email ? 'mt-2' : 'mt-7'}`}>Password*</label>
+              <label htmlhtmlFor="password" className={`mb-2 text-sm text-start text-grey-900 ${errors.email ? 'mt-2' : 'mt-7'}`}>Password*</label>
               <input id="password" type="password" name="password" placeholder="Enter a password" className="flex items-center w-full px-5 py-4  mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
               {errors.password && <span className="text-red-500 text-left ms-5">{errors.password}</span>}
 
-              <label htmlFor="password_confirmation" className={`mb-2 text-sm text-start text-grey-900 ${errors.email ? 'mt-2' : 'mt-7'}`}>Confirm Password*</label>
+              <label htmlhtmlFor="password_confirmation" className={`mb-2 text-sm text-start text-grey-900 ${errors.email ? 'mt-2' : 'mt-7'}`}>Confirm Password*</label>
               <input id="password_confirmation" type="password" name="password_confirmation" placeholder="Confirm your password" className="flex items-center w-full px-5 py-4  mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
               {errors.password_confirmation && <span className="text-red-500 text-left ms-5">{errors.password_confirmation}</span>}
 
