@@ -67,6 +67,15 @@ export default function NavbarCustom() {
     !isAuth() && navigate('/login')
   }, []);
 
+  const containerStyle = {
+    overflowY: 'auto',
+    scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    }
+  };
+
 
 
   return (
@@ -75,12 +84,11 @@ export default function NavbarCustom() {
       <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} openDrawer={openDrawer} logo={logo} logo2={logo2} />
       <Drawer open={isDrawerOpen} onClose={closeDrawer} className={`bg-white border-gray-50 ${isDarkMode ? 'dark bg-gray-900' : ''}`}>
         <Card
-
           shadow={false}
-
-          className={` border-gray-50 h-[calc(100vh-2rem)] w-full p-4  bg-gray-50 text-blue-900   ${isDarkMode ? 'dark bg-gray-900 text-blue-50' : ''}`}
+          style={containerStyle}
+          className={` border-gray-50 h-[calc(100vh-2rem)] w-full p-4  bg-gray-50 text-blue-900 overflow-y-auto   ${isDarkMode ? 'dark bg-gray-900 text-blue-50' : ''}`}
         >
-          <div className="mb-2 flex items-center gap-4 p-4 ">
+          <div className="mb-2 flex items-center gap-4 p-4   ">
             <img
               src={isDarkMode ? logo : logo2}
               alt="brand"

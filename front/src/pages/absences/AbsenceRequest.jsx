@@ -8,6 +8,7 @@ export default function AbsenceRequest() {
 
     const [errors, setErrors] = useState({});
     const [types, setTypes] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         date: '',
         type: '',
@@ -44,7 +45,7 @@ export default function AbsenceRequest() {
             setTypes(data.data)
         } catch (error) {
             console.error('Error:', error);
-            
+
 
         }
     }
@@ -56,14 +57,17 @@ export default function AbsenceRequest() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
+
         if (validate()) {
-            console.log('h')
+
 
             try {
 
                 const data = await AbsenceFunctions.addAbsence(formData);
                 console.log(data);
                 setFormData({})
+                setErrors()
                 Swal.fire({
                     title: data.success,
                     icon: "success",
@@ -76,9 +80,15 @@ export default function AbsenceRequest() {
                     timer: 2000,
                 });
                 console.error('Error:', error);
-                setErrors()
+
+                setErrors(prevState => ({
+                    ...prevState,
+                    file: error.response?.data.error ?? error.response.data.message
+                }));
             }
         }
+        setLoading(false)
+
     }
     const validate = () => {
         try {
@@ -106,12 +116,12 @@ export default function AbsenceRequest() {
                         <div className="col-span-6 ">
                             <label for="last_name" className="block mb-2 text-sm font-medium ">Date</label>
                             <input type="date" name="date" id="date" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="last name" value={formData.date} onChange={handleChange} min={today} />
-                            {/* {errors.date && <span className="text-red-500 text-left ms-5">{errors.date}</span>} */}
+                            {errors.date && <span className="text-red-500 text-left ms-5">{errors.date}</span>}
                         </div>
                         <div className="col-span-6 ">
                             <label for="type" className="block mb-2 text-sm font-medium ">Type </label>
                             <select name="type" id="type" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.type} onChange={handleChange} >
-                                <option value=""> choose campus </option>
+                                <option value=""> choose type of absence </option>
                                 {
                                     types.map(type => (
                                         <option key={type.id} value={type.id}>
@@ -121,16 +131,17 @@ export default function AbsenceRequest() {
                                     ))
                                 }
                             </select>
-                            {/* {errors.type && <span className="text-red-500 text-left ms-5">{errors.type}</span>} */}
+                            {errors.type && <span className="text-red-500 text-left ms-5">{errors.type}</span>}
                         </div>
 
                         <div className="col-span-6">
                             <label for="file" className="block mb-2 text-sm font-medium ">File approve</label>
                             <input type="file" name="file" id="file" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full " onChange={handleFileChange} accept='pdf' />
-                            {/* {errors.file && <span className="text-red-500 text-left ms-5">{errors.file}</span>} */}
+                            {errors.file && <span className="text-red-500 text-left ms-5">{errors.file}</span>}
                         </div>
                         <div className="col-span-6 sm:col-full">
-                            <Button type="submit" fullWidth>Save</Button>
+                            <Button type="submit" fullWidth disabled={loading}  > {loading ? loader : 'Save'} </Button>
+
 
                         </div>
                     </div>

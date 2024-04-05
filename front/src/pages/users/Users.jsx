@@ -24,7 +24,6 @@ export function Users() {
 
     const UserContext = useUserContext()
     const navigate = useNavigate()
-
     const [users, setUsers] = useState([]);
     const [cities, setCities] = useState([]);
     const [campuses, setCampuses] = useState([]);
@@ -86,8 +85,12 @@ export function Users() {
     };
 
     useEffect(() => {
-        // !isAuth() && navigate('/login')
+        !isAuth() && navigate('/login')
         getAllUsers();
+    }, []);
+
+    useEffect(() => {
+        !isAuth() && navigate('/login')
         performSearch();
     }, [formDataSearch]);
 
