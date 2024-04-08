@@ -230,7 +230,19 @@ class UserController extends Controller
     }
 
 
+public function  oldUsers(){
+    $users=User::onlyTrashed()->get();
+    return response([
+        'users' => UserResource::collection($users),
+       ]);
+}
 
+    public function  restore(User $user){
+        $user->restore();
+        return response([
+            'success' => 'User restored Successful',
+        ]);
+    }
 
 
 }

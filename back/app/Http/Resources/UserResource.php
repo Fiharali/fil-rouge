@@ -35,6 +35,7 @@ class UserResource extends JsonResource
             'image' => $this->getFirstMediaUrl('images'),
             'roles' => $this->roles->pluck('name'),
             'role_id' => $this->roles->pluck('id'),
+            'deleted_at' => $this->deleted_at,
         ];
     }
 }

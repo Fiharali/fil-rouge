@@ -17,6 +17,7 @@ import AbsencesCalendar from "../pages/absences/AbsencesCalendar";
 import MyAbsencesCalendar from "../pages/absences/MyAbsencesCalendar";
 import MyAbsences from "../pages/absences/MyAbsences";
 import AddAbsence from "../pages/absences/AddAbsence";
+import { OldUsers } from "../pages/users/OldUsers";
 
 
 export const router = createBrowserRouter([
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
             {
                 path: '/user/:id',
                 element: <UserEdit />
+
+            },
+            {
+                path: '/old-users',
+                element: <OldUsers />
 
             },
 
@@ -97,6 +103,7 @@ export const router = createBrowserRouter([
                 element: <MyAbsencesCalendar />
 
             },
+            
 
         ]
     },

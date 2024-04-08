@@ -37,7 +37,7 @@ export const ApiFunctions = {
 
         const data = await axiosSetup.get(`/users?page=${page}`);
         if (data.status === 200) {
-            console.log('users ...');
+            //console.log('users ...');
             return data.data;
 
         } else {
@@ -45,6 +45,18 @@ export const ApiFunctions = {
         }
 
     },
+
+    getAllOldUsers: async () => {
+
+        const data = await axiosSetup.get('old-users');
+        if (data.status === 200) {
+            return data.data;
+        } else {
+            console.log(' failed');
+        }
+
+    },
+
 
     addUser: async (formData) => {
 
@@ -66,6 +78,16 @@ export const ApiFunctions = {
 
             return data.data;
 
+        } else {
+            console.log(' failed');
+        }
+
+    },
+    restoreUser: async (id) => {
+
+        const data = await axiosSetup.post('/users-restore/' + id);
+        if (data.status === 200) {
+            return data.data;
         } else {
             console.log(' failed');
         }

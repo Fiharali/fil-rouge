@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::apiResource('users', UserController::class);
     Route::get('search-users', [UserController::class,'search']);
+    Route::get('old-users', [UserController::class,'oldUsers']);
+    Route::post('users-restore/{user}', [UserController::class,'restore'])->withTrashed();
 
     Route::apiResource('campuses', CampusController::class);
     Route::apiResource('classNames', ClassNameController::class);
