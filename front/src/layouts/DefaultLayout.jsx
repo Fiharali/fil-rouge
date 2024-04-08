@@ -1,10 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavbarCustom from './NavbarCustom'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { isAuth } from '../roles/isAuth';
 // import Sidebar from './Sidebar'
 
 export default function DefaultLayout() {
+
+    const navigate= useNavigate()
+
+    useEffect(() => {
+        !isAuth() && navigate('/login')
+       
+    }, []);
     return (
         <>
             <NavbarCustom />

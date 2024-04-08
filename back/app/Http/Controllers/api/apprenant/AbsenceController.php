@@ -4,8 +4,11 @@ namespace App\Http\Controllers\api\apprenant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAbsenceRequest;
+use App\Http\Resources\AbsenceResource;
+use App\Http\Resources\UserResource;
 use App\Models\Absence;
 use App\Models\Type;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AbsenceController extends Controller
@@ -13,9 +16,12 @@ class AbsenceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $absences=Absence::where('user_id',$request->user()->id)->get();
+        return response([
+            'absences' => AbsenceResource::collection($absences),
+        ]);
     }
 
     /**
@@ -37,6 +43,20 @@ class AbsenceController extends Controller
         return response([
             'success' => 'User absence Successful',
         ]);
+    }
+
+
+    public function allTypes()
+    {
+        return Type::all();
+    }
+
+    public function usersForAbsence(){
+
+        $users=User::all();
+        return response([
+            'users' => UserResource::collection($users),
+            ]);
     }
 
 

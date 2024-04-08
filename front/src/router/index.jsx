@@ -16,6 +16,7 @@ import AbsenceRequest from "../pages/absences/AbsenceRequest";
 import AbsencesCalendar from "../pages/absences/AbsencesCalendar";
 import MyAbsencesCalendar from "../pages/absences/MyAbsencesCalendar";
 import MyAbsences from "../pages/absences/MyAbsences";
+import AddAbsence from "../pages/absences/AddAbsence";
 
 
 export const router = createBrowserRouter([
@@ -72,6 +73,11 @@ export const router = createBrowserRouter([
             {
                 path: '/demand-absence',
                 element: <AbsenceRequest />
+
+            },
+            {
+                path: '/add-absence',
+                element: <AddAbsence />
 
             },
             {

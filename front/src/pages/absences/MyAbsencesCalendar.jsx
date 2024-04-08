@@ -4,7 +4,7 @@ import { isAuth } from '../../roles/isAuth';
 import AbsencesSkeleton from './components/AbsencesSkeleton';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from "@fullcalendar/interaction" 
+import interactionPlugin from "@fullcalendar/interaction"
 import { getMyAbsences } from './functions/getMyAbsences';
 
 export default function MyAbsencesCalendar() {
@@ -26,29 +26,33 @@ export default function MyAbsencesCalendar() {
     };
 
 
- 
 
 
 
-    const events = absences.map(absence => ({
+
+    const absencesData = absences.map(absence => ({
         id: absence.id,
         title: absence.user.first_name,
         start: absence.date,
         end: absence.date,
-        backgroundColor: 'green',
+        // backgroundColor: 'blue',
+        // color: 'black',
+        display: 'background',
         textColor: 'white'
+
     }));
 
 
     return (
         <>
             <div className="overflow-x-auto  mt-5  ">
+
                 <div className='md:w-2/3 mx-auto w-full'>
                     <FullCalendar className="mx-auto w-1/2"
-                        plugins={[ dayGridPlugin, interactionPlugin ]}
+                        plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
-                        events={events}
-                        // dateClick={handleDateClick}
+                        events={absencesData}
+
                     />
                 </div>
             </div>

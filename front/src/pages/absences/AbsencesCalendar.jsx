@@ -18,20 +18,19 @@ export default function AbsencesCalendar() {
         //getAllAbsences();
     }, []);
 
-    // const getAllAbsences = async () => {
-    //     setLoadingPage(true)
-    //     const data = await getAbsences();
-    //     // console.log(data.data.absences);
-    //     setAbsences(data.data.absences)
-    //     setLoadingPage(false)
-    // };
+
 
     const { isLoading, isError, data: absencesData } = useQuery('absences', getAbsences, {
         cacheTime: 60000, // Cache for 1 minute (adjust the value as needed)
     });
 
     if (isLoading) {
-        return <div>skeleton</div>;
+        return (
+            <div className="overflow-x-auto  mt-5  ">
+                loading ...
+
+            </div>
+        );
     }
 
     if (isError) {

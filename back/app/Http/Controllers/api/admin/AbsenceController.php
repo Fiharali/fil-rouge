@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangeStatusAbsenceRequest;
+use App\Http\Requests\StoreNewAbsenceRequest;
 use App\Http\Resources\AbsenceResource;
 use App\Models\Absence;
 use App\Models\Type;
@@ -24,9 +26,18 @@ class AbsenceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreNewAbsenceRequest $request)
     {
+        $absence=Absence::create([
+            'date'=>$request->date,
+            'type_id'=>$request->type,
+            'status'=>0,
+            'user_id'=>$request->user,
+        ]);
 
+        return response([
+            'success' => 'add Absence Successful',
+        ]);
     }
 
     /**
@@ -65,5 +76,13 @@ class AbsenceController extends Controller
     public function allTypes()
     {
         return Type::all();
+    }
+
+     public function changeStatus(ChangeStatusAbsenceRequest $request ,Absence $absence)
+    {
+        $absence->status=$request->status;
+        return response([
+            'success' => 'User absence Successful',
+        ]);
     }
 }

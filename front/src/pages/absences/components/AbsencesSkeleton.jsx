@@ -10,6 +10,7 @@ export default function AbsencesSkeleton() {
                     <td className="animate-pulse"> </td>
                     <td className="animate-pulse"> </td>
                     <td className="animate-pulse py-2 h-5"> </td>
+                    <td className="animate-pulse py-2 h-5"> </td>
                     <td className="animate-pulse"> </td>
                     <td className="animate-pulse"> </td>
                 </tr>

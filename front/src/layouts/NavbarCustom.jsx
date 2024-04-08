@@ -64,9 +64,9 @@ export default function NavbarCustom() {
 
 
 
-  useEffect(() => {
-    !isAuth() && navigate('/login')
-  }, []);
+  // useEffect(() => {
+  //   !isAuth() && navigate('/login')
+  // }, []);
 
   const containerStyle = {
     overflowY: 'auto',
@@ -228,6 +228,16 @@ export default function NavbarCustom() {
                       <WorkHistory className="h-5 w-5" />
                     </ListItemPrefix>
                     Levels
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/add-absence'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <WorkHistory className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Add Absence
                   </ListItem>
                 </NavLink>
                 <NavLink
