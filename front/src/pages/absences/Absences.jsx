@@ -5,7 +5,8 @@ import AbsencesSkeleton from './components/AbsencesSkeleton';
 import { Button } from '@material-tailwind/react';
 import { addNewAbsence, changeStatus } from '../../lib/validations/absence';
 import { AbsenceFunctions } from '../../functions/absence';
-
+import { deleteAbsence } from './functions/deleteAbsence';
+// import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Absences() {
 
@@ -93,6 +94,12 @@ export default function Absences() {
     return `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')}`;
   };
 
+  const deleteAbsenceFunction = async (id) => {
+    if (await deleteAbsence(id)) {
+      await getAllAbsences()
+    }
+  }
+
 
   const listAbsences = absences.map(absence => {
     return (
@@ -113,7 +120,17 @@ export default function Absences() {
         <td>{absence.user?.first_name ?? 'Unknown'}</td>
         <td><span className='text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-400'>{formatDate(absence.created_at)}</span></td>
         <td> <a className='underline underline-offset-1' target='_blank' href={absence.file}>Link of file</a> </td>
-        <td>  <button className="btn" onClick={() => document.getElementById(`my_modal_${absence.id}`).showModal()}>change status</button></td>
+        <td className='flex p-3'>
+          <button className="btn btn-sm" onClick={() => document.getElementById(`my_modal_${absence.id}`).showModal()}>change status</button>
+          <button className='ms-1 ' onClick={() => deleteAbsenceFunction(absence.id)}  >
+            <lord-icon
+              src="https://cdn.lordicon.com/hjbrplwk.json"
+              trigger="click"
+              colors="primary:#646e78,secondary:#ff0000,tertiary:#ebe6ef,quaternary:#3a3347"
+              style={{ 'width': '50px' }}>
+            </lord-icon>
+          </button>
+        </td>
 
 
         <dialog id={`my_modal_${absence.id}`} className="modal">

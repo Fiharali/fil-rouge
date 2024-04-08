@@ -61,7 +61,10 @@ class AbsenceController extends Controller
      */
     public function destroy(Absence $absence)
     {
-        //
+        $absence->delete();
+        return response([
+            'success' => 'Absence deleted Successful',
+        ]);
     }
 
 

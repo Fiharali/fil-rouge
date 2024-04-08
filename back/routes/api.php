@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('promotions', PromotionController::class);
     Route::apiResource('levels', LevelController::class);
 
-    Route::apiResource('absences', AbsenceController::class)->only(['index','delete']);
+    Route::apiResource('absences', AbsenceController::class)->only(['index','destroy']);
     Route::apiResource('absences', \App\Http\Controllers\api\apprenant\AbsenceController::class)
         ->only('store');
     Route::get('types', [\App\Http\Controllers\api\apprenant\AbsenceController::class,'allTypes']);

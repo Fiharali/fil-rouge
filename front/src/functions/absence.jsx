@@ -71,6 +71,15 @@ export const AbsenceFunctions = {
 
     },
 
+    deleteAbsence: async (id) => {
+        const data = await axiosSetup.delete('/absences/' + id);
+        if (data.status === 200) {
+            return data.data;
+        } else {
+            console.log(' failed');
+        }
+    },
+
     
 
 }
