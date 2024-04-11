@@ -26,9 +26,6 @@ export default function AddAbsence() {
     };
 
 
-
-
-
     useEffect(() => {
         !isAuth() && navigate('/login')
         getTypes()
@@ -117,7 +114,7 @@ export default function AddAbsence() {
                         <div className="col-span-6 ">
                             <label htmlFor="last_name" className="block mb-2 text-sm font-medium ">Date</label>
                             <input type="date" name="date" id="date" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="last name" value={formData.date} onChange={handleChange} min={today} />
-                             {errors?.date && <span className="text-red-500 text-left ms-5">{errors?.date ?? ''}</span>}
+                            {errors?.date && <span className="text-red-500 text-left ms-5">{errors?.date ?? ''}</span>}
                         </div>
                         <div className="col-span-6 ">
                             <label htmlFor="type" className="block mb-2 text-sm font-medium ">Type </label>
@@ -137,10 +134,10 @@ export default function AddAbsence() {
                         <div className="col-span-6 ">
                             <label htmlFor="" className="block mb-2 text-sm font-medium ">users </label>
 
-                           
+
 
                             <select name="user" id="user" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.user} onChange={handleChange}   >
-                                <option value=""> choose type of absence </option>
+                                <option value=""> choose user </option>
                                 {
                                     users.map(user => (
                                         <>

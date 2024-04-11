@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "./../Auth/Login";
 import DefaultLayout from "./../layouts/DefaultLayout";
 import Home from "./../pages/Home";
-import Profile from "../pages/Profile";
+import Profile from "../pages/profile/Profile";
 import { Users } from "../pages/users/Users";
 import UserEdit from "../pages/users/UserEdit";
 import Page404 from "../pages/Page404";
@@ -103,7 +103,7 @@ export const router = createBrowserRouter([
                 element: <MyAbsencesCalendar />
 
             },
-            
+
 
         ]
     },

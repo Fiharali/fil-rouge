@@ -15,7 +15,7 @@ export default function MyAbsences() {
     getAllAbsences();
   }, []);
 
-  
+
 
   const getAllAbsences = async () => {
     setLoadingPage(true)
@@ -36,7 +36,16 @@ export default function MyAbsences() {
         <td>{absence.id}</td>
         <td>{absence.type.name}</td>
         <td>{absence.date}</td>
-        <td>{absence.status}</td>
+        <td>{absence.status == 0 ? (<span
+          class="inline-block whitespace-nowrap rounded-[0.27rem]  px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none bg-red-900  text-gray-50">
+          Not Accepted
+        </span>) : absence.status == 1 ? (<span
+          class="inline-block whitespace-nowrap rounded-[0.27rem]  px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none bg-blue-900  text-gray-50">
+          Accepted
+        </span>) : (<span
+          class="inline-block whitespace-nowrap rounded-[0.27rem]  px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none bg-green-900  text-gray-50">
+          retard
+        </span>)}</td>
         <td>{absence.user.first_name}</td>
         <td><span className='text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-400'>{formatDate(absence.created_at)}</span></td>
         <td> <a className='underline underline-offset-1' target='_blank' href={absence.file}>Link of file</a> </td>
@@ -45,7 +54,7 @@ export default function MyAbsences() {
   }
   );
 
-  
+
 
 
   return (
@@ -67,7 +76,7 @@ export default function MyAbsences() {
             {loadingPage ? <AbsencesSkeleton /> : listAbsences}
           </tbody>
         </table>
-       
+
       </div>
 
 

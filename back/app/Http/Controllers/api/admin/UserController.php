@@ -231,7 +231,7 @@ class UserController extends Controller
 
 
 public function  oldUsers(){
-    $users=User::onlyTrashed()->get();
+    $users=User::onlyTrashed()->orderBy('deleted_at','desc')->get();
     return response([
         'users' => UserResource::collection($users),
        ]);

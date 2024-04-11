@@ -48,7 +48,7 @@ export default function Absences() {
     if (validate()) {
       try {
         const data = await AbsenceFunctions.changeStatus(id, formData);
-        console.log(data);
+        //  console.log(data);
         setFormData({})
         setErrors()
         const modal = document.getElementById(`my_modal_${id}`);
@@ -58,13 +58,14 @@ export default function Absences() {
           icon: "success",
           timer: 2000,
         });
+        getAllAbsences()
       } catch (error) {
         console.error('Error:', error);
       }
     }
     setLoading(false)
 
-    console.log(formData, id)
+    // console.log(formData, id)
 
   }
   const validate = () => {
@@ -106,13 +107,13 @@ export default function Absences() {
       <tr key={absence.id}>
         <td>{absence.id}</td>
         <td>{absence.type.name}</td>
-        <td>{absence.date}</td>
+        <td>{absence.status}</td>
         <td>{absence.status == 0 ? (<span
           class="inline-block whitespace-nowrap rounded-[0.27rem]  px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none bg-red-900  text-gray-50">
-          pending
+          Not Accepted
         </span>) : absence.status == 1 ? (<span
           class="inline-block whitespace-nowrap rounded-[0.27rem]  px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none bg-blue-900  text-gray-50">
-          approved
+          Accepted
         </span>) : (<span
           class="inline-block whitespace-nowrap rounded-[0.27rem]  px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none bg-green-900  text-gray-50">
           retard
@@ -142,10 +143,10 @@ export default function Absences() {
             <form onSubmit={(e) => handleSubmit(e, absence.id)} >
               <select name="status" id="status" className="shadow-sm  mt-5 border  sm:text-sm rounded-lg  block w-full p-2.5" onChange={(e) => handleChange(e)} >
                 <option value=""> choose type of absence </option>
-                <option value="0"  {...(absence.status === 0 ? { selected: true } : {})}   > not Approve</option>
-                <option value="1"  {...(absence.status === 1 ? { selected: true } : {})}  > Approve</option>
-                <option value="2"  {...(absence.status === 2 ? { selected: true } : {})} > retard </option>
-                <option value="3"  {...(absence.status === 3 ? { selected: true } : {})} > pending </option>
+                <option value="0"  {...(absence.status === 0 ? { selected: true } : {})}   > Not Accepted</option>
+                <option value="1"  {...(absence.status === 1 ? { selected: true } : {})}  > Accepted</option>
+                <option value="2"  {...(absence.status === 2 ? { selected: true } : {})} > Retard </option>
+
               </select>
               {errors?.status && <span className="text-red-500 text-left ms-5">{errors?.status ?? ''}</span>}
 

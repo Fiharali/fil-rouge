@@ -84,8 +84,9 @@ class AbsenceController extends Controller
      public function changeStatus(ChangeStatusAbsenceRequest $request ,Absence $absence)
     {
         $absence->status=$request->status;
+        $absence->save();
         return response([
-            'success' => 'User absence Successful',
+            'success' => 'Absence status changed Successful',
         ]);
     }
 }

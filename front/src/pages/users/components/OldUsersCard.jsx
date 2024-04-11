@@ -1,14 +1,15 @@
 import { Button } from "@material-tailwind/react";
+import { UserMinus } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function OldUsesCard(props) {
     const formatDate = (dateString) => {
         const createdAt = new Date(dateString);
         return `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')}`;
-      };
+    };
     return (
         <div key={props.user.id} class="max-w-sm w-full  mx-auto  rounded-lg overflow-hidden shadow-lg ">
-            <div class="border-b px-4 pb-6">
+            <div class=" px-4 pb-6">
                 <div class="text-center my-4">
                     <img class="h-32 w-32 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
                         src={props.user.image ? props.user.image : 'https://randomuser.me/api/portraits/women/21.jpg'} alt="" />
@@ -28,9 +29,10 @@ export default function OldUsesCard(props) {
                         {props.user.roles.join(', ')}
                     </div>
                 </div>
-                <div class="flex gap-2 justify-center">
+                <hr />
+                <div class="flex gap-2 justify-center mt-2" >
 
-                    <Button onClick={() => props.restoreUser(props.user.id)} >Restore</Button>
+                    <Button onClick={() => props.restoreUser(props.user.id)} ><UserMinus /></Button>
 
                 </div>
             </div>

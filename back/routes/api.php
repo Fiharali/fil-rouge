@@ -22,17 +22,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+ //   return $request->user();
+//});
 
-Route::get('/sanctum/csrf-cookie', [\Laravel\Sanctum\Http\Controllers\CsrfCookieController::class, 'show']);
+//Route::get('/sanctum/csrf-cookie', [\Laravel\Sanctum\Http\Controllers\CsrfCookieController::class, 'show']);
 
 //auths
-Route::post('/register', [AuthController::class, 'Register']);
+//Route::post('/register', [AuthController::class, 'Register']);
 
-Route::post('/login', [AuthController::class, 'login'])
-    ->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
@@ -47,8 +46,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('levels', LevelController::class);
 
     Route::apiResource('absences', AbsenceController::class)->only(['index','destroy']);
-    Route::apiResource('absences', \App\Http\Controllers\api\apprenant\AbsenceController::class)
-        ->only('store');
+    Route::apiResource('absences', \App\Http\Controllers\api\apprenant\AbsenceController::class)->only('store');
     Route::get('types', [\App\Http\Controllers\api\apprenant\AbsenceController::class,'allTypes']);
     Route::get('my-absences', [\App\Http\Controllers\api\apprenant\AbsenceController::class,'index']);
     Route::get('users-for-absence', [\App\Http\Controllers\api\apprenant\AbsenceController::class,'usersForAbsence']);

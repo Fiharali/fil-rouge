@@ -45,6 +45,7 @@ import { useUserContext } from "../context/UserContext";
 import { isAdmin } from "../roles/isAdmin";
 import { isAuth } from "../roles/isAuth";
 import isApprenant from "../roles/isApprenant";
+import { BookOpenCheck } from "lucide-react";
 
 
 export default function NavbarCustom() {
@@ -191,6 +192,16 @@ export default function NavbarCustom() {
                   </ListItem>
                 </NavLink>
                 <NavLink
+                  to='/old-users'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <UsersIcon className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Removed Users
+                  </ListItem>
+                </NavLink>
+                <NavLink
                   to='/campuses'
                 >
                   <ListItem className='mt-2' >
@@ -235,7 +246,7 @@ export default function NavbarCustom() {
                 >
                   <ListItem className='mt-2' >
                     <ListItemPrefix>
-                      <WorkHistory className="h-5 w-5" />
+                      <BookOpenCheck className="h-5 w-5" />
                     </ListItemPrefix>
                     Add Absence
                   </ListItem>
@@ -250,7 +261,7 @@ export default function NavbarCustom() {
                     Absences
                   </ListItem>
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                   to='/absence-calender'
                 >
                   <ListItem className='mt-2' >
@@ -259,7 +270,7 @@ export default function NavbarCustom() {
                     </ListItemPrefix>
                     Absences Calender
                   </ListItem>
-                </NavLink>
+                </NavLink> */}
               </>
             )
             }
