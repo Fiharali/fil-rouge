@@ -1,6 +1,7 @@
 import React from 'react'
 import { submitLogout } from "../Auth/LogOut";
 import { useUserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar(props) {
 
@@ -8,6 +9,13 @@ export default function Navbar(props) {
 
     const UserContext = useUserContext()
     //console.log(UserContext)
+
+    const navigate = useNavigate()
+
+    const logout =  async () => {
+        await submitLogout()
+        navigate('/login')
+    }
 
 
     return (
@@ -110,7 +118,7 @@ export default function Navbar(props) {
                             </li>
                         </ul>
                         <div className="py-2">
-                            <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={submitLogout}>Sign out</button>
+                            <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={logout}>Sign out</button>
                         </div>
                     </div>
 

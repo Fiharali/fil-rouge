@@ -6,7 +6,9 @@ import { Button } from '@material-tailwind/react';
 import { addNewAbsence, changeStatus } from '../../lib/validations/absence';
 import { AbsenceFunctions } from '../../functions/absence';
 import { deleteAbsence } from './functions/deleteAbsence';
-// import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
+import { checkAdminAndNavigate, isAdmin } from '../../roles/isAdmin';
 
 export default function Absences() {
 
@@ -20,14 +22,16 @@ export default function Absences() {
 
   const modalButtonRef = useRef(null);
 
-
-
-
+  const navigate = useNavigate()
+  const UserContext = useUserContext();
 
   useEffect(() => {
     !isAuth() && navigate('/login')
+    checkAdminAndNavigate(UserContext, navigate)
     getAllAbsences();
   }, []);
+
+
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -36,6 +40,8 @@ export default function Absences() {
       [name]: value
     }));
   };
+
+
 
   //console.log(formData)
 
@@ -107,7 +113,7 @@ export default function Absences() {
       <tr key={absence.id}>
         <td>{absence.id}</td>
         <td>{absence.type.name}</td>
-        <td>{absence.status}</td>
+        <td>{absence.date}</td>
         <td>{absence.status == 0 ? (<span
           class="inline-block whitespace-nowrap rounded-[0.27rem]  px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none bg-red-900  text-gray-50">
           Not Accepted
@@ -158,7 +164,6 @@ export default function Absences() {
     )
   }
   );
-
 
 
 

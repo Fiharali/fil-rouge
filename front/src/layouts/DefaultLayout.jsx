@@ -13,6 +13,10 @@ export default function DefaultLayout() {
         !isAuth() && navigate('/login')
        
     }, []);
+
+    if (!isAuth()) {
+        return null;
+    }
     return (
         <>
             <NavbarCustom />

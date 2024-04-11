@@ -9,6 +9,7 @@ import UserFormSkeleton from "./components/UserFormSkeleton";
 import UserEditForm from "./components/UserEditForm";
 import { isAuth } from "../../roles/isAuth";
 import UserContext, { useUserContext } from "../../context/UserContext";
+import { checkAdminAndNavigate } from "../../roles/isAdmin";
 export default function UserEdit() {
 
   const { id } = useParams();
@@ -62,8 +63,11 @@ export default function UserEdit() {
 
   };
 
+  
+
   useEffect(() => {
     !isAuth() && navigate('/login')
+    checkAdminAndNavigate(UserContext, navigate)
     getOneUser();
   }, [isAuth]);
   const getOneUser = async () => {
@@ -84,7 +88,7 @@ export default function UserEdit() {
 
     try {
       const data = await ApiFunctions.getAuthUser();
-      console.log(data.user);
+      //console.log(data.user);
       userContext.setUser(data.user);
       localStorage.setItem('user', JSON.stringify(data.user));
 

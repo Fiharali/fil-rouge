@@ -25,9 +25,12 @@ export default function AddAbsence() {
         }));
     };
 
-
+    const navigate = useNavigate()
+    const UserContext = useUserContext();
+    
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
         getTypes()
         getUsers()
     }, []);

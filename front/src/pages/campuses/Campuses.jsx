@@ -8,6 +8,8 @@ import { createCampus } from './functions/createCampus';
 import CampusSkeleton from './components/CampusSkeleton';
 import { deleteCampus } from './functions/deleteCampus';
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
+import { checkAdminAndNavigate } from '../../roles/isAdmin';
 
 
 export default function Campuses() {
@@ -44,8 +46,11 @@ export default function Campuses() {
         }
     };
 
+    const UserContext = useUserContext();
+
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
         getAllCampuses();
     }, []);
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ApiFunctions } from "../../functions/Api";
 import { userEditProfile } from "../../lib/validations/validation";
 import { isAuth } from "../../roles/isAuth";
+import { checkAdminAndNavigate } from "../../roles/isAdmin";
 
 
 
@@ -47,7 +48,7 @@ const Profile = () => {
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        console.log(file);
+        //console.log(file);
         setSelectedFile(file);
         setFormData(prevState => ({
             ...prevState,
@@ -55,9 +56,13 @@ const Profile = () => {
         }));
 
     };
+    const navigate = useNavigate()
+    const UserContext = useUserContext();
 
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
+
         getAuthUser();
 
     }, []);

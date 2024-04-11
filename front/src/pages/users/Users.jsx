@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import UserCardSkeleton from "./components/UserCardSkeleton";
 import Pagination from "../../components/Pagination";
 import { getSearchUsers } from "./functions/userSearch";
+import { checkAdminAndNavigate } from "../../roles/isAdmin";
 
 
 
@@ -83,14 +84,18 @@ export function Users() {
         setPagination(data.pagination);
         setLoadingPage(false);
     };
+   
 
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
+
         getAllUsers();
     }, []);
 
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
         performSearch();
     }, [formDataSearch]);
 
@@ -194,6 +199,10 @@ export function Users() {
         )
     }
     );
+
+    if (!isAuth()) {
+        return null;
+    }
 
     return (
 

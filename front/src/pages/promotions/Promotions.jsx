@@ -7,6 +7,9 @@ import { addPromotion } from '../../lib/validations/promotion';
 import { createPromotion } from './functions/createPromotion';
 import PromotionSkeleton from './components/PromotionSkeleton';
 import { deletePromotion } from './functions/deletePromotion';
+import { checkAdminAndNavigate } from '../../roles/isAdmin';
+import { useUserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Promotions() {
@@ -41,9 +44,12 @@ export default function Promotions() {
             return false;
         }
     };
-
+    const navigate = useNavigate()
+    const UserContext = useUserContext();
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
+
         getAllPromotions();
     }, []);
 

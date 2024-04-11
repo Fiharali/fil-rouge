@@ -7,6 +7,7 @@ import { addClassName } from '../../lib/validations/className';
 import { createClassName } from './functions/createClassName';
 import ClassNameSkeleton from './components/ClassNameSkeleton';
 import { deleteClassName } from './functions/deleteClassName';
+import { checkAdminAndNavigate } from '../../roles/isAdmin';
 
 
 export default function ClassNames() {
@@ -43,8 +44,12 @@ export default function ClassNames() {
         }
     };
 
+    const navigate = useNavigate()
+    const UserContext = useUserContext();
+
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
         getAllClassNames();
     }, []);
 

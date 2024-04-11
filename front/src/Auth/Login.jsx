@@ -31,7 +31,6 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-
         isAuth() && navigate('/')
     });
 
@@ -87,6 +86,12 @@ export default function Login() {
             }
         }
     };
+
+    if (isAuth()) {
+        return null;
+      }
+
+
     return (
 
 

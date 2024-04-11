@@ -65,9 +65,9 @@ export default function NavbarCustom() {
 
 
 
-  // useEffect(() => {
-  //   !isAuth() && navigate('/login')
-  // }, []);
+  useEffect(() => {
+    !isAuth() && navigate('/login')
+  }, []);
 
   const containerStyle = {
     overflowY: 'auto',
@@ -78,7 +78,9 @@ export default function NavbarCustom() {
     }
   };
 
-
+  if (!isAuth()) {
+    return null;
+  }
 
   return (
 

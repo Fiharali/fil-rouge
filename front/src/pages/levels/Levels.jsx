@@ -7,6 +7,7 @@ import { addLevel } from '../../lib/validations/level';
 import { createLevel } from './functions/createLevel';
 import LevelSkeleton from './components/LevelSkeleton';
 import { deleteLevel } from './functions/deleteLevel';
+import { checkAdminAndNavigate } from '../../roles/isAdmin';
 
 
 export default function Levels() {
@@ -43,8 +44,12 @@ export default function Levels() {
         }
     };
 
+    const navigate = useNavigate()
+    const UserContext = useUserContext();
+
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
         getAllLevels();
     }, []);
 

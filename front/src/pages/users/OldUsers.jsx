@@ -24,6 +24,7 @@ export function OldUsers() {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkAdminAndNavigate(UserContext, navigate)
         getOldUsers();
     }, []);
 

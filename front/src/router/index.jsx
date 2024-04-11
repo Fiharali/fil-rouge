@@ -2,11 +2,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./../Auth/Login";
 import DefaultLayout from "./../layouts/DefaultLayout";
-import Home from "./../pages/Home";
+import Home from "../pages/home/Home";
 import Profile from "../pages/profile/Profile";
 import { Users } from "../pages/users/Users";
 import UserEdit from "../pages/users/UserEdit";
-import Page404 from "../pages/Page404";
+import Page404 from "../pages/errors/Page404";
 import ClassNames from "../pages/classNames/classNames";
 import Campuses from "../pages/campuses/Campuses";
 import Promotions from "../pages/promotions/Promotions";
@@ -18,6 +18,7 @@ import MyAbsencesCalendar from "../pages/absences/MyAbsencesCalendar";
 import MyAbsences from "../pages/absences/MyAbsences";
 import AddAbsence from "../pages/absences/AddAbsence";
 import { OldUsers } from "../pages/users/OldUsers";
+import Page403 from "../pages/errors/Page403";
 
 
 export const router = createBrowserRouter([
@@ -104,6 +105,11 @@ export const router = createBrowserRouter([
 
             },
 
+            {
+                path: 'unauthorized',
+                element: <Page403 />
+            },
+
 
         ]
     },
@@ -113,9 +119,6 @@ export const router = createBrowserRouter([
         element: <Login />
     },
 
-    {
-        path: '*',
-        element: <Page404 />
-    },
+
 
 ])
