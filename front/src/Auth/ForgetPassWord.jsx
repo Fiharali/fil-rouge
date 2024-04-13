@@ -11,19 +11,16 @@ import { isHasRole } from "../roles/isHasRole.jsx";
 
 const schema = z.object({
     email: z.string().email(),
-    password: z.string().min(8),
 });
 
 
 
 
-export default function Login() {
+export default function ForgetPassword() {
 
     const UserContext = useUserContext()
-
     const [formData, setFormData] = useState({
         email: '',
-        password: ''
     });
 
     const [errors, setErrors] = useState({});
@@ -60,26 +57,17 @@ export default function Login() {
         if (validate()) {
             setLoading(true);
             try {
-
-                // const csrf = await axiosSetup.get('/sanctum/csrf-cookie');
-                const data = await ApiFunctions.Login(formData);
-                //console.log(data);
-                UserContext.setUser(data.user)
-                UserContext.setIsAuth(true)
-                UserContext.setToken(data.token)
-                localStorage.setItem('user', JSON.stringify(data.user));
-                localStorage.setItem('isAuth', true);
-                localStorage.setItem('token', JSON.stringify(data.token));
-
-                //console.log(data.user.roles)
-                isHasRole(data.user.roles)
-                // navigate('/users')
-
+                const data = await ApiFunctions.resetLink(formData);
+                // console.log(data);
+                setErrors(prevState => ({
+                    ...prevState,
+                    email: data.message ?? "Reset link sent to your email" 
+                }));
             } catch (error) {
                 console.error('Error:', error);
                 setErrors(prevState => ({
                     ...prevState,
-                    email: error.response?.data.error //?? error.response.data.message
+                    email: error.response?.data.error ?? error.response.data.message
                 }));
             } finally {
                 setLoading(false);
@@ -103,8 +91,8 @@ export default function Login() {
                     <div className="flex items-center justify-center w-full lg:p-12">
                         <div className="flex items-center xl:p-10 w-full sm:w-3/4 md:w-1/2 lg:w-2/5 md:mx-auto sm:mx-5 ">
                             <form className="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl" onSubmit={handleSubmit}>
-                                <h3 className="mb-3 text-4xl font-extrabold text-dark-grey-900">Sign In</h3>
-                                <p className="mb-4 text-grey-700">Enter your email and password</p>
+                                <h3 className="mb-3 text-4xl font-extrabold text-dark-grey-900">Reset Password</h3>
+                                <p className="mb-4 text-grey-700">Enter your email </p>
 
                                 <div className="flex items-center mb-3">
                                     <hr className="h-0 border-b border-solid border-grey-500 grow" />
@@ -114,11 +102,8 @@ export default function Login() {
                                 <label htmlFor="email" className="mb-2 text-sm text-start text-grey-900">Email*</label>
                                 <input id="email" type="email" name="email" placeholder="mail@loopple.com" className="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400  placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
                                 {errors.email && <span className="text-red-500 text-left ms-5">{errors.email}</span>}
-                                <label htmlFor="password" className={`mb-2 text-sm text-start text-grey-900 ${errors.email ? 'mt-2' : 'mt-7'}`}>Password*</label>
-                                <input id="password" type="password" name="password" placeholder="Enter a password" className="flex items-center w-full px-5 py-4  mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl" onChange={handleChange} />
-                                {errors.password && <span className="text-red-500 text-left ms-5">{errors.password}</span>}
                                 <div className="flex flex-row justify-between mb-8 mt-6">
-                                    <Link to='/forget-password' className="mr-4 text-sm font-medium text-purple-blue-500">Forget password?</Link>
+                                    <Link to='/login' className="mr-4 text-sm font-medium text-purple-blue-500">Forget password?</Link>
                                 </div>
                                 <Button
                                     disabled={loading}
@@ -127,7 +112,7 @@ export default function Login() {
                                 >
                                     {loading ? (
                                         <LoopIcon className="animate-spin" />
-                                    ) : 'Sign In'}
+                                    ) : 'Reset Password'}
                                 </Button>
 
                             </form>

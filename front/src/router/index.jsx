@@ -19,6 +19,8 @@ import MyAbsences from "../pages/absences/MyAbsences";
 import AddAbsence from "../pages/absences/AddAbsence";
 import { OldUsers } from "../pages/users/OldUsers";
 import Page403 from "../pages/errors/Page403";
+import ForgetPassword from "../Auth/ForgetPassWord";
+import ResetPassWord from "../Auth/ResetPassWord";
 
 
 export const router = createBrowserRouter([
@@ -117,6 +119,19 @@ export const router = createBrowserRouter([
     {
         path: '/login',
         element: <Login />
+    },
+
+    {
+        path: '/forget-password',
+        element: <ForgetPassword />
+    },
+    {
+        path: '/password-reset/:token',
+        element: <ResetPassWord />
+    },
+    {
+        path: '*',
+        element: <Page404 />
     },
 
 

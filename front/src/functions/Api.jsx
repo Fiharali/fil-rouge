@@ -173,4 +173,25 @@ export const ApiFunctions = {
         }
 
     },
+
+    resetLink: async (formData) => {
+
+        const data = await axiosSetup.post('/reset-link/' , formData);
+        if (data.status === 200) {
+            return data.data;
+        } else {
+            console.log(' failed');
+        }
+    },
+    ResetPassWord: async (formData) => {
+
+        const data = await axiosSetup.post('/reset-password/' , formData);
+        if (data.status === 200) {
+            return data.data;
+        } else {
+            console.log(' failed');
+        }
+    },
+
+    
 } 
