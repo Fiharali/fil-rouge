@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import UserCard from "./components/UserCard";
 import { deleteUser } from "./functions/deleteUser";
 import { getUsers } from "./functions/getUsers";
-import {  useUserContext } from "../../context/UserContext";
+import { useUserContext } from "../../context/UserContext";
 import { isAuth } from "../../roles/isAuth";
 import { useNavigate } from "react-router-dom";
 import UserCardSkeleton from "./components/UserCardSkeleton";
@@ -24,7 +24,7 @@ export function OldUsers() {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        checkAdminAndNavigate(UserContext, navigate)
+        // checkAdminAndNavigate(UserContext, navigate)
         getOldUsers();
     }, []);
 

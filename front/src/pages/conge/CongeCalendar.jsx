@@ -1,33 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import { getAbsences } from './functions/getAbsences';
+import { getConge } from './functions/conge';
 import { isAuth } from '../../roles/isAuth';
-import AbsencesSkeleton from './components/AbsencesSkeleton';
+import CongesSkeleton from './components/CongesSkeleton';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction"
 import { useQuery } from 'react-query';
 
-export default function AbsencesCalendar() {
+export default function CongesCalendar() {
 
-    // const [loadingPage, setLoadingPage] = useState(false);
-    const [absences, setAbsences] = useState([]);
+
+    const [conges, setConges] = useState([]);
 
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        //getAllAbsences();
     }, []);
 
 
 
-    const { isLoading, isError, data: absencesData } = useQuery('absences', getAbsences, {
+    const { isLoading, isError, data: congesData } = useQuery('conges', getConge, {
         cacheTime: 60000,
     });
 
     if (isLoading) {
         return (
-            <div className="overflow-x-auto  mt-5  ">
-                loading ...
+            <div className="overflow-x-auto  mt-5   ">
+                <div className='md:w-2/3 mx-auto w-full blur-sm'>
+                    <FullCalendar className="mx-auto w-1/2 "
+                        plugins={[dayGridPlugin, interactionPlugin]}
+                        initialView="dayGridMonth"
+                    />
+                </div>
             </div>
         );
     }
@@ -35,15 +39,15 @@ export default function AbsencesCalendar() {
     if (isError) {
         return <div>Error fetching data</div>;
     }
-   
 
 
 
-    const events = absencesData.data.absences.map(absence => ({
-        id: absence.id,
-        title: absence.user?.first_name ?? 'null',
-        start: absence.date,
-        end: absence.date,
+
+    const events = congesData.conges.map(conge => ({
+        id: conge.id,
+        title: conge.user?.first_name ?? 'null',
+        start: conge.from,
+        end: conge.to,
         backgroundColor: 'green',
         textColor: 'white'
     }));

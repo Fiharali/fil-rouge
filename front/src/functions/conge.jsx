@@ -33,9 +33,9 @@ export const CongeFunctions = {
     },
 
     getConges: async () => {
-        const data = await axiosSetup.get('/conges');
+        const data = await axiosSetup.get('/conge');
         if (data.status === 200) {
-            return data;
+            return data.data;
         } else {
             console.log(' failed');
         }
@@ -60,9 +60,9 @@ export const CongeFunctions = {
         }
 
     },
-    changeStatus: async (id,formData) => {
+    changeStatus: async (id, formData) => {
 
-        const data = await axiosSetup.post('/change-status-conge/'+ id , formData);
+        const data = await axiosSetup.post('/change-status-conge/' + id, formData);
         if (data.status === 200) {
             return data.data;
         } else {
@@ -80,6 +80,6 @@ export const CongeFunctions = {
         }
     },
 
-    
+
 
 }

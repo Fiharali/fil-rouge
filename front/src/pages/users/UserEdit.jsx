@@ -8,7 +8,7 @@ import { userUpdate } from "./functions/UserUpdate";
 import UserFormSkeleton from "./components/UserFormSkeleton";
 import UserEditForm from "./components/UserEditForm";
 import { isAuth } from "../../roles/isAuth";
-import UserContext, { useUserContext } from "../../context/UserContext";
+import  { useUserContext } from "../../context/UserContext";
 import { checkAdminAndNavigate } from "../../roles/isAdmin";
 export default function UserEdit() {
 
@@ -148,7 +148,7 @@ export default function UserEdit() {
                   <img class="mb-4 rounded-lg w-36 h-36 sm:mb-0 xl:mb-4 2xl:mb-0 mx-auto" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Jese picture" />
             }
             <div className="flex items-center justify-center   rounded-full col-span-2 ms-2 ">
-              <label htmlhtmlFor="dropzone-file" className="flex  rounded-4 flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-2 cursor-pointer ">
+              <label htmlFor="dropzone-file" className="flex  rounded-4 flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-2 cursor-pointer ">
 
                 <div className="flex flex-col items-center justify-center p-5 rounded-2">
                   <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">

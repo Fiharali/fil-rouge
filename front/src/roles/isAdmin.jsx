@@ -16,7 +16,8 @@ export const isAdmin = () => {
 
 
 export const checkAdminAndNavigate = (userContext, navigateFunction) => {
-    if (!userContext.user?.roles?.includes('admin')) {
-      navigateFunction('/unauthorized');
-    }
-  };
+    console.log(userContext.user)
+    // if (!userContext.user?.roles?.includes('admin')) {
+    //   navigateFunction('/unauthorized');
+    // }
+};

@@ -23,6 +23,9 @@ import ForgetPassword from "../Auth/ForgetPassWord";
 import ResetPassWord from "../Auth/ResetPassWord";
 import AddConge from "../pages/conge/AddConge";
 import CongeRequest from "../pages/conge/CongeRequest";
+import Conges from "../pages/conge/Conges";
+import CongesCalendar from "../pages/conge/CongeCalendar";
+
 
 
 export const router = createBrowserRouter([
@@ -94,20 +97,24 @@ export const router = createBrowserRouter([
             {
                 path: '/absence-calender',
                 element: <AbsencesCalendar />
-
             },
-
-
             {
                 path: '/add-conge',
                 element: <AddConge />
-
             },
 
             {
                 path: '/conge-request',
                 element: <CongeRequest />
+            },
+            {
+                path: '/conges',
+                element: <Conges/>
+            },
 
+            {
+                path: '/conges-calendar',
+                element: <CongesCalendar/>
             },
 
 

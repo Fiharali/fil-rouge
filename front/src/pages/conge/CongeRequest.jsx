@@ -68,7 +68,7 @@ export default function CongeRequest() {
             }
             try {
 
-                const data = await CongeFunctions.addNewConge(formData);
+                const data = await CongeFunctions.addConge(formData);
                 console.log(data);
                 setFormData({})
                 setErrors()
