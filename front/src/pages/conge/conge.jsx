@@ -27,7 +27,7 @@ export default function AddAbsence() {
 
     const navigate = useNavigate()
     const UserContext = useUserContext();
-
+    
     useEffect(() => {
         !isAuth() && navigate('/login')
         checkAdminAndNavigate(UserContext, navigate)
@@ -63,7 +63,7 @@ export default function AddAbsence() {
     const loader = <span className="loading loading-ring loading-sm"></span>
     const today = new Date().toISOString().split('T')[0];
 
-    //console.log(formData)
+    console.log(formData)
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true)

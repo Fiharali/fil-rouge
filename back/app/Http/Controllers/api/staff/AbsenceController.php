@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\admin;
+namespace App\Http\Controllers\api\staff;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangeStatusAbsenceRequest;

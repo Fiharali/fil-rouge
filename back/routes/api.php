@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\api\admin\AbsenceController;
 use App\Http\Controllers\api\admin\CampusController;
 use App\Http\Controllers\api\admin\ClassNameController;
 use App\Http\Controllers\api\admin\LevelController;
 use App\Http\Controllers\api\admin\PromotionController;
 use App\Http\Controllers\api\admin\UserController;
 use App\Http\Controllers\api\Auth\AuthController;
+use App\Http\Controllers\api\Rh\CongeController;
+use App\Http\Controllers\api\staff\AbsenceController;
 use App\Http\Controllers\api\user\ProfileUserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('add-absence', [AbsenceController::class,'store']);
     Route::post('change-status-absence/{absence}', [AbsenceController::class,'changeStatus']);
 
+    Route::apiResource('conge', CongeController::class);
+    Route::get('users-for-conge', [CongeController::class,'usersForConge']);
 
     Route::get('profile',[ProfileUserController::class, 'index']);
     Route::patch('profile',[ProfileUserController::class, 'update']);
