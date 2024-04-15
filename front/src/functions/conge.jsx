@@ -43,7 +43,7 @@ export const CongeFunctions = {
     },
 
     getMyConges: async () => {
-        const data = await axiosSetup.get('/my-conges');
+        const data = await axiosSetup.get('/my-conge');
         if (data.status === 200) {
             return data;
         } else {
@@ -72,7 +72,7 @@ export const CongeFunctions = {
     },
 
     deleteConge: async (id) => {
-        const data = await axiosSetup.delete('/conges/' + id);
+        const data = await axiosSetup.delete('/conge/' + id);
         if (data.status === 200) {
             return data.data;
         } else {

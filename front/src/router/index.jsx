@@ -25,6 +25,7 @@ import AddConge from "../pages/conge/AddConge";
 import CongeRequest from "../pages/conge/CongeRequest";
 import Conges from "../pages/conge/Conges";
 import CongesCalendar from "../pages/conge/CongeCalendar";
+import MyConges from "../pages/conge/MyConges.jsx";
 
 
 
@@ -98,6 +99,8 @@ export const router = createBrowserRouter([
                 path: '/absence-calender',
                 element: <AbsencesCalendar />
             },
+
+
             {
                 path: '/add-conge',
                 element: <AddConge />
@@ -113,13 +116,19 @@ export const router = createBrowserRouter([
             },
 
             {
+                path: '/my-conges',
+                element: <MyConges/>
+            },
+
+            {
                 path: '/conges-calendar',
                 element: <CongesCalendar/>
             },
 
-
-
-
+            {
+                path: '/my-conges-calendar',
+                element: <CongesCalendar/>
+            },
 
 
             {

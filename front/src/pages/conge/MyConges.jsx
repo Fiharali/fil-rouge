@@ -5,13 +5,14 @@ import CongesSkeleton from './components/CongesSkeleton';
 import { Button } from '@material-tailwind/react';
 import { addNewConge, changeStatus } from '../../lib/validations/conge';
 import { CongeFunctions } from '../../functions/conge';
-import { deleteConge } from './functions/deleteConge';
+// import { deleteConge } from './functions/deleteConge';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import { checkAdminAndNavigate, isAdmin } from '../../roles/isAdmin';
 import { getConge } from './functions/conge';
+import {getMyConges} from "./functions/myConge.jsx";
 
-export default function Conges() {
+export default function MyConges() {
 
   const [loadingPage, setLoadingPage] = useState(false);
   const [conges, setConges] = useState([]);
@@ -92,9 +93,9 @@ export default function Conges() {
 
   const getAllConges = async () => {
     setLoadingPage(true)
-    const data = await getConge();
-   // console.log(data)
-    setConges(data.conges)
+    const data = await getMyConges();
+    // console.log(data.data.conges)
+   setConges(data.data.conges)
     setLoadingPage(false)
   };
 
@@ -109,7 +110,7 @@ export default function Conges() {
     }
   }
 
-
+console.log(conges)
   const listConges = conges.map(conge => {
     return (
       <tr key={conge.id}>
@@ -150,8 +151,9 @@ export default function Conges() {
             <form onSubmit={(e) => handleSubmit(e, conge.id)} >
               <select name="status" id="status" className="shadow-sm  mt-5 border  sm:text-sm rounded-lg  block w-full p-2.5" onChange={(e) => handleChange(e)} >
                 <option value=""> choose type of conge </option>
-                <option value="0"  {...(conge.status === 0 ? { selected: true } : {})}   > Not Accepted</option>
-                <option value="1"  {...(conge.status === 1 ? { selected: true } : {})}  > Accepted</option>
+                <option value="0"  {...(conge.status === 0 ? { selected: true } : {})}   > Not Confirmed</option>
+                <option value="1"  {...(conge.status === 1 ? { selected: true } : {})}  > Confirmed</option>
+
 
               </select>
               {errors?.status && <span className="text-red-500 text-left ms-5">{errors?.status ?? ''}</span>}

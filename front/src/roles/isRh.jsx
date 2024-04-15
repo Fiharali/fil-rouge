@@ -1,10 +1,10 @@
 import { useUserContext } from "../context/UserContext";
-import { useNavigate } from 'react-router-dom';
+
 
 //console.log('UserContext.user.roles')
-export const isAdmin = () => {
+export const isRh = () => {
     const UserContext = useUserContext()
-    if (UserContext?.user?.roles?.includes('admin') ?? false) {
+    if (UserContext?.user?.roles?.includes('rh') ?? false) {
         // console.log('UserContext.user')
         return true
     }
@@ -15,9 +15,9 @@ export const isAdmin = () => {
 
 
 
-export const checkAdminAndNavigate = (userContext, navigateFunction) => {
+export const checkRhAndNavigate = (userContext, navigateFunction) => {
     //console.log(userContext.user)
-    if (!userContext.user?.roles?.includes('admin')) {
+    if (!userContext.user?.roles?.includes('rh')) {
       navigateFunction('/unauthorized');
     }
 };

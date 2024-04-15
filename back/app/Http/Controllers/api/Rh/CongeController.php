@@ -63,7 +63,10 @@ class CongeController extends Controller
      */
     public function destroy(Conge $conge)
     {
-        //
+        $conge->delete();
+        return response([
+            'success' => 'Conge deleted  Successful',
+        ]);
     }
 
 

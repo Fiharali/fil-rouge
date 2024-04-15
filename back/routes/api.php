@@ -58,6 +58,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('conge', CongeController::class);
     Route::get('users-for-conge', [CongeController::class,'usersForConge']);
     Route::post('add-conge', [\App\Http\Controllers\api\staff\CongeController::class,'store']);
+    Route::get('my-conge', [\App\Http\Controllers\api\staff\CongeController::class,'index']);
+    Route::post('change-status-conge/{conge}', [\App\Http\Controllers\api\staff\CongeController::class,'update']);
 
 
     Route::get('profile',[ProfileUserController::class, 'index']);

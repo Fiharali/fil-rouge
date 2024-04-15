@@ -46,6 +46,8 @@ import { isAdmin } from "../roles/isAdmin";
 import { isAuth } from "../roles/isAuth";
 import isApprenant from "../roles/isApprenant";
 import { BookOpenCheck } from "lucide-react";
+import { isStaff } from "../roles/isStaff";
+import { isRh } from "../roles/isRh";
 
 
 export default function NavbarCustom() {
@@ -280,6 +282,79 @@ export default function NavbarCustom() {
 
             {/* apprenant */}
             {isApprenant() && (
+              <>
+                <NavLink
+                  to='/demand-absence'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AllInbox className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Demand Absence
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/my-absences'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <WorkHistory className="h-5 w-5" />
+                    </ListItemPrefix>
+                    My Absences
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/my-absence-calender'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AppRegistration className="h-5 w-5" />
+                    </ListItemPrefix>
+                    My Absence Calender
+                  </ListItem>
+                </NavLink>
+              </>
+            )}
+
+
+
+            {isRh() && (
+              <>
+                <NavLink
+                  to='/add-conge'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                    <WorkHistory className="h-5 w-5" />
+                    </ListItemPrefix>
+                    add new Conge
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/conges'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <WorkHistory className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Conges
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to='/conges-calendar'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AppRegistration className="h-5 w-5" />
+                    </ListItemPrefix>
+                  Conges Calender
+                  </ListItem>
+                </NavLink>
+              </>
+            )}
+
+
+            {isStaff() && (
               <>
                 <NavLink
                   to='/demand-absence'

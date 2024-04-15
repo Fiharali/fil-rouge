@@ -8,7 +8,7 @@ import { userUpdate } from "./functions/UserUpdate";
 import UserFormSkeleton from "./components/UserFormSkeleton";
 import UserEditForm from "./components/UserEditForm";
 import { isAuth } from "../../roles/isAuth";
-import  { useUserContext } from "../../context/UserContext";
+import { useUserContext } from "../../context/UserContext";
 import { checkAdminAndNavigate } from "../../roles/isAdmin";
 export default function UserEdit() {
 
@@ -63,11 +63,12 @@ export default function UserEdit() {
 
   };
 
-  
+
 
   useEffect(() => {
     !isAuth() && navigate('/login')
-    checkAdminAndNavigate(UserContext, navigate)
+    // console.log(userContext)
+    checkAdminAndNavigate(userContext, navigate)
     getOneUser();
   }, [isAuth]);
   const getOneUser = async () => {
