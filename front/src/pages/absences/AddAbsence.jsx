@@ -4,6 +4,9 @@ import { isAuth } from '../../roles/isAuth';
 import { AbsenceFunctions } from '../../functions/absence';
 import { addAbsence, addNewAbsence } from '../../lib/validations/absence';
 import Select from 'react-select';
+import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../context/UserContext';
+import { checkStaffAndNavigate } from '../../roles/isStaff';
 
 export default function AddAbsence() {
 
@@ -30,7 +33,7 @@ export default function AddAbsence() {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        checkAdminAndNavigate(UserContext, navigate)
+        checkStaffAndNavigate(UserContext, navigate)
         getTypes()
         getUsers()
     }, []);

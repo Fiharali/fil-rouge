@@ -30,6 +30,7 @@ export default function CongesCalendar() {
                     <FullCalendar className="mx-auto w-1/2 "
                         plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
+
                     />
                 </div>
             </div>
@@ -52,15 +53,23 @@ export default function CongesCalendar() {
         textColor: 'white'
     }));
 
+    function handleDateClick(info) {
+        setSelectedDate(info.dateStr); // Store the selected date
+        setShowModal(true); // Show the modal
+    }
+
+
 
     return (
         <>
-            <div className="overflow-x-auto  mt-5  ">
+            <div className="overflow-x-auto  mt-5   ">
                 <div className='md:w-2/3 mx-auto w-full'>
                     <FullCalendar className="mx-auto w-1/2"
                         plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
                         events={events}
+                                  dateClick={handleDateClick}
+
                     // dateClick={handleDateClick}
                     />
                 </div>

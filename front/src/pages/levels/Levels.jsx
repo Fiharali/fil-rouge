@@ -8,6 +8,8 @@ import { createLevel } from './functions/createLevel';
 import LevelSkeleton from './components/LevelSkeleton';
 import { deleteLevel } from './functions/deleteLevel';
 import { checkAdminAndNavigate } from '../../roles/isAdmin';
+import {useNavigate} from "react-router-dom";
+import {useUserContext} from "../../context/UserContext.jsx";
 
 
 export default function Levels() {

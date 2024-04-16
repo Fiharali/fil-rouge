@@ -8,7 +8,7 @@ import { AbsenceFunctions } from '../../functions/absence';
 import { deleteAbsence } from './functions/deleteAbsence';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
-import { checkAdminAndNavigate, isAdmin } from '../../roles/isAdmin';
+import { checkStaffAndNavigate } from '../../roles/isStaff';
 
 export default function Absences() {
 
@@ -27,7 +27,7 @@ export default function Absences() {
 
   useEffect(() => {
     !isAuth() && navigate('/login')
-    checkAdminAndNavigate(UserContext, navigate)
+    checkStaffAndNavigate(UserContext, navigate)
     getAllAbsences();
   }, []);
 

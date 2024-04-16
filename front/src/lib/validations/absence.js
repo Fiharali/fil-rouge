@@ -18,3 +18,11 @@ export const addNewAbsence = z.object({
 export const changeStatus = z.object({
     status: z.string().min(1, { message: "Please select a status" }), 
 });
+
+export const addNewAbsenceWithCalendar = z.object({
+
+    //date: z.string().min(1, { message: "Please select a date" }),
+    type: z.string().min(1, { message: "Please select a type" }),
+    user: z.string().min(1, { message: "Please select a user" }),
+
+});

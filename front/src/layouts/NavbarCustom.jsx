@@ -245,36 +245,8 @@ export default function NavbarCustom() {
                     Levels
                   </ListItem>
                 </NavLink>
-                <NavLink
-                  to='/add-absence'
-                >
-                  <ListItem className='mt-2' >
-                    <ListItemPrefix>
-                      <BookOpenCheck className="h-5 w-5" />
-                    </ListItemPrefix>
-                    Add Absence
-                  </ListItem>
-                </NavLink>
-                <NavLink
-                  to='/absences'
-                >
-                  <ListItem className='mt-2' >
-                    <ListItemPrefix>
-                      <AllInbox className="h-5 w-5" />
-                    </ListItemPrefix>
-                    Absences
-                  </ListItem>
-                </NavLink>
-                {/* <NavLink
-                  to='/absence-calender'
-                >
-                  <ListItem className='mt-2' >
-                    <ListItemPrefix>
-                      <AppRegistration className="h-5 w-5" />
-                    </ListItemPrefix>
-                    Absences Calender
-                  </ListItem>
-                </NavLink> */}
+
+                <hr/>
               </>
             )
             }
@@ -283,8 +255,9 @@ export default function NavbarCustom() {
             {/* apprenant */}
             {isApprenant() && (
               <>
+
                 <NavLink
-                  to='/demand-absence'
+                    to='/demand-absence'
                 >
                   <ListItem className='mt-2' >
                     <ListItemPrefix>
@@ -294,7 +267,7 @@ export default function NavbarCustom() {
                   </ListItem>
                 </NavLink>
                 <NavLink
-                  to='/my-absences'
+                    to='/my-absences'
                 >
                   <ListItem className='mt-2' >
                     <ListItemPrefix>
@@ -304,7 +277,7 @@ export default function NavbarCustom() {
                   </ListItem>
                 </NavLink>
                 <NavLink
-                  to='/my-absence-calender'
+                    to='/my-absence-calender'
                 >
                   <ListItem className='mt-2' >
                     <ListItemPrefix>
@@ -313,6 +286,8 @@ export default function NavbarCustom() {
                     My Absence Calender
                   </ListItem>
                 </NavLink>
+
+                <hr/>
               </>
             )}
 
@@ -350,42 +325,77 @@ export default function NavbarCustom() {
                   Conges Calender
                   </ListItem>
                 </NavLink>
+                <hr/>
               </>
             )}
 
 
             {isStaff() && (
               <>
+
+
                 <NavLink
-                  to='/demand-absence'
+                    to='/add-absence'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <BookOpenCheck className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Add Absence
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                    to='/absences'
                 >
                   <ListItem className='mt-2' >
                     <ListItemPrefix>
                       <AllInbox className="h-5 w-5" />
                     </ListItemPrefix>
-                    Demand Absence
+                    Absences
                   </ListItem>
                 </NavLink>
-                <NavLink
-                  to='/my-absences'
-                >
-                  <ListItem className='mt-2' >
-                    <ListItemPrefix>
-                      <WorkHistory className="h-5 w-5" />
-                    </ListItemPrefix>
-                    My Absences
-                  </ListItem>
-                </NavLink>
-                <NavLink
-                  to='/my-absence-calender'
+                 <NavLink
+                  to='/absence-calender'
                 >
                   <ListItem className='mt-2' >
                     <ListItemPrefix>
                       <AppRegistration className="h-5 w-5" />
                     </ListItemPrefix>
-                    My Absence Calender
+                    Absences Calender
                   </ListItem>
                 </NavLink>
+
+                <NavLink
+                    to='/conge-request'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <BookOpenCheck className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Conge Request
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                    to='/my-conges'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AllInbox className="h-5 w-5" />
+                    </ListItemPrefix>
+                    My Conge
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                    to='/my-conges-calendar'
+                >
+                  <ListItem className='mt-2' >
+                    <ListItemPrefix>
+                      <AppRegistration className="h-5 w-5" />
+                    </ListItemPrefix>
+                   My Conge Calender
+                  </ListItem>
+                </NavLink>
+                <hr/>
               </>
             )}
           </List>
