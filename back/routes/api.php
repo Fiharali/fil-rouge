@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\admin\CampusController;
 use App\Http\Controllers\api\admin\ClassNameController;
+use App\Http\Controllers\api\admin\HomeController;
 use App\Http\Controllers\api\admin\LevelController;
 use App\Http\Controllers\api\admin\PromotionController;
 use App\Http\Controllers\api\admin\UserController;
@@ -65,6 +66,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('profile',[ProfileUserController::class, 'index']);
     Route::patch('profile',[ProfileUserController::class, 'update']);
     Route::delete('/logout', [AuthController::class, 'logout']);
+
+    Route::get('home', [HomeController::class,'index']);
+
 
 
 });

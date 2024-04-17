@@ -37,7 +37,7 @@ export default function MyAbsencesCalendar() {
         end: absence.date,
         // backgroundColor: 'blue',
         // color: 'black',
-        display: 'background',
+
         textColor: 'white'
 
     }));

@@ -82,8 +82,6 @@ export default function Levels() {
         setLoading(true);
         e.preventDefault();
         if (validate()) {
-
-
             const { success, data, error } = await createLevel(formData);
             if (success) {
                 setFormData({

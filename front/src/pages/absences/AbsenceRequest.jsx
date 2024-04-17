@@ -4,6 +4,7 @@ import { isAuth } from '../../roles/isAuth';
 import { AbsenceFunctions } from '../../functions/absence';
 import { addAbsence } from '../../lib/validations/absence';
 import AbsenceRequestForm from './components/AbsenceRequestForm';
+import isApprenant from "../../roles/isApprenant.jsx";
 
 export default function AbsenceRequest() {
 
