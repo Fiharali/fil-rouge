@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\api\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Absence;
 use App\Models\Campus;
 use App\Models\ClassName;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,12 +26,24 @@ class HomeController extends Controller
         $classes=ClassName::count();
         $campuses=Campus::count();
 
+        $absences = Absence::select('date', DB::raw('count(*) as count'))
+            ->groupBy('date')
+            ->get();
+
+        $absencesWithStatus = Absence::query()
+            ->select('status', DB::raw('COUNT(*) as count'))
+            ->groupBy('status')
+            ->get();
+
 
         return response()->json([
             'apprenant' =>$apprenant,
             'staff' =>$staff,
             'classes' =>$classes,
             'campuses' =>$campuses,
+            'absences' =>$absences,
+            'absencesWithStatus' =>$absencesWithStatus,
+
         ]);
 
     }

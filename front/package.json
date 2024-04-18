@@ -23,6 +23,7 @@
     "@mui/material": "^5.15.10",
     "@react-pdf/renderer": "^3.4.2",
     "@sweetalert2/theme-dark": "^5.0.16",
+    "apexcharts": "^3.48.0",
     "axios": "^1.6.7",
     "lucide-react": "^0.367.0",
     "query-string": "^9.0.0",

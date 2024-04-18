@@ -5,11 +5,10 @@ import CardDataStats from "./components/CardDataStats.jsx";
 import {useQuery} from "react-query";
 import {getMyConges} from "../conge/functions/myConge.jsx";
 import {getStatistics} from "./function/getStatistics..jsx";
+import ChartComponent from "./components/ChartComponent.jsx";
+import ChartComponentStatus from "./components/ChartComponentStatus.jsx";
 
 export default function Home() {
-
-
-
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -20,11 +19,18 @@ export default function Home() {
         cacheTime: 60000,
     });
 
-    console.log(data)
+    const apprenantCount = data?.data?.staff;
+    const staffCount = data?.data?.staff;
+    const campusesCount = data?.data?.campuses;
+    const classesCount = data?.data?.classes;
+    const  absencesData =data?.data?.absences;
+    const  absencesWithStatus =data?.data?.absencesWithStatus;
+
+   // console.log(data)
     return (
         <>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mx-10 mt-16">
-                <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp>
+                <CardDataStats title="Total apprenant" total={apprenantCount}  >
                     <svg
                         className="fill-primary dark:fill-white"
                         width="22"
@@ -43,7 +49,7 @@ export default function Home() {
                         />
                     </svg>
                 </CardDataStats>
-                <CardDataStats title="Total Profit" total="$45,2K" rate="4.35%" levelUp>
+                <CardDataStats title="Total Staff" total={staffCount} >
                     <svg
                         className="fill-primary dark:fill-white"
                         width="20"
@@ -66,7 +72,7 @@ export default function Home() {
                         />
                     </svg>
                 </CardDataStats>
-                <CardDataStats title="Total Product" total="2.450" rate="2.59%" levelUp>
+                <CardDataStats title="Total Campuses" total={campusesCount}  >
                     <svg
                         className="fill-primary dark:fill-white"
                         width="22"
@@ -85,7 +91,7 @@ export default function Home() {
                         />
                     </svg>
                 </CardDataStats>
-                <CardDataStats title="Total Product" total="2.450" rate="2.59%" levelUp>
+                <CardDataStats title="Total classes" total={classesCount}  >
                     <svg
                         className="fill-primary dark:fill-white"
                         width="22"
@@ -104,8 +110,12 @@ export default function Home() {
                         />
                     </svg>
                 </CardDataStats>
-
             </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5 mx-10 mt-5 ">
+                  <ChartComponent absencesData={absencesData}/>
+                <ChartComponentStatus absencesWithStatus={absencesWithStatus} />
+            </div>
+
         </>
     )
 }
