@@ -6,15 +6,21 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction"
 import { getMyAbsences } from './functions/getMyAbsences';
+import {checkApprenantAndNavigate} from "../../roles/isApprenant.jsx";
+import {useNavigate} from "react-router-dom";
+import {useUserContext} from "../../context/UserContext.jsx";
 
 export default function MyAbsencesCalendar() {
 
     const [loadingPage, setLoadingPage] = useState(false);
     const [absences, setAbsences] = useState([]);
 
+    const navigate = useNavigate()
+    const UserContext = useUserContext();
 
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkApprenantAndNavigate(UserContext, navigate)
         getAllAbsences();
     }, []);
 

@@ -4,7 +4,10 @@ import { isAuth } from '../../roles/isAuth';
 import { AbsenceFunctions } from '../../functions/absence';
 import { addAbsence } from '../../lib/validations/absence';
 import AbsenceRequestForm from './components/AbsenceRequestForm';
-import isApprenant from "../../roles/isApprenant.jsx";
+import isApprenant, {checkApprenantAndNavigate} from "../../roles/isApprenant.jsx";
+import {useNavigate} from "react-router-dom";
+import {useUserContext} from "../../context/UserContext.jsx";
+import {checkStaffAndNavigate} from "../../roles/isStaff.jsx";
 
 export default function AbsenceRequest() {
 
@@ -33,9 +36,12 @@ export default function AbsenceRequest() {
         }));
 
     };
+    const navigate = useNavigate()
+    const UserContext = useUserContext();
 
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkApprenantAndNavigate(UserContext, navigate)
         getTypes()
     }, []);
 

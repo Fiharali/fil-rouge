@@ -7,3 +7,11 @@ export default function isApprenant() {
     }
     return false
 }
+
+
+export const checkApprenantAndNavigate = (userContext, navigateFunction) => {
+    //console.log(userContext.user)
+    if (!userContext.user?.roles?.includes('apprenant')) {
+        navigateFunction('/unauthorized');
+    }
+};

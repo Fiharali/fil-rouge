@@ -11,6 +11,10 @@ import {addNewAbsence, addNewAbsenceWithCalendar, changeStatus} from "../../lib/
 import Swal from "sweetalert2";
 import ShowModal from "./components/ShowModal.jsx";
 import ShowModalEditStatus from "./components/ShowModalEditStatus.jsx";
+import {checkAdminAndNavigate} from "../../roles/isAdmin.jsx";
+import {useUserContext} from "../../context/UserContext.jsx";
+import {useNavigate} from "react-router-dom";
+import {checkStaffAndNavigate} from "../../roles/isStaff.jsx";
 
 export default function AbsencesCalendar() {
     const [absences, setAbsences] = useState([]);
@@ -28,12 +32,16 @@ export default function AbsencesCalendar() {
         user: ''
     });
 
+    const UserContext = useUserContext()
+    const navigate = useNavigate()
+
     const { isLoading, isError, data: absencesData , refetch } = useQuery('absences', getAbsences, {
         cacheTime: 60000,
     });
 
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkStaffAndNavigate(UserContext, navigate)
         getTypes()
         getUsers()
     }, []);

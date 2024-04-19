@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
- //   return $request->user();
+//   return $request->user();
 //});
 
 //Route::get('/sanctum/csrf-cookie', [\Laravel\Sanctum\Http\Controllers\CsrfCookieController::class, 'show']);
@@ -38,37 +38,45 @@ Route::post('/reset-password', [AuthController::class, 'reset'])->name('resetPas
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::apiResource('users', UserController::class);
-    Route::get('search-users', [UserController::class,'search']);
-    Route::get('old-users', [UserController::class,'oldUsers']);
-    Route::post('users-restore/{user}', [UserController::class,'restore'])->withTrashed();
 
-    Route::apiResource('campuses', CampusController::class);
-    Route::apiResource('classNames', ClassNameController::class);
-    Route::apiResource('promotions', PromotionController::class);
-    Route::apiResource('levels', LevelController::class);
+    Route::group(['middleware' => ['isAdmin']], function () {
+        Route::apiResource('users', UserController::class);
+        Route::get('search-users', [UserController::class, 'search']);
+        Route::get('old-users', [UserController::class, 'oldUsers']);
+        Route::post('users-restore/{user}', [UserController::class, 'restore'])->withTrashed();
+        Route::apiResource('campuses', CampusController::class);
+        Route::apiResource('classNames', ClassNameController::class);
+        Route::apiResource('promotions', PromotionController::class);
+        Route::apiResource('levels', LevelController::class);
+    });
 
-    Route::apiResource('absences', AbsenceController::class)->only(['index','destroy']);
-    Route::apiResource('absences', \App\Http\Controllers\api\apprenant\AbsenceController::class)->only('store');
-    Route::get('types', [\App\Http\Controllers\api\apprenant\AbsenceController::class,'allTypes']);
-    Route::get('my-absences', [\App\Http\Controllers\api\apprenant\AbsenceController::class,'index']);
-    Route::get('users-for-absence', [\App\Http\Controllers\api\apprenant\AbsenceController::class,'usersForAbsence']);
-    Route::post('add-absence', [AbsenceController::class,'store']);
-    Route::post('change-status-absence/{absence}', [AbsenceController::class,'changeStatus']);
+    Route::group(['middleware' => ['isStaff']], function () {
+        Route::apiResource('absences', AbsenceController::class)->only(['index', 'destroy']);
+        Route::post('add-absence', [AbsenceController::class, 'store']);
+        Route::post('change-status-absence/{absence}', [AbsenceController::class, 'changeStatus']);
+        Route::get('types', [\App\Http\Controllers\api\apprenant\AbsenceController::class, 'allTypes']);
+        Route::get('users-for-absence', [\App\Http\Controllers\api\apprenant\AbsenceController::class, 'usersForAbsence']);
+        Route::post('add-conge', [\App\Http\Controllers\api\staff\CongeController::class, 'store']);
+        Route::get('my-conge', [\App\Http\Controllers\api\staff\CongeController::class, 'index']);
+    });
 
-    Route::apiResource('conge', CongeController::class);
-    Route::get('users-for-conge', [CongeController::class,'usersForConge']);
-    Route::post('add-conge', [\App\Http\Controllers\api\staff\CongeController::class,'store']);
-    Route::get('my-conge', [\App\Http\Controllers\api\staff\CongeController::class,'index']);
-    Route::post('change-status-conge/{conge}', [\App\Http\Controllers\api\staff\CongeController::class,'update']);
+    Route::group(['middleware' => ['isApprenant']], function () {
+        Route::apiResource('absences', \App\Http\Controllers\api\apprenant\AbsenceController::class)->only('store');
+        Route::get('my-absences', [\App\Http\Controllers\api\apprenant\AbsenceController::class, 'index']);
+    });
+
+    Route::group(['middleware' => ['isRh']], function () {
+        Route::apiResource('conge', CongeController::class);
+        Route::get('users-for-conge', [CongeController::class, 'usersForConge']);
+        Route::post('change-status-conge/{conge}', [\App\Http\Controllers\api\staff\CongeController::class, 'update']);
+    });
 
 
-    Route::get('profile',[ProfileUserController::class, 'index']);
-    Route::patch('profile',[ProfileUserController::class, 'update']);
+
+    Route::get('profile', [ProfileUserController::class, 'index']);
+    Route::patch('profile', [ProfileUserController::class, 'update']);
     Route::delete('/logout', [AuthController::class, 'logout']);
-
-    Route::get('home', [HomeController::class,'index']);
-
+    Route::get('home', [HomeController::class, 'index']);
 
 
 });

@@ -6,15 +6,21 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction"
 import { useQuery } from 'react-query';
+import {useNavigate} from "react-router-dom";
+import {useUserContext} from "../../context/UserContext.jsx";
+import {checkRhAndNavigate} from "../../roles/isRh.jsx";
 
 export default function CongesCalendar() {
 
 
     const [conges, setConges] = useState([]);
-
+    const navigate = useNavigate()
+    const UserContext = useUserContext();
 
     useEffect(() => {
         !isAuth() && navigate('/login')
+        checkRhAndNavigate(UserContext, navigate)
+
     }, []);
 
 

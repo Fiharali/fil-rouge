@@ -63,8 +63,7 @@ const Profile = () => {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        checkAdminAndNavigate(UserContext, navigate)
-
+       // checkAdminAndNavigate(UserContext, navigate)
         getAuthUser();
 
     }, []);

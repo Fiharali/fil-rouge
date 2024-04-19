@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import { checkAdminAndNavigate } from '../../roles/isAdmin';
+import {checkStaffAndNavigate} from "../../roles/isStaff.jsx";
 
 export default function CongeRequest() {
 
@@ -31,7 +32,7 @@ export default function CongeRequest() {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        checkAdminAndNavigate(UserContext, navigate)
+        checkStaffAndNavigate(UserContext, navigate)
         getUsers()
     }, []);
 

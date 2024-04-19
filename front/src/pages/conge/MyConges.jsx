@@ -11,6 +11,7 @@ import { useUserContext } from '../../context/UserContext';
 import { checkAdminAndNavigate, isAdmin } from '../../roles/isAdmin';
 import { getConge } from './functions/conge';
 import {getMyConges} from "./functions/myConge.jsx";
+import {checkStaffAndNavigate} from "../../roles/isStaff.jsx";
 
 export default function MyConges() {
 
@@ -29,7 +30,7 @@ export default function MyConges() {
 
   useEffect(() => {
     !isAuth() && navigate('/login')
-    checkAdminAndNavigate(UserContext, navigate)
+    checkStaffAndNavigate(UserContext, navigate)
     getAllConges();
   }, []);
 
@@ -153,8 +154,6 @@ console.log(conges)
                 <option value=""> choose type of conge </option>
                 <option value="0"  {...(conge.status === 0 ? { selected: true } : {})}   > Not Confirmed</option>
                 <option value="1"  {...(conge.status === 1 ? { selected: true } : {})}  > Confirmed</option>
-
-
               </select>
               {errors?.status && <span className="text-red-500 text-left ms-5">{errors?.status ?? ''}</span>}
 

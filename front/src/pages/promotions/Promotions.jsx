@@ -49,7 +49,6 @@ export default function Promotions() {
     useEffect(() => {
         !isAuth() && navigate('/login')
         checkAdminAndNavigate(UserContext, navigate)
-
         getAllPromotions();
     }, []);
 

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { isAuth } from '../../roles/isAuth';
 import AbsencesSkeleton from './components/AbsencesSkeleton';
 import { getMyAbsences } from './functions/getMyAbsences';
+import isApprenant, {checkApprenantAndNavigate} from "../../roles/isApprenant.jsx";
+import {useNavigate} from "react-router-dom";
+import {useUserContext} from "../../context/UserContext.jsx";
 
 
 export default function MyAbsences() {
@@ -9,11 +12,15 @@ export default function MyAbsences() {
   const [loadingPage, setLoadingPage] = useState(false);
   const [absences, setAbsences] = useState([]);
 
-
+  const navigate = useNavigate()
+  const UserContext = useUserContext();
   useEffect(() => {
     !isAuth() && navigate('/login')
+    checkApprenantAndNavigate(UserContext, navigate)
     getAllAbsences();
   }, []);
+
+
 
 
 
@@ -54,7 +61,9 @@ export default function MyAbsences() {
   }
   );
 
-
+if (!isApprenant() ){
+     return null
+}
 
 
   return (

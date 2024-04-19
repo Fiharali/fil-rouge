@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../context/UserContext';
 import { checkAdminAndNavigate, isAdmin } from '../../roles/isAdmin';
 import { getConge } from './functions/conge';
+import {checkRhAndNavigate} from "../../roles/isRh.jsx";
 
 export default function Conges() {
 
@@ -28,7 +29,7 @@ export default function Conges() {
 
   useEffect(() => {
     !isAuth() && navigate('/login')
-    checkAdminAndNavigate(UserContext, navigate)
+    checkRhAndNavigate(UserContext, navigate)
     getAllConges();
   }, []);
 
