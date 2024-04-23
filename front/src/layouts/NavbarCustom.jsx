@@ -45,7 +45,7 @@ import { useUserContext } from "../context/UserContext";
 import { isAdmin } from "../roles/isAdmin";
 import { isAuth } from "../roles/isAuth";
 import isApprenant from "../roles/isApprenant";
-import { BookOpenCheck } from "lucide-react";
+import {BookOpenCheck, HomeIcon} from "lucide-react";
 import { isStaff } from "../roles/isStaff";
 import { isRh } from "../roles/isRh";
 
@@ -183,6 +183,17 @@ export default function NavbarCustom() {
               </NavLink>
             ))
             } */}
+
+            <NavLink
+                to='/'
+            >
+              <ListItem className='mt-2' >
+                <ListItemPrefix>
+                  <HomeIcon className="h-5 w-5 bg-blue" />
+                </ListItemPrefix>
+                Home
+              </ListItem>
+            </NavLink>
             {isAdmin() && (
               <>
                 <NavLink

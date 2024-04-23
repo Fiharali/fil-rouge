@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { submitLogout } from "../Auth/LogOut";
 import { useUserContext } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 
 export default function Navbar(props) {
@@ -31,11 +31,6 @@ export default function Navbar(props) {
                     onClick={props.openDrawer}
                     className="w-20"
                 /></span>
-
-
-
-
-
                 <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <label className="swap swap-rotate mx-5">
                         <input type="checkbox" onChange={props.toggleDarkMode} checked={props.isDarkMode} className="theme-controller hidden" value="dark" />
@@ -112,7 +107,7 @@ export default function Navbar(props) {
                         </div>
                         <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownAvatarNameButton">
                             <li>
-                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                <Link to="/" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
                             </li>
                             <li>
                                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>

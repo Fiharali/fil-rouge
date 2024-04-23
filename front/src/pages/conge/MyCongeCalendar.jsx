@@ -21,7 +21,7 @@ export default function MyCongeCalendar() {
 
     useEffect(() => {
         !isAuth() && navigate('/login')
-        checkStaffAndNavigate(UserContext, navigate)
+       checkStaffAndNavigate(UserContext, navigate)
     }, []);
 
 
@@ -29,6 +29,9 @@ export default function MyCongeCalendar() {
     const { isLoading, isError, data: congesData } = useQuery('conges', getMyConges, {
         cacheTime: 60000,
     });
+
+    console.log(congesData)
+
 
     if (isLoading) {
         return (
@@ -50,7 +53,7 @@ export default function MyCongeCalendar() {
 
 
 
-    const events = congesData.conges.map(conge => ({
+    const events = congesData.data.conges.map(conge => ({
         id: conge.id,
         title: conge.user?.first_name ?? 'null',
         start: conge.from,

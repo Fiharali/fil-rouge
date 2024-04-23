@@ -16,9 +16,7 @@ export const PromotionFunctions = {
 
         const data = await axiosSetup.post('/promotions', formData);
         if (data.status === 200) {
-
             return data.data;
-
         } else {
             console.log(' failed');
         }

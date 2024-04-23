@@ -141,7 +141,6 @@ export default function Conges() {
           </button>
         </td>
 
-
         <dialog id={`my_modal_${conge.id}`} className="modal">
           <div className="modal-box">
             <form method="dialog">
