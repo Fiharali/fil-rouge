@@ -74,7 +74,7 @@ export default function UserEdit() {
   const getOneUser = async () => {
     setLoadingPage(true);
     const data = await getUser(id);
-    // console.log(data)
+    //console.log(data.class_names)
     setData(data.user);
     setFormData(data.user);
     setCities(data.cities);
@@ -97,11 +97,13 @@ export default function UserEdit() {
       console.error('Error:', error);
     }
   };
+  console.log(classNames)
 
   const submitUserEdit = async (e) => {
     e.preventDefault();
     if (validate()) {
       setLoading(true);
+     // console.log(formData)
       const data = await userUpdate(id, formData).finally(() => setLoading(false));
       Swal.fire({
         title: data.success,

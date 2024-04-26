@@ -38,7 +38,7 @@ export default function MyAbsencesCalendar() {
 
     const absencesData = absences.map(absence => ({
         id: absence.id,
-        title: absence.user.first_name,
+        title: (absence.user ? absence.user.first_name : 'null') + ' ' + (absence.status === 0 ? '(Not Confirmed)' :absence.status === 1 ? '(Confirmed)' :'(retard)' ),
         start: absence.date,
         end: absence.date,
         // backgroundColor: 'blue',

@@ -12,6 +12,7 @@ import { useUserContext } from "../../context/UserContext";
 
 
 
+
 const Profile = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -82,6 +83,7 @@ const Profile = () => {
             setPromotions(data.promotions)
             setRoles(data.roles)
 
+
         } catch (error) {
             console.error('Error:', error);
         }
@@ -97,12 +99,8 @@ const Profile = () => {
             try {
 
                 const data = await ApiFunctions.editAuthUser(formData);
-
                 setSelectedFile(null)
-
-
                 Swal.fire({
-                    //position: "top",
                     title: data.success,
                     icon: "success",
                     timer: 2000,

@@ -54,7 +54,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::apiResource('absences', AbsenceController::class)->only(['index', 'destroy']);
         Route::post('add-absence', [AbsenceController::class, 'store']);
         Route::post('change-status-absence/{absence}', [AbsenceController::class, 'changeStatus']);
-        Route::get('types', [\App\Http\Controllers\api\apprenant\AbsenceController::class, 'allTypes']);
         Route::get('users-for-absence', [\App\Http\Controllers\api\apprenant\AbsenceController::class, 'usersForAbsence']);
         Route::post('add-conge', [\App\Http\Controllers\api\staff\CongeController::class, 'store']);
         Route::get('my-conge', [\App\Http\Controllers\api\staff\CongeController::class, 'index']);
@@ -71,6 +70,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('change-status-conge/{conge}', [\App\Http\Controllers\api\staff\CongeController::class, 'update']);
     });
 
+
+    Route::get('types', [\App\Http\Controllers\api\apprenant\AbsenceController::class, 'allTypes']);
 
 
     Route::get('profile', [ProfileUserController::class, 'index']);

@@ -112,12 +112,12 @@ export default function CongeRequest() {
                     <div className="grid grid-cols-6 gap-6">
                         <div className="col-span-6 ">
                             <label htmlFor="last_name" className="block mb-2 text-sm font-medium ">Date from </label>
-                            <input type="date" name="from" id="from" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="" value={formData.from} onChange={handleChange} />
+                            <input type="date" name="from" id="from" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" placeholder="" value={formData.from} onChange={handleChange} min={today} />
                             {errors?.from && <span className="text-red-500 text-left ms-5">{errors?.from ?? ''}</span>}
                         </div>
                         <div className="col-span-6 ">
                             <label htmlFor="last_name" className="block mb-2 text-sm font-medium ">Date to </label>
-                            <input type="date" name="to" id="to" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.to} onChange={handleChange} />
+                            <input type="date" name="to" id="to" className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5" value={formData.to} onChange={handleChange}  min={today}/>
                             {errors?.to && <span className="text-red-500 text-left ms-5">{errors?.to ?? ''}</span>}
                         </div>
                        

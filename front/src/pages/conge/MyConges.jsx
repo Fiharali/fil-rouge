@@ -131,7 +131,7 @@ console.log(conges)
         <td>{conge.user?.first_name ?? 'Unknown'}</td>
         <td><span className='text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-400'>{formatDate(conge.created_at)}</span></td>
         <td className='flex p-3'>
-          <button className="btn btn-sm" onClick={() => document.getElementById(`my_modal_${conge.id}`).showModal()}>change status</button>
+          {/*<button className="btn btn-sm" onClick={() => document.getElementById(`my_modal_${conge.id}`).showModal()}>change status</button>*/}
           <button className='ms-1 ' onClick={() => deleteCongeFunction(conge.id)}  >
             <lord-icon
               src="https://cdn.lordicon.com/hjbrplwk.json"

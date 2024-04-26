@@ -26,7 +26,15 @@ export default function Home() {
     const  absencesData =data?.data?.absences;
     const  absencesWithStatus =data?.data?.absencesWithStatus;
 
-
+    if (isLoading) {
+        return (
+            <div className="overflow-x-auto mt-5 relative h-96">
+                <div className="flex justify-center items-center h-full">
+                    <div className="loading loading-ring loading-lg"></div>
+                </div>
+            </div>
+        );
+    }
     return (
         <>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mx-10 mt-16">
